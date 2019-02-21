@@ -14,7 +14,7 @@ pipeline {
         sh 'pwd'
         sh 'ls'
         sh 'sh ./process_all_projects.sh' 
-        archiveArtifacts artifacts: '**/projects/*.gz', fingerprint: true 
+        archiveArtifacts artifacts: 'projects/**/*.gz', fingerprint: true 
       }
     }
   }
