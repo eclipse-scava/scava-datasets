@@ -1,6 +1,6 @@
 node {
     stage('Build') {
-        sh 'get_all.sh' 
+        sh 'process_all_projects.sh' 
         archiveArtifacts artifacts: '**/projects/*.gz', fingerprint: true 
     }
 }
