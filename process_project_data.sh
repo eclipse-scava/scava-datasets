@@ -19,7 +19,7 @@ else
     exit 4
 fi
 
-export PERL5LIB=data-anonymiser:$PERL5LIB
+export PERL5LIB=./data-anonymiser/code/:$PERL5LIB
 
 verbose=false
 
