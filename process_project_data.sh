@@ -19,6 +19,8 @@ else
     exit 4
 fi
 
+export PERL5LIB=data-anonymiser:$PERL5LIB
+
 verbose=false
 
 dir_out="projects/$proj"
