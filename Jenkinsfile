@@ -5,13 +5,17 @@ pipeline {
   }
   stages {
     stage('SCM') {
+      steps {
         git url: 'https://github.com/borisbaldassari/scava-datasets.git'
+      }
     }
     stage('Build') {
+      steps {
         sh 'pwd'
         sh 'ls'
         sh 'process_all_projects.sh' 
         archiveArtifacts artifacts: '**/projects/*.gz', fingerprint: true 
+      }
     }
   }
 }
