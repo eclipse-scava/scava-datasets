@@ -1,0 +1,100 @@
+
+## <a name="forums"></a> Eclipse Forums
+
+### <a name="forums_posts"></a> Forums posts
+
+**Download**: [`r file_forums_posts`.gz](`r url_forums_posts`.gz)
+
+```{r forums_posts}
+data <- read.csv(file=url_forums_posts, header=T)
+```
+
+File is [``r url_forums_posts``](../../`r url_forums_posts`), and has ``r ncol(data)`` columns for ``r nrow(data)`` posts. The evolution of posts
+
+```{r forums_posts_evol}
+data$created.date <- as.POSIXct(data$created_date, origin="1970-01-01")
+posts.xts <- xts(data, order.by = data$created.date)
+posts.weekly <- apply.weekly(x=posts.xts, FUN = nrow)
+names(posts.weekly) <- c("posts")
+
+p <- dygraph(
+  data = posts.weekly,
+  main = paste('Weekly forum posts for ', project_id, sep=''),
+  width = 800, height = 250 ) %>%
+  dyAxis("x", drawGrid = FALSE) %>%
+  dySeries("posts", label = "Weekly posts") %>%
+  dyOptions(stepPlot = TRUE) %>%
+  dyRangeSelector()
+p
+```
+
+The list of the 10 last active posts on the forums:
+
+```{r forums_posts_table, results='asis'}
+data$created.date <- as.POSIXct(data$created_date, origin="1970-01-01")
+posts.table <- head(data[,c('id', 'subject', 'created.date', 'author_id')], 10)
+posts.table$subject <- paste('<a href="', posts.table$html_url, '">', posts.table$subject, '</a>', sep='')
+posts.table$created.date <- as.character(posts.table$created.date)
+names(posts.table) <- c('ID', 'Subject', 'Post date', 'Post author')
+
+print(
+    xtable(head(posts.table, 10),
+        caption = paste('10 most recent posts on', project_id, 'forum.', sep=" "),
+        digits=0, align="lllll"), type="html",
+    html.table.attributes='class="table table-striped"',
+    caption.placement='bottom',
+    include.rownames=FALSE,
+    sanitize.text.function=function(x) { x }
+)
+```
+
+### <a name="forums_threads"></a> Forums threads
+
+**Download**: [`r file_forums_threads`.gz](`r url_forums_threads`.gz)
+
+```{r forums_threads}
+data <- read.csv(file=url_forums_threads, header=T)
+```
+
+File is [``r url_forums_threads``](../../`r url_forums_threads`), and has ``r ncol(data)`` columns for ``r nrow(data)`` threads. A wordcloud with the main words used in threads is presented below.
+
+```{r forums_threads_viz, message=FALSE, echo=FALSE, warning=FALSE, fig.width=5, fig.height=5}
+require(tm)
+require(wordcloud)
+require(SnowballC)
+
+posts.vector <- as.vector(data$subject)
+Encoding(posts.vector)  <- "UTF-8"
+mysrc <- VectorSource(posts.vector)
+corpus <- VCorpus(mysrc)
+
+corpus <- tm_map(corpus, stripWhitespace)
+corpus <- tm_map(corpus, content_transformer(tolower))
+corpus <- tm_map(corpus, content_transformer(removePunctuation))
+corpus <- tm_map(corpus, content_transformer(removeNumbers))
+corpus <- tm_map(corpus, removeWords, stopwords("english"))
+a <- tm_map(corpus, stemDocument)
+
+wordcloud(a, scale=c(12,1), max.words=50, random.order=FALSE, rot.per=0.15, use.r.layout=FALSE, colors=brewer.pal(8, "Dark2"))
+```
+
+The list of the 10 last active threads on the forums:
+
+```{r forums_threads_table, results='asis'}
+data$last.post.date <- as.POSIXct(data$last_post_date, origin="1970-01-01")
+threads.table <- head(data[,c('id', 'subject', 'last.post.date', 'last_post_id', 'replies', 'views')], 10)
+threads.table$subject <- paste('<a href="', threads.table$html_url, '">', threads.table$subject, '</a>', sep='')
+threads.table$last.post.date <- as.character(threads.table$last.post.date)
+names(threads.table) <- c('ID', 'Subject', 'Last post date', 'Last post author', 'Replies', 'Views')
+
+print(
+    xtable(threads.table,
+        caption = paste('10 last active threads on', project_id, 'forum.', sep=" "),
+        digits=0, align="lllllll"), type="html",
+    html.table.attributes='class="table table-striped"',
+    caption.placement='bottom',
+    include.rownames=FALSE,
+    sanitize.text.function=function(x) { x }
+)
+```
+

@@ -1,0 +1,29 @@
+
+## <a name="git"></a> Git
+
+### <a name="git_commits"></a> Git commits
+
+**Download**: [`r file_git_commits`.gz](../`r url_git_commits`.gz)
+
+```{r git_commits}
+data <- read.csv(file=url_git_commits, header=T)
+```
+
+File is [``r url_git_commits``](../`r url_git_commits`), and has ``r ncol(data)`` columns for ``r nrow(data)`` commits.
+
+```{r git_commits_viz}
+data$commits_sum <- cumsum(data$commits)
+data.xts <- xts(x = data[,c('commits_sum', 'commits', 'authors')], order.by=as.POSIXct(as.character(data[,c('date')]), format="%Y-%m-%d"))
+
+p <-dygraph(data.xts[,c('commits')],
+        main = paste('Daily commits for ', project_id, sep=''),
+        width = 800, height = 250 ) %>%
+      dyRangeSelector()
+p
+```
+
+### <a name="git_log"></a> Git log
+
+**Download**: [`r file_git_log`.gz](../`r url_git_log`.gz)
+
+File is [``r url_git_log``](../`r url_git_log`), and full log has ``r countLines(file=url_git_log)`` lines.

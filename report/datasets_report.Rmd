@@ -1,0 +1,189 @@
+---
+title: "Report on datasets"
+output:
+  html_document:
+    df_print: paged
+  html_notebook:
+    echo: no
+    self_contained: yes
+params:
+  project_id: "modeling.sirius"
+---
+
+```{r init, message=FALSE, echo=FALSE, warning=FALSE}
+
+library(xts)
+library(dygraphs)
+require(xtable)
+library(R.utils)
+
+#if (is.null(project_id)) {
+project_id <- params$project_id
+  #'modeling.sirius'
+  #params$project_id
+#}
+
+dir_in <- "../projects/"
+
+file_git_commits <- "git_commits_evol.csv"
+url_git_commits <- paste( dir_in, project_id, "/", file_git_commits, sep="" )
+
+file_git_log <- "git_log.txt"
+url_git_log <- paste( dir_in, project_id, "/", file_git_log, sep="" )
+
+file_bz_issues <- "bugzilla_issues.csv"
+url_bz_issues <- paste( dir_in, project_id, "/", file_bz_issues, sep="" )
+
+file_bz_issues_open <- "bugzilla_issues_open.csv"
+url_bz_issues_open <- paste( dir_in, project_id, "/", file_bz_issues_open, sep="" )
+
+file_bz_evol <- "bugzilla_evol.csv"
+url_bz_evol <- paste( dir_in, project_id, "/", file_bz_evol, sep="" )
+
+file_bz_components <- "bugzilla_components.csv"
+url_bz_components <- paste( dir_in, project_id, "/", file_bz_components, sep="" )
+
+file_bz_versions <- "bugzilla_versions.csv"
+url_bz_versions <- paste( dir_in, project_id, "/", file_bz_versions, sep="" )
+
+file_forums_posts <- "eclipse_forums_posts.csv"
+url_forums_posts <- paste( dir_in, project_id, "/", file_forums_posts, sep="" )
+
+file_forums_threads <- "eclipse_forums_threads.csv"
+url_forums_threads <- paste( dir_in, project_id, "/", file_forums_threads, sep="" )
+
+file_pmi_checks <- "eclipse_pmi_checks.csv"
+url_pmi_checks <- paste( dir_in, project_id, "/", file_pmi_checks, sep="" )
+
+file_sq_issues_blocker <- "sq_issues_blocker.csv"
+url_sq_issues_blocker <- paste( dir_in, project_id, "/", file_sq_issues_blocker, sep="" )
+
+file_sq_issues_critical <- "sq_issues_critical.csv"
+url_sq_issues_critical <- paste( dir_in, project_id, "/", file_sq_issues_critical, sep="" )
+
+file_sq_issues_major <- "sq_issues_major.csv"
+url_sq_issues_major <- paste( dir_in, project_id, "/", file_sq_issues_major, sep="" )
+
+file_sq_metrics <- "sq_metrics.csv"
+url_sq_metrics <- paste( dir_in, project_id, "/", file_sq_metrics, sep="" )
+
+```
+
+
+# Datasets generated for project `r project_id`
+
+## Context of this work
+
+[Crossminer](https://crossminer.org) is EU-funded research project that aims at providing tailored recommendations for software practitionners. Its outputs include the [Scava Eclipse project](https://projects.eclipse.org/projects/technology.scava) and a set of public datasets extracted from a selection of representative Eclipse projects.
+
+This report was generated on ``r Sys.Date()``.
+
+
+## About this document
+
+This document is a [R notebook](https://rmarkdown.rstudio.com/), dynamically created from the numbers extracted on the project. It lists all datasets published for the project, providing basic numbers, figures and a quick summary, and serves as a test case to make sure that all the required data is present and roughly consistent with requirements. All plots and tables are computed from the actual data as provided in the downloads.
+
+To re-execute the document, simply render it with the project ID as a parameter: 
+
+```
+render("datasets_report.Rmd", params = list(project_id = "`r project_id`"))
+```
+
+
+## About the downloads
+
+Downloads are mainly composed of CSV and JSON files. CSV files always have a header to name the fields, which makes it easy to import in analysis software like R: 
+
+```
+data <- read.csv(file='myfile.csv', header=T)
+names(data)
+```
+
+All downloads are available as compressed (gzip'd) files to reduce bandwidth usage. 
+
+
+## Content
+
+List of datasets generated for the project:
+
+`r if(file.exists(url_git_commits)){paste("
+* [Git](#git)
+    - [Git Commits](#git_commits) -- list of all commits recorded in git. [ [Download CSV](../", 
+    url_git_commits, 
+    ".gz) ]
+    - [Git Log](#git_log) -- the raw export of git log. [ [Download TXT](../", 
+    url_git_log, 
+    ".gz) ]
+", sep='')}`
+`r if(file.exists(url_bz_issues)){paste("
+* [Bugzilla](#bugzilla)
+    - [Bugzilla issues](#bz_issues) (CSV) -- list of all issues. [ [Download CSV](../", 
+    url_bz_issues, 
+    ".gz) ]
+    - [Bugzilla open issues](#bz_issues_open) (CSV) -- list of issues in an open state. [ [Download CSV](../", 
+    url_bz_issues_open, 
+    ".gz) ]
+    - [Bugzilla evolution](#bz_evol) (CSV) -- weekly time series of issues created. [ [Download CSV](../", 
+    url_bz_evol,
+    ".gz) ]
+    - [Bugzilla components](#bz_components) (CSV) -- list of components declared for the project. [ [Download CSV](../", 
+    url_bz_components, 
+    ".gz) ]
+    - [Bugzilla versions](#bz_versions) (CSV) -- list of versions declared for the project. [ [Download CSV](../", 
+    url_bz_versions, 
+    ".gz) ]
+", sep='')}`
+`r if(file.exists(url_forums_posts)){paste("
+* [Eclipse Forums](#forums)
+    - [Forums Posts](#forums_posts) (CSV) -- list of all forum posts for this project. [ [Download CSV](../", 
+    url_bz_issues, 
+    ".gz) ]
+    - [Forums threads](#forums_threads) (CSV) -- list of all forum threads for this project. [ [Download CSV](../", 
+    url_bz_issues, 
+    ".gz) ]
+", sep='')}`
+`r if(file.exists(url_pmi_checks)){paste("
+* [Eclipse PMI](#pmi)
+    - [PMI Checks](#pmi_checks) (CSV) -- list of all checks applied to the Project Management Infrastructure entries for the project. [ [Download CSV](../", 
+    url_pmi_checks, 
+    ".gz) ]
+", sep='')}`
+`r if(file.exists(url_sq_metrics)){paste("
+* [SonarQube](#sq)
+    - [SonarQube blocker issues](#sq_issues_blocker) (CSV) -- list of blocker issues detected by SonarQube. [ [Download CSV](../", 
+    url_sq_issues_blocker, 
+    ".gz) ]
+    - [SonarQube critical issues](#sq_issues_critical) (CSV) -- list of critical issues detected by SonarQube. [ [Download CSV](../", 
+    url_sq_issues_critical, 
+    ".gz) ]
+    - [SonarQube major issues](#sq_issues_major) (CSV) -- list of major issues detected by SonarQube. [ [Download CSV](../", 
+    url_sq_issues_major, 
+    ".gz) ]
+    - [SonarQube metrics](#sq_metrics) (CSV) -- list of code metrics extracted from SonarQube. [ [Download CSV](../", 
+    url_sq_metrics, 
+    ".gz) ]
+", sep='')}`
+
+
+```{r inc_git, eval=file.exists(url_git_commits), child='datasets_report_git.Rmd'}
+```
+
+
+```{r inc_bz, eval=file.exists(url_bz_issues), child='datasets_report_bz.Rmd'}
+```
+
+
+```{r inc_forums, eval=file.exists(url_forums_posts), child='datasets_report_forums.Rmd'}
+```
+
+
+```{r inc_pmi, eval=file.exists(url_pmi_checks), child='datasets_report_pmi.Rmd'}
+```
+
+
+```{r inc_git, eval=file.exists(url_sq_metrics), child='datasets_report_sq.Rmd'}
+```
+
+
+
+

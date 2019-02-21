@@ -1,0 +1,83 @@
+
+## <a name="bz"></a> SonarQube
+
+### <a name="sq_issues_blocker"></a> SonarQube blocker issues
+
+**Download**: [`r file_sq_issues_blocker`.gz](../`r url_sq_issues_blocker`.gz)
+
+```{r sq_issues_blocker}
+data <- read.csv(file=url_sq_issues_blocker, header=T)
+```
+
+File is [``r url_sq_issues_blocker``](../`r url_sq_issues_blocker`), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues.
+
+```{r sq_issues_blocker_table, results='asis'}
+data$last.update <- as.POSIXct(data$last_update, origin="1970-01-01")
+issues.table <- head(data[,c('key', 'rule', 'sev', 'last.update', 'message')], 10)
+issues.table$last.update <- as.character(issues.table$last.update)
+names(issues.table) <- c('Key', 'Rule', 'Severity', 'Last update', 'Message')
+
+print(
+    xtable(issues.table,
+        caption = paste('Extract of 10 SonarQube blocker issues for ', 
+                        project_id, '.', sep=" "),
+        digits=0, align="llllll"), type="html",
+    html.table.attributes='class="table table-striped"',
+    caption.placement='bottom',
+    include.rownames=FALSE,
+    sanitize.text.function=function(x) { x }
+)
+```
+
+### <a name="sq_issues_critical"></a> SonarQube critical issues
+
+**Download**: [`r file_sq_issues_critical`.gz](../`r url_sq_issues_critical`.gz)
+
+```{r sq_issues_critical}
+data <- read.csv(file=url_sq_issues_critical, header=T)
+```
+
+File is [``r url_sq_issues_critical``](../`r url_sq_issues_critical`), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues.
+
+### <a name="sq_issues_major"></a> SonarQube major issues
+
+**Download**: [`r file_sq_issues_major`.gz](../`r url_sq_issues_major`.gz)
+
+```{r sq_issues_major}
+data <- read.csv(file=url_sq_issues_major, header=T)
+```
+
+File is [``r url_sq_issues_major``](../`r url_sq_issues_major`), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues.
+
+### <a name="sq_metrics"></a> SonarQube metrics
+
+**Download**: [`r file_sq_metrics`.gz](../`r url_sq_metrics`.gz)
+
+```{r sq_metrics}
+data <- read.csv(file=url_sq_metrics, header=T)
+```
+
+File is [``r url_sq_metrics``](../`r url_sq_metrics`), and has ``r ncol(data)`` columns for ``r nrow(data)`` line.
+
+
+```{r sq_metrics_table, results='asis'}
+# Transform from wide to long format.
+data <- t(data)
+data_ <- data.frame(rownames(data), data[,1])
+names(data_) <- c('Metric', 'Value')
+# Remove NAs
+data_  <- data_[complete.cases(data_$Value),]
+
+print(
+    xtable(data_,
+        caption = paste('SonarQube metrics for ', 
+                        project_id, '.', sep=" "),
+        digits=0, align="lll"), type="html",
+    html.table.attributes='class="table table-striped"',
+    caption.placement='bottom',
+    include.rownames=FALSE,
+    sanitize.text.function=function(x) { x }
+)
+```
+
+
