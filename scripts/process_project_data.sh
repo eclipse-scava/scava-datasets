@@ -84,6 +84,11 @@ echo "  * Anonymise data."
 echo "    - Scramble Git commits files."
 anonymise ${dir_out}/git_log.txt
 
+echo "    - Scramble names in Git log."
+sed -E 's/Signed-off-by: [^<]+/Signed-off-by: XXXXXXXX /' < git_log.txt > git_log.txt.1
+sed -E 's/^Author: [^<]+/Author: XXXXXXXX /' < git_log.txt.1 > git_log.txt
+rm git_log.txt.1
+
 echo "    - Scramble Bugzilla files"
 anonymise ${dir_out}/bugzilla_issues.csv
 anonymise ${dir_out}/bugzilla_issues_open.csv
