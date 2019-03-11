@@ -3,13 +3,13 @@
 
 ### <a name="pmi_checks"></a> PMI Checks
 
-**Download**: [`r file_pmi_checks`.gz](../`r url_pmi_checks`.gz)
+**Download**: [`r file_pmi_checks`.gz](../`r file_pmi_checks`.gz)
 
 ```{r git_pmi}
 data <- read.csv(file=url_pmi_checks, header=T)
 ```
 
-File is [``r url_pmi_checks``](../`r url_pmi_checks`), and has ``r ncol(data)`` columns for ``r nrow(data)`` commits.
+File is [``r file_pmi_checks``](../`r file_pmi_checks`), and has ``r ncol(data)`` columns for ``r nrow(data)`` commits.
 
 ```{r pmi_checks_table, results='asis'}
 checks.table <- head(data[,c('Description', 'Value', 'Results')], 10)

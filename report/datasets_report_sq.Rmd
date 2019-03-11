@@ -3,13 +3,13 @@
 
 ### <a name="sq_issues_blocker"></a> SonarQube blocker issues
 
-**Download**: [`r file_sq_issues_blocker`.gz](../`r url_sq_issues_blocker`.gz)
+**Download**: [`r file_sq_issues_blocker`.gz](../`r file_sq_issues_blocker`.gz)
 
 ```{r sq_issues_blocker}
 data <- read.csv(file=url_sq_issues_blocker, header=T)
 ```
 
-File is [``r url_sq_issues_blocker``](../`r url_sq_issues_blocker`), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues.
+File is [``r file_sq_issues_blocker``](../`r file_sq_issues_blocker`), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues.
 
 ```{r sq_issues_blocker_table, results='asis'}
 data$last.update <- as.POSIXct(data$last_update, origin="1970-01-01")
@@ -31,33 +31,33 @@ print(
 
 ### <a name="sq_issues_critical"></a> SonarQube critical issues
 
-**Download**: [`r file_sq_issues_critical`.gz](../`r url_sq_issues_critical`.gz)
+**Download**: [`r file_sq_issues_critical`.gz](../`r file_sq_issues_critical`.gz)
 
 ```{r sq_issues_critical}
 data <- read.csv(file=url_sq_issues_critical, header=T)
 ```
 
-File is [``r url_sq_issues_critical``](../`r url_sq_issues_critical`), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues.
+File is [``r file_sq_issues_critical``](../`r file_sq_issues_critical`), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues.
 
 ### <a name="sq_issues_major"></a> SonarQube major issues
 
-**Download**: [`r file_sq_issues_major`.gz](../`r url_sq_issues_major`.gz)
+**Download**: [`r file_sq_issues_major`.gz](../`r file_sq_issues_major`.gz)
 
 ```{r sq_issues_major}
 data <- read.csv(file=url_sq_issues_major, header=T)
 ```
 
-File is [``r url_sq_issues_major``](../`r url_sq_issues_major`), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues.
+File is [``r file_sq_issues_major``](../`r file_sq_issues_major`), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues.
 
 ### <a name="sq_metrics"></a> SonarQube metrics
 
-**Download**: [`r file_sq_metrics`.gz](../`r url_sq_metrics`.gz)
+**Download**: [`r file_sq_metrics`.gz](../`r file_sq_metrics`.gz)
 
 ```{r sq_metrics}
 data <- read.csv(file=url_sq_metrics, header=T)
 ```
 
-File is [``r url_sq_metrics``](../`r url_sq_metrics`), and has ``r ncol(data)`` columns for ``r nrow(data)`` line.
+File is [``r file_sq_metrics``](../`r file_sq_metrics`), and has ``r ncol(data)`` columns for ``r nrow(data)`` line.
 
 
 ```{r sq_metrics_table, results='asis'}

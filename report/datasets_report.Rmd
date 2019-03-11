@@ -23,7 +23,7 @@ project_id <- params$project_id
   #params$project_id
 #}
 
-dir_in <- "../projects/"
+dir_in <- "../scripts/projects/"
 
 file_git_commits <- "git_commits_evol.csv"
 url_git_commits <- paste( dir_in, project_id, "/", file_git_commits, sep="" )

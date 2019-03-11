@@ -21,7 +21,7 @@ fi
 
 export PERL5LIB=./data-anonymiser/code/:$PERL5LIB
 
-verbose=false
+verbose=true
 
 dir_out="projects/$proj"
 mkdir -p $dir_out
@@ -87,7 +87,7 @@ anonymise ${dir_out}/git_log.txt
 echo "    - Scramble names in Git log."
 sed -E 's/Signed-off-by: [^<]+/Signed-off-by: XXXXXXXX /' < ${dir_out}/git_log.txt > ${dir_out}/git_log.txt.1
 sed -E 's/^Author: [^<]+/Author: XXXXXXXX /' < ${dir_out}/git_log.txt.1 > ${dir_out}/git_log.txt
-rm git_log.txt.1
+rm ${dir_out}/git_log.txt.1
 
 echo "    - Scramble Bugzilla files"
 anonymise ${dir_out}/bugzilla_issues.csv
@@ -103,11 +103,11 @@ anonymise ${dir_out}/eclipse_pmi_checks.json
 
 
 tmpfile=$(mktemp /tmp/r_extract_project.XXXXXX.r)
-echo "  * Rendering RMarkdown file [$tmpfile]." 
+echo "  * Rendering RMarkdown file [$tmpfile] in [${dir_out}/dataset_report_$proj.html]." 
 cat <<EOF > $tmpfile
 require(rmarkdown)
 render("../report/datasets_report.Rmd", 
-	output_file="${dir_out}/dataset_report_$proj.html",
+	output_file="../scripts/${dir_out}/dataset_report_$proj.html",
 	params = list(project_id = "$proj"))
 EOF
 
