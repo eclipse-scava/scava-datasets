@@ -101,8 +101,8 @@ tmpfile=$(mktemp /tmp/r_extract_project.XXXXXX.r)
 echo "  * Rendering RMarkdown file [$tmpfile]." 
 cat <<EOF > $tmpfile
 require(rmarkdown)
-render("report/datasets_report.Rmd", 
-	output_file="../${dir_out}/dataset_report_$proj.html",
+render("../report/datasets_report.Rmd", 
+	output_file="${dir_out}/dataset_report_$proj.html",
 	params = list(project_id = "$proj"))
 EOF
 
