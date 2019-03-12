@@ -105,17 +105,19 @@ for my $project (@projects) {
 	# populate out json
 	$projects{$project} = $m;
 	# populate out csv
+#	print "DBG " . Dumper($m) . "\n";
 	if ( scalar( @{$m->{'datatable'}} ) > 0 ) {
 	    for my $d ( @{$m->{'datatable'}} ) {
-#		print "DBG " . Dumper($d) . "\n";
+		print "DBG " . $m->{'x'} . " " . $m->{'y'} . " "
+		    . $d->{ $m->{'x'} } . ' ' . $d->{ $m->{'y'} } . "\n";
 		$projects_csv = "$project,";
 		$projects_csv .= $m->{'id'} . ",";
 		$projects_csv .= $m->{'name'} . ",";
 		$projects_csv .= $m->{'type'} . ",";
 		$projects_csv .= $m->{'x'} . ",";
 		$projects_csv .= $m->{'y'} . ",";
-		$projects_csv .= $d->{'Date'} . ",";
-		$projects_csv .= $d->{'Val'} . "\n";
+		$projects_csv .= $d->{ $m->{'x'} } . ",";
+		$projects_csv .= $d->{ $m->{'y'} } . "\n";
 	    }
 	} else {
 	    $projects_csv = "$project,";
