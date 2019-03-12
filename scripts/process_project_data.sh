@@ -21,7 +21,7 @@ fi
 
 export PERL5LIB=./data-anonymiser/code/:$PERL5LIB
 
-verbose=true
+verbose=false
 
 dir_out="projects/$proj"
 mkdir -p $dir_out
