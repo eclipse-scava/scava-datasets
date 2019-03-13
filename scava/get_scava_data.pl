@@ -98,6 +98,9 @@ my $projects_csv = "project,id,name,type,x,y,value_x,value_y\n";
 
 for my $project (@projects) {
 
+    my $project_csv = "project,id,name,type,x,y,value_x,value_y\n";
+    my $project_csv_1 = "project,id,name,type,x,y,value_x,value_y\n";
+
     print "# Metrics for project $project\n";
     for my $metric (keys %metrics) {
         print "   - $metric [" . $base_url . ":8182/projects/p/$project/m/$metric].\n";
@@ -108,24 +111,53 @@ for my $project (@projects) {
 #	print "DBG " . Dumper($m) . "\n";
 	if ( scalar( @{$m->{'datatable'}} ) > 0 ) {
 	    for my $d ( @{$m->{'datatable'}} ) {
-		print "DBG " . $m->{'x'} . " " . $m->{'y'} . " "
-		    . $d->{ $m->{'x'} } . ' ' . $d->{ $m->{'y'} } . "\n";
-		$projects_csv = "$project,";
-		$projects_csv .= $m->{'id'} . ",";
-		$projects_csv .= $m->{'name'} . ",";
-		$projects_csv .= $m->{'type'} . ",";
-		$projects_csv .= $m->{'x'} . ",";
-		$projects_csv .= $m->{'y'} . ",";
-		$projects_csv .= $d->{ $m->{'x'} } . ",";
-		$projects_csv .= $d->{ $m->{'y'} } . "\n";
+		if (ref($m->{'y'}) !~ m!ARRAY!) {
+		    my $i = 1;
+		    print "DBG " . $m->{'x'} . " " . $m->{'y'} . " "
+			. $d->{ $m->{'x'} } . ' ' . $d->{ $m->{'y'} } . "\n";
+		    $project_csv .= "$project,\"";
+		    $project_csv .= $m->{'id'} . '","';
+		    $project_csv .= $m->{'name'} . '","';
+		    $project_csv .= $m->{'type'} . '","';
+		    $project_csv .= $m->{'x'} . '","';
+		    $project_csv .= $m->{'y'} . '","';
+		    $project_csv .= $d->{ $m->{'x'} } . '","';
+		    $project_csv .= $d->{ $m->{'y'} } . "\"\n";
+		    if ($i == 1 ) {
+			$project_csv_1 .= "$project,\"";
+			$project_csv_1 .= $m->{'id'} . '","';
+			$project_csv_1 .= $m->{'name'} . '","';
+			$project_csv_1 .= $m->{'type'} . '","';
+			$project_csv_1 .= $m->{'x'} . '","';
+			$project_csv_1 .= $m->{'y'} . '","';
+			$project_csv_1 .= $d->{ $m->{'x'} } . '","';
+			$project_csv_1 .= $d->{ $m->{'y'} } . "\"\n";
+			$i++;
+		    }
+		    $projects_csv .= "$project,\"";
+		    $projects_csv .= $m->{'id'} . '","';
+		    $projects_csv .= $m->{'name'} . '","';
+		    $projects_csv .= $m->{'type'} . '","';
+		    $projects_csv .= $m->{'x'} . '","';
+		    $projects_csv .= $m->{'y'} . '","';
+		    $projects_csv .= $d->{ $m->{'x'} } . '","';
+		    $projects_csv .= $d->{ $m->{'y'} } . "\"\n";
+		}
 	    }
 	} else {
-	    $projects_csv = "$project,";
-	    $projects_csv .= $m->{'id'} . ",";
-	    $projects_csv .= $m->{'name'} . ",";
-	    $projects_csv .= $m->{'type'} . ",";
-	    $projects_csv .= $m->{'x'} . ",";
-	    $projects_csv .= $m->{'y'} . ",,\n";
+	    # $project_csv .= "$project,";
+	    # $project_csv .= $m->{'id'} . ",";
+	    # $project_csv .= $m->{'name'} . ",";
+	    # $project_csv .= $m->{'type'} . ",";
+	    # $project_csv .= $m->{'x'} . ",";
+	    # $project_csv .= $m->{'y'} . ",,\n";
+
+ 	    # $projects_csv .= "$project,";
+	    # $projects_csv .= $m->{'id'} . ",";
+	    # $projects_csv .= $m->{'name'} . ",";
+	    # $projects_csv .= $m->{'type'} . ",";
+	    # $projects_csv .= $m->{'x'} . ",";
+	    # $projects_csv .= $m->{'y'} . ",,\n";
 	}
 #        print "     " . Dumper($m) . "\n";
     }
@@ -134,11 +166,17 @@ for my $project (@projects) {
 #    my $s = &get_url($base_url . "/api/recommendation/similar/p/$project/m/Compound/n/3");
 #    print Dumper($s);
 
+    &write_file($project_csv, "project_$project.csv");
+    &write_file($project_csv, "project_$project.csv");
+    &write_file($project_csv_1, "project_${project}_single.csv");
+    
+    #    @projects_csv = ( @projects_csv, @project_csv );
 }
 
 my $projects_json = encode_json(\%projects);
 &write_file($projects_json, "projects.json");
 
+&write_file($projects_csv, "projects.csv");
 
 
 
