@@ -576,54 +576,58 @@ pre.editor-colors .fold-marker:after {
 </style>
   </head>
   <body class='markdown-preview' data-use-github-style><h1 id="eclipse-scava-datasets">Eclipse Scava Datasets</h1>
-<p>This web site hosts the open datasets generated in the course of the Crossminer research project. It includes various pieces of data retrieved from the Eclipse forge in CSV and JSON format, and each dataset has a R Markdown document describing its content and providing hints about how to use it. Examples provided mainly use the <a href="https://r-project.org">R statistical analysis software</a>.</p>
+<p>This web site hosts the open datasets generated in the course of the Crossminer research project. It includes various pieces of data retrieved from the Eclipse forge in CSV and JSON formats, and each dataset has a R Markdown document describing its content and providing hints about how to use it. Examples provided mainly use the <a href="https://r-project.org">R statistical analysis software</a>.</p>
 <p>All data is anonymised, please see the <a href="docs/datasets_privacy.html">dedicated document</a> to learn more about privacy and the anonymisation mecanism.</p>
+<h2 id="eclipse-projects">Eclipse projects</h2>
+<p>We generate full extracts of a <a href="datasets/projects/eclipse_projects.html">set of Eclipse projects</a>, including data sources like SCM (git), Issues tracking (Bugzilla), PMI checks and more.</p>
+<p>These datasets are updated weekly, at 2am on Sunday.</p>
 <h2 id="aeri-stacktraces">AERI Stacktraces</h2>
 <p>The <a href="datasets/aeri_stacktraces/stacktraces.html">AERI stacktraces dataset</a> is a list of exceptions encountered by users in the Eclipse IDE, as retrieved by the AERI system. The Automated Error Reporting (AERI) system has been developed by the people at <a href="https://www.codetrails.com/">Code Trails</a> and retrieves information about exceptions. It is installed by default in the Eclipse IDE and has helped hundreds of projects better support their users and resolve bugs. This dataset is a dump of all records over a couple of years, with useful information about the exceptions and environment.</p>
 <p>Last update of the dataset occured on 2018-02-11.</p>
-<h3 id="downloads">Downloads</h3>
+<p><strong>Downloads</strong></p>
 <ul>
-<li>Problems full [ <a href="problems_full.tar.bz2">Download JSON</a> ]<ul>
-<li>Description: A list of all problems, exported as JSON (one problem per file).</li>
+<li><strong>Problems full</strong> [ <a href="problems_full.tar.bz2">Download JSON</a> ] -- A list of all problems, exported as JSON (one problem per file).<ul>
 <li>Content: 125250 entries, 22 attributes</li>
 <li>Size: 38M compressed, 904M raw</li>
 </ul>
 </li>
-<li>Problems extract ( CSV )<ul>
-<li>Description: A list of all problems, exported as CSV (one big file).</li>
+<li><strong>Problems extract</strong> [ <a href="problems_full.tar.bz2">Download CSV</a> ] -- A list of all problems, exported as CSV (one big file).<ul>
 <li>Content: 125250 entries, 22 attributes</li>
 <li>Size: 1.5M compressed, 14M raw</li>
 </ul>
 </li>
-<li>Incidents full ( JSON )<ul>
-<li>Description: A list of all incidents, exported as JSON (one incident per file).</li>
+<li><strong>Incidents full</strong> [ <a href="problems_full.tar.bz2">Download JSON</a> ] -- A list of all incidents, exported as JSON (one incident per file).<ul>
 <li>Content: 2084363 entries, 22 attributes</li>
 <li>Size: 820M compressed, 19G raw</li>
 </ul>
 </li>
-<li>Incidents extract ( CSV )<ul>
-<li>Description: A list of all incidents, exported as CSV (one big file).</li>
+<li><strong>Incidents extract</strong> [ <a href="problems_full.tar.bz2">Download CSV</a> ] -- A list of all incidents, exported as CSV (one big file).<ul>
 <li>Content: 2084045 entries, 20 attributes</li>
 <li>Size: 141M compressed, 778M raw</li>
 </ul>
 </li>
-<li>Incidents Bundles ( CSV )<ul>
-<li>Description: A list of all bundles found in incidents, exported as CSV. Attributes are bundle_name, bundle_version, and number of occurrences.</li>
+<li><strong>Incidents Bundles</strong> [ <a href="problems_full.tar.bz2">Download CSV</a> ] -- A list of all bundles found in incidents, exported as CSV. Attributes are bundle_name, bundle_version, and number of occurrences.<ul>
 <li>Content: 29709 entries, 3 attributes</li>
 <li>Size: 220K compressed, 1.5M raw</li>
 </ul>
 </li>
 </ul>
-<h3 id="documentation">Documentation</h3>
+<p><strong>Documentation</strong></p>
 <ul>
-<li><a href="datasets/aeri_stacktraces/problems_analysis.pdf">Stacktraces Problems analysis document (PDF)</a>. A R Markdown document to analyse the Stacktraces problem dataset, with description of the actual content and examples of usage. This is the PDF export.</li>
-<li><a href="datasets/aeri_stacktraces/problems_analysis.rmd">Stacktraces Problems analysis document (Rmd)</a>. A R Markdown document to analyse the Stacktraces problem dataset, with description of the actual content and examples of usage. This is the original R Markdown document.</li>
-<li><a href="datasets/aeri_stacktraces/incidents_analysis.pdf">Stacktraces Incidents analysis document (PDF)</a>. A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage. This is the PDF export.</li>
-<li><a href="datasets/aeri_stacktraces/incidents_analysis.rmd">Stacktraces Incidents analysis document (Rmd)</a>. A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage. This is the original R Markdown document.</li>
+<li><strong>Stacktraces Problems analysis document</strong> [ <a href="datasets/aeri_stacktraces/problems_analysis.pdf">Download PDF</a> | <a href="datasets/aeri_stacktraces/problems_analysis.rmd">Download Rmd</a> ] -- A R Markdown document to analyse the Stacktraces problem dataset, with description of the actual content and examples of usage.</li>
+<li><strong>Stacktraces Incidents analysis document</strong> <a href="datasets/aeri_stacktraces/incidents_analysis.pdf"> </a><a href="datasets/aeri_stacktraces/incidents_analysis.pdf">Download PDF</a> | <a href="PDF">Download Rmd](datasets/aeri_stacktraces/incidents_analysis.rmd) </a>. A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage. This is the PDF export.</li>
 </ul>
 <p>More information about the AERI system can be found on the <a href="https://www.codetrails.com/error-analytics/manual/">Code Trails website</a>.</p>
 <h2 id="eclipse-mailing-lists">Eclipse mailing lists</h2>
 <p>The <a href="datasets/eclipse_mls/mbox_analysis.html">Eclipse Mailing lists</a> dump is an extract of all emails posted on the Eclipse mailing lists.</p>
-<h2 id="eclipse-projects">Eclipse projects</h2>
-<p>We also generate <a href="datasets/projects/eclipse_projects.html">full extracts of a set of Eclipse projects</a>, including data sources like SCM (git), Issues tracking (Bugzilla), PMI checks and more. These datasets are updated weekly, at 2am on Sunday.</p></body>
+<ul>
+<li>Download the <a href="datasets/eclipse_mls/eclipse_mls.gz">Eclipse mailing lists dataset here</a>.<ul>
+<li>Content: 352951 entries, 6 attributes</li>
+<li>Size: 12M compressed, 63M raw</li>
+</ul>
+</li>
+<li>Check the <a href="datasets/eclipse_mls/mbox_analysis.html">PDF documentation for the dataset</a>.</li>
+<li>For reproducibility we also provide the <a href="datasets/eclipse_mls/mbox_analysis.rmd">R Markdown document</a> for the dataset analysis and documentation.</li>
+</ul>
+<p>More information can be found on the official <a href="https://accounts.eclipse.org/mailing-list">Eclipse page for mailing lists</a>.</p></body>
 </html>
