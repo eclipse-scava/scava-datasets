@@ -17,6 +17,7 @@ pipeline {
         archiveArtifacts artifacts: 'datasets/**/*.gz', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.html', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.pdf', fingerprint: true 
+        archiveArtifacts artifacts: 'datasets/**/*.rmd', fingerprint: true 
         archiveArtifacts artifacts: 'docs/*', fingerprint: true 
         cleanWs()
       }
