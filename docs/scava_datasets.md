@@ -15,25 +15,25 @@ These datasets are updated weekly, at 2am on Sunday.
 
 ## AERI Stacktraces
 
-The [AERI stacktraces dataset](datasets/aeri_stacktraces/stacktraces.html) is a list of exceptions encountered by users in the Eclipse IDE, as retrieved by the AERI system. The Automated Error Reporting (AERI) system has been developed by the people at [Code Trails](https://www.codetrails.com/) and retrieves information about exceptions. It is installed by default in the Eclipse IDE and has helped hundreds of projects better support their users and resolve bugs. This dataset is a dump of all records over a couple of years, with useful information about the exceptions and environment.
+The [AERI stacktraces dataset](datasets/aeri_stacktraces/aeri_stacktraces.html) is a list of exceptions encountered by users in the Eclipse IDE, as retrieved by the AERI system. The Automated Error Reporting (AERI) system has been developed by the people at [Code Trails](https://www.codetrails.com/) and retrieves information about exceptions. It is installed by default in the Eclipse IDE and has helped hundreds of projects better support their users and resolve bugs. This dataset is a dump of all records over a couple of years, with useful information about the exceptions and environment.
 
 Last update of the dataset occured on 2018-02-11.
 
 **Downloads**
 
-* **Problems full** [ [Download JSON](problems_full.tar.bz2) ] -- A list of all problems, exported as JSON (one problem per file).
+* **Problems full** [ [Download JSON](datasets/aeri_stacktraces/problems_full.tar.bz2) ] -- A list of all problems, exported as JSON (one problem per file).
     * Content: 125250 entries, 22 attributes
     * Size: 38M compressed, 904M raw
-* **Problems extract** [ [Download CSV](problems_full.tar.bz2) ] -- A list of all problems, exported as CSV (one big file).
+* **Problems extract** [ [Download CSV](datasets/aeri_stacktraces/problems_full.tar.bz2) ] -- A list of all problems, exported as CSV (one big file).
     * Content: 125250 entries, 22 attributes
     * Size: 1.5M compressed, 14M raw
-* **Incidents full** [ [Download JSON](problems_full.tar.bz2) ] -- A list of all incidents, exported as JSON (one incident per file).
+* **Incidents full** [ [Download JSON](datasets/aeri_stacktraces/problems_full.tar.bz2) ] -- A list of all incidents, exported as JSON (one incident per file).
     * Content: 2084363 entries, 22 attributes
     * Size: 820M compressed, 19G raw
-* **Incidents extract** [ [Download CSV](problems_full.tar.bz2) ] -- A list of all incidents, exported as CSV (one big file).
+* **Incidents extract** [ [Download CSV](datasets/aeri_stacktraces/problems_full.tar.bz2) ] -- A list of all incidents, exported as CSV (one big file).
     * Content: 2084045 entries, 20 attributes
     * Size: 141M compressed, 778M raw
-* **Incidents Bundles** [ [Download CSV](problems_full.tar.bz2) ] -- A list of all bundles found in incidents, exported as CSV. Attributes are bundle_name, bundle_version, and number of occurrences.
+* **Incidents Bundles** [ [Download CSV](datasets/aeri_stacktraces/problems_full.tar.bz2) ] -- A list of all bundles found in incidents, exported as CSV. Attributes are bundle_name, bundle_version, and number of occurrences.
     * Content: 29709 entries, 3 attributes
     * Size: 220K compressed, 1.5M raw
 
