@@ -5,5 +5,5 @@ tools.andmore
 technology.ease
 modeling.emf-parsley
 modeling.mdt.papyrus
-modeling.sirius
+technology.tycho
 tools.tracecompass
