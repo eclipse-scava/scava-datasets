@@ -42,7 +42,7 @@ pipeline {
 
     }
 
-    stage('Deploy AERI') {
+    /* stage('Deploy AERI') {
       steps {
         sshagent ( ['73e80f22-58da-40ce-bc2d-b9f8ec7debcd']) {
           sh '''
@@ -59,9 +59,9 @@ pipeline {
           '''
         }
       }
-	}
+	} */
 
-    stage('Deploy Mailing lists') {
+    /* stage('Deploy Mailing lists') {
       steps {
           sshagent ( ['73e80f22-58da-40ce-bc2d-b9f8ec7debcd']) {
             sh '''
@@ -74,7 +74,7 @@ pipeline {
             '''
           }
         }
-    }
+    } */
 
     stage('Deploy Projects') {
       steps {
