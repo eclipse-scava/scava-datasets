@@ -14,9 +14,9 @@ pipeline {
         sh 'pwd'
         sh 'ls'
         sh 'cd scripts/ && sh ./process_all_projects.sh' 
-        archiveArtifacts artifacts: '**/*.gz', fingerprint: true 
+        archiveArtifacts artifacts: 'datasets/**/*.gz', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.html', fingerprint: true 
-        archiveArtifacts artifacts: 'docs/**/*.html', fingerprint: true 
+        archiveArtifacts artifacts: 'docs/*', fingerprint: true 
         cleanWs()
       }
     }
