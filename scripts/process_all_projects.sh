@@ -42,10 +42,10 @@ for proj in `cat list_projects.txt`; do
     echo ""
 done
 
-echo "Moving projects to datasets directory..."
-mv projects/ ../datasets/
+echo "# Moving projects to datasets directory..."
+mv projects/* ../datasets/projects/
 
-#echo "# Removing session directory [${dir_session}]."
+echo "# Removing session directory [${dir_session}]."
 rm -rf $dir_session
 
 
