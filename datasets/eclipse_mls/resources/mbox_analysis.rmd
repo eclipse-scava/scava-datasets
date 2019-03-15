@@ -1,0 +1,297 @@
+---
+title: "Eclipse mailing lists"
+subtitle: "R Analysis document"
+author: "Boris Baldassari -- Castalia Solutions"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 2
+  pdf_document:
+    toc: yes
+    toc_depth: 3
+  word_document:
+    toc: yes
+    toc_depth: '2'
+params:
+  project: ../eclipse_mls_clean.csv
+---
+
+```{r init, message=FALSE, echo=FALSE}
+library(ggplot2)
+library(plotly)
+library(ggthemes)
+library(knitr)
+library(kableExtra)
+library(parsedate)
+library(magrittr)
+
+# Read csv file
+file.in <- paste( params$project, sep="")
+project.csv <- read.csv(file.in, header=T)
+
+project.csv$Company <- substr(x = project.csv$sender_addr, 18, 33)
+
+# Create xts object
+require(xts)
+project.xts <- xts(x = project.csv, order.by = parse_iso_8601(project.csv$sent_at))
+
+# Initialise plotly
+Sys.setenv("plotly_username"="BorisBaldassari")
+Sys.setenv("plotly_api_key"="uewufFf4T6NTGwbU6uS5")
+```
+
+# Introduction
+
+## About this dataset
+
+The [Eclipse Foundation](https://eclipse.org) provides individuals and organizations with a commercially focused environment for open source software innovation. It includes git repositories, reviews, issues management, continuous integration, forums and mailing lists among other services. Many well-known and widely used projects are hosted on the forge, including the Eclipse IDE itself, The new Java working group, 
+
+This dataset is a dump of all posts sent on all mailing lists hosted at the Eclipse Forge. Although this is public data (the mailing lists can be browsed on the [official mailman page](https://accounts.eclipse.org/mailing-list)) all data has been anonymised to prevent any misuse.
+
+* **Generated date**: `r date()`
+* **First date**: `r first(index(project.xts))`
+* **Last date**: `r last(index(project.xts))`
+* **Number of posts**: `r nrow(project.xts)`
+* **Number of attributes**: `r ncol(project.xts)`
+
+
+## Privacy concerns
+
+We value privacy and intend to make everything we can to prevent misuse of the dataset. If you think we failed somewhere in the process, please [let us know](https://www.crossminer.org/contact) so we can do better.
+
+All personally identifiable information has been scrambled using the [data anonymiser](https://github.com/borisbaldassari/data-anonymiser) Perl module. As a result there is **no clear email address** in this dataset, **nor any UUID or name**. However all identical information produces the same encrypted string, which means that one can still identify identical data without knowing what it actually is. As an example email addresses are split (name, company) and encoded separately, which enables one to e.g. identify posters from the same company without knowing the company.
+
+The anonymisation technique used basically encrypts information and then throws away the private key. Please refer to the [documentation published on github](https://github.com/borisbaldassari/data-anonymiser) for more details.
+
+
+## About this document
+
+This document is a [R Markdown document](http://rmarkdown.rstudio.com) and is composed of both text (like this one) and dynamically computed information (mostly in the sections below) executed on the data itself. This ensures that the documentation is always synchronised with the data, and serves as a test suite for the dataset.
+
+
+# Structure of data
+
+This dataset is composed of a single big CSV file. Attributes are: ``r names(project.xts)``.
+
+Examples are provided at the end of this file to demonstrate how to use it in R.
+
+## list {#list}
+
+* Description: The mailing list and project of the post.
+* Type: String
+
+Examples: 
+```{r list.sample, warning=FALSE, include=FALSE, results='asis'}
+extract <- sample(unique(project.csv$list), size=5)
+kable( extract, caption="Sample of list names", col.names = c('Project list names'))
+```
+
+## messageId {#message_id}
+
+* Description: A unique identifier for the post.
+* Type: String (Scrambled Base64)
+
+Examples: 
+```{r messageid.sample, warning=FALSE, echo=FALSE, results='asis'}
+extract <- sample(unique(project.csv$messageid), size=5)
+kable( extract, caption="Sample of message IDs", col.names = c('Message ID'))
+```
+
+## Subject {#subject}
+
+* Description: The subject of the post as sent on the mailing list.
+* Type: String 
+
+Examples: 
+```{r subject.sample, warning=FALSE, echo=FALSE, results='asis'}
+extract <- sample(unique(project.csv$subject), size=5)
+kable( extract, caption="Sample of email subjects", col.names = c('Subject'))
+```
+
+## Sent at {#sent_at}
+
+* Description: The time of sending for the post.
+* Type: Date (ISO 8601)
+
+Main characteristics:
+
+* **First date**: `r first(index(project.xts))`
+* **Last date**: `r last(index(project.xts))`
+
+Examples: 
+```{r sentat.sample, warning=FALSE, echo=FALSE, results='asis'}
+extract <- sample(project.csv$sent_at, size=5)
+kable( extract, caption="Sample of sent dates", col.names = c('Sent date'))
+```
+
+
+## Sender name
+
+* Description: The name of the sender of the post.
+* Type: String (Scrambled Base64)
+* Number of unique entries: `r length(unique(project.csv$sender_name))`
+
+Examples: 
+```{r sendername.sample, warning=FALSE, echo=FALSE, results='asis'}
+extract <- sample(project.csv$sender_name, size=5)
+kable( extract, caption="Sample of sender names", col.names = c('Sender names'))
+```
+
+Note: A single name repeated several times will always result in the same scrambled ID. This way it is possible to identify same-author posts without actually knowing the name of the sender.
+
+## Sender address
+
+* Description: The email address of the sender, encoded.
+* Type: String (Scrambled Base64)
+* Number of unique entries: `r length(unique(project.csv$sender_addr))`
+
+Examples: 
+```{r senderaddr.sample, warning=FALSE, echo=FALSE, results='asis'}
+extract <- sample(project.csv$sender_addr, size=5)
+kable( extract, caption="Sample of sender addresses", col.names = c('Sender addresses'))
+```
+
+Note: A single email address repeated several times will always result in the same scrambled email address. Furthermore both parts of the email (name, company) are individually scrambled, which means that one can identify email addresses from the same company without actually knowing the real company or name of the sender.
+
+# Using the dataset
+
+## Reading CSV file
+
+Reading file from `r file.in`. 
+
+```{r examples.init, echo=T}
+project.csv <- read.csv(file.in, header=T)
+```
+
+We add a column for the Company, which we extract from the email address (i.e. the domain name):
+
+```{r examples.init.comp, echo=T}
+project.csv$Company <- substr(x = project.csv$sender_addr, 18, 33)
+```
+
+Number of columns in this dataset:
+
+```{r examples.ncol, echo=T}
+ncol(project.csv)
+```
+
+Number of entries in this dataset:
+
+```{r examples.nrow, echo=T}
+nrow(project.csv)
+```
+
+Names of columns: 
+
+```{r examples.names, echo=T}
+names(project.csv)
+```
+
+
+## Using time series (xts)
+
+The dataset needs to be converted to a `xts` object. We can use the `sent_at` attribute as a time index.
+
+```{r examples.xts, echo=T}
+require(xts)
+project.xts <- xts(x = project.csv, order.by = parse_iso_8601(project.csv$sent_at))
+```
+
+## Plotting number of monthly posts
+
+When considering the timeline of the dataset, it can be misleading when there several submissions on a short period of time, compared to sparse time ranges. We'll use the `apply.monthly` function from `xts` to normalise the total number of monthly submissions.
+
+```{r examples.xts.plot}
+project.monthly <- apply.monthly(x=project.xts$sent_at, FUN=nrow)
+
+autoplot(project.monthly, geom='line') + 
+  theme_minimal() + ylab("Number of posts") + xlab("Time") + ggtitle("Number of monthly posts")
+```
+
+## Plotting number of monthly reporters
+
+One author can post several emails on the mailing list. Let's plot the monthly number of distinct authors on the mailing list. For this we need to count the number of unique occurrences of the email address (attribute `sender_attr`).
+
+```{r xts.monthly.reporters}
+count_unique <- function(x) { length(unique(x)) }
+project.monthly <- apply.monthly(x=project.xts$sender_addr, FUN=count_unique)
+
+autoplot(project.monthly, geom='line') + 
+  theme_minimal() + ylab("Number of authors") + xlab("Time") + ggtitle("Number of monthly distinct authors")
+```
+
+
+## Plotting activity of authors
+
+We want to plot the number of emails sent by each author regardless of the mailing list they were sent on. We display only the 10 top posters:
+
+```{r reporters.sample, warning=FALSE, echo=FALSE, results='asis'}
+authors <- sort(x = table(project.csv$sender_addr), decreasing = TRUE)
+authors.10 <- head( authors, n = 10)
+authors.subset.df <- as.data.frame(authors.10)
+authors.subset.df$Company <- substr(x = authors.subset.df$Var1, 18, 33)
+
+kable( authors.subset.df, caption="Top 10 senders on mailing lists", col.names = c('Sender address', 'Number of posts', 'Company'))
+```
+
+```{r reporters.plot.init, echo=F}
+n <- 50
+```
+
+Now plot these `r n` top posters with ggplot and use the company (i.e. second part of the email address) for the colour:
+
+```{r reporters.plot}
+authors.subset <- head( authors, n = n)
+
+authors.subset.df <- as.data.frame(authors.subset)
+names(authors.subset.df) <- c('ID', 'Posts')
+authors.subset.df$Author <- substr(x = authors.subset.df$ID, 1, 16)
+authors.subset.df$Company <- substr(x = authors.subset.df$ID, 18, 33)
+
+p <- ggplot(data=authors.subset.df, aes(x=reorder(Author, -Posts), y = Posts, fill = Company)) + 
+  geom_bar(stat="identity") + 
+  theme_minimal() + ylab("Number of posts") + xlab('Posters') + 
+  ggtitle(paste(n, " overall top posters on Eclipse mailing lists", sep="")) +
+  theme( axis.text.x = element_text(angle=60, size = 7, hjust = 1))
+g <- ggplotly(p)
+g
+#api_create(g, filename = "r-eclipse_mls_authors")
+```
+
+
+## Posts by Company
+
+We want to know what companies posted the most messages in mailing listsacross years. To that end we select the 20 companies that have the larger number of posts and plot the number of messages by company year after year.
+
+```{r comp.init}
+comps_list <- head( sort( x = table(project.csv$Company), decreasing = T ), n=20 )
+df <- data.frame(Company=character(), 
+                 Year=character(),
+                 Posts=integer(), 
+                 stringsAsFactors=FALSE) 
+for (i in seq_along(1:20)) {
+  project.comp.xts <- project.xts[project.xts$Company == names(comps_list)[[i]],]
+  project.comp.yearly <- apply.yearly(x=project.comp.xts$Company, FUN=nrow)
+  for (j in seq_along(1:nrow(project.comp.yearly))) {
+    year <- format(index(project.comp.yearly)[[j]],"%Y")
+    comp <- as.data.frame(t(c(names(comps_list)[[i]], year, as.integer(project.comp.yearly[[j]]))))
+    names(comp) <- c("Company", "Year", "Posts")
+    df <- rbind(df, comp)
+  }
+}
+
+df$Company <- as.character(df$Company)
+df <- df[order(df$Company),]
+
+p <- ggplot(data=df, aes(x=Year, y = Posts, fill = Company)) + geom_bar(stat="identity") + 
+  theme_minimal() + ylab("Number of posts") + xlab('Years') + 
+  ggtitle("Top 20 Companies involved in Eclipse mailing lists across years") +
+  theme( axis.text.x = element_text(angle=60, size = 7, hjust = 1))
+
+g <- ggplotly(p)
+g
+#api_create(g, filename = "r-eclipse_mls_companies")
+```
+
+
+
