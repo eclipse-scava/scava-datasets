@@ -1,0 +1,579 @@
+---
+title: "StackTraces -- Incidents"
+subtitle: "R Analysis document"
+author: "Boris Baldassari -- Castalia Solutions"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 3
+    keep_tex: true
+  html_document:
+    toc: yes
+    toc_depth: 2
+  word_document:
+    toc: yes
+    toc_depth: '2'
+---
+
+```{r init, message=FALSE, echo=FALSE, cache=FALSE}
+library(ggplot2)
+library(ggthemes)
+library(knitr)
+
+library(kableExtra)
+options(knitr.table.format = "latex")
+
+library(parsedate)
+library(magrittr)
+
+require(xts)
+```
+
+```{r init.read, message=FALSE, echo=FALSE, cache=TRUE}
+# Read csv file
+file.in <- "incidents_extract.csv"
+myincidents <- read.csv(file.in, header=T, quote='"')
+file.in.bundles <- "incidents_bundles_extract.csv"
+mybundles <- read.csv(file.in.bundles, header=T, quote='"')
+
+# Create xts object
+myincidents <- myincidents[myincidents$timestamp != '',]
+myincidents <- myincidents[myincidents$savedOn != '',]
+myp.xts <- xts(x = myincidents, order.by = parse_iso_8601(myincidents$timestamp))
+```
+
+# Introduction
+
+## About this dataset
+
+The [Automated Error Reporting](https://wiki.eclipse.org/EPP/Logging) (AERI) system retrieves [information about exceptions](https://www.codetrails.com/error-analytics/manual/). It is installed by default in the [Eclipse IDE](http://www.eclipse.org/ide/) and has helped hundreds of projects better support their users and resolve bugs.  
+
+This dataset is a dump of all records over a couple of years, with useful information about the exceptions and environment.
+
+* **Generated date**: `r date()`
+* **First date**: `r first(index(myp.xts))`
+* **Last date**: `r last(index(myp.xts))`
+* **Number of incidents**: `r nrow(myp.xts)`
+* **Number of attributes**: `r ncol(myp.xts)`
+
+## Terminology
+
+* **Incidents** When an exception occurs and is trapped by the AERI system, it constitutes an incident (or error report). An incident can be reported by several different people, can be reported multiple times, and can be linked to different environments.
+* **Problems** As soon as an error report arrives on the server, it will be analyzed and subsequently assigned to one or more problems. A problem thus represents a set of (similar) error reports which usually have the same root cause – for example a bug in your software. (Extract from the [AERI system documentation](https://www.codetrails.com/error-analytics/manual/concepts/error-reports-problems-bugs-projects.html))
+
+This dataset targets only the Incidents of the AERI dataset. There is another dedicated document for the Problems.
+
+## Privacy concerns
+
+We value privacy and intend to make everything we can to prevent misuse of the dataset. If you think we failed somewhere in the process, please [let us know](https://www.crossminer.org/contact) so we can do better.
+
+The AERI system itself doesn't gather much private information, and takes a great care of it. Ths dataset goes a step further and removes all identifiable information. 
+
+* There is **no email address** in this dataset, **nor any UUID**. 
+* People not willing to share their traces to the AERI system can tick the private option. This choice has been respected, and all classes that do not belong to public hierarchy have been hidden thanks to an anonymisation mechanism.
+
+The anonymisation technique used basically encrypts information and then throws away the private key. Please refer to the [documentation published on github](https://github.com/borisbaldassari/data-anonymiser) for more details.
+
+
+## About this document
+
+This document is a [R Markdown document](http://rmarkdown.rstudio.com) and is composed of both text (like this one) and dynamically computed information (mostly in the Anaysis section below) executed on the data itself. This ensures that the information is always synchronised with the data, and serves as a test suite for the dataset.
+
+
+# Structure of data
+
+The plugin collects a [lot of useful information](https://www.codetrails.com/error-analytics/manual/misc/sent-data.html). We only use a subset of it, as required by research interest and privacy protection concerns. 
+
+The Incidents dataset comes in two flavours: `All incidents`, in JSON format, and `incidents extract`, in CSV format. There is also a list of bundles discovered in the data dump with their version and number of attached incidents.
+
+
+## All incidents (JSON)
+
+**All incidents** is the most complete dataset, with all attributes, stacktraces and bundles. Since the stacktraces and bundles structures are too complex for CSV, only the JSON export contains them. The dataset comes as a quite large compressed archive, with one JSON file per incident This represents a total of `r nrow(myincidents)` files (incidents).
+
+
+The structure of an incident file is examplified below: 
+
+    {
+      "eclipseBuildId": "4.6.1.M20160907-1200",
+      "eclipseProduct": "org.eclipse.epp.package.jee.product",
+      "fingerprint": "cd03d068798d141412b1d1605892fbec",
+      "fingerprint2": "12166d864efb7adcccc187034deb7dbf",
+      "javaRuntimeVersion": "1.8.0_112-b15",
+      "kind": "NORMAL",
+      "osgiArch": "x86_64",
+      "osgiOs": "Windows7",
+      "osgiOsVersion": "6.1.0",
+      "osgiWs": "win32",
+      "presentBundles": [
+        [ "bundle" ]
+      ],
+      "savedOn": "2016-11-08T10:23:01.914Z",
+      "severity": "UNKNOWN",
+      "stacktraces": [
+        [ "stacktrace" ]
+      ],
+      "status": {
+        "code": 0,
+        "fingerprint": "98631af2ddb2d197ebdca532f19d082b",
+        "message": "Failed to retrieve default libraries for C:\\Program Files\\Java\\jre1.8.0_111",
+        "pluginId": "org.eclipse.jdt.launching",
+        "pluginVersion": "3.8.100.v20160505-0636",
+        "severity": 4
+      },
+      "timestamp": "2016-11-08T10:22:59.204Z"
+    }
+    
+The structure used in the mongodb for stacktraces has been kept as is: it is composed of fields with all information relevant to each line of the stacktrace. Each stacktrace is an array of objects as shown below:
+
+    [
+      {
+        "cN": "sun.net.www.http.HttpClient",
+        "mN": "parseHTTPHeader",
+        "fN": "HttpClient.java",
+        "lN": 786,
+      }
+    ]
+
+Bundles have the following format:
+
+    {
+      "name": "org.eclipse.egit.core",
+      "version": "4.1.1.201511131810-r"
+    }
+
+
+## Incidents extract (CSV)
+
+The **Incidents extract** CSV dataset provides the same information as the full JSON dataset, excluding complex structures that cannot be easily formatted in CSV: stacktraces, bundles, products.
+
+Attributes are: ``r names(myincidents)``.
+
+Examples are provided at the end of this file to demonstrate how to use it in R.
+
+
+## Bundles extract (CSV)
+
+The **Bundles extract** CSV dataset lists the Eclipse bundles and versions associated to incidents, with the number of incidents for each pair. 
+
+```{r bundles.table, message=FALSE, echo=FALSE, warning=FALSE, results='asis', cache=TRUE}
+#library(DT)
+#datatable(mybundles[seq(1,10),], options=list(paging=F))
+kable(mybundles[seq(1,30),])
+```
+
+# Attributes
+
+## Message
+
+* Description: A short text summarising the error.
+* Type: String
+
+## Code
+
+* Description: The numeric status code logged with the error.
+* Type: Integer
+
+```{r attr.code.init, warning=FALSE, echo=FALSE, cache=TRUE}
+mysum <- summary(myincidents$code)
+```
+
+Statistical summary:
+
+* Range [ `r format(mysum[[1]], scientific = FALSE)` : `r format(mysum[[6]], scientific = FALSE)` ]
+* 1st Quartile `r mysum[[2]]`
+* Median `r mysum[[3]]`
+* Mean `r format(mysum[[4]], scientific = FALSE)`
+* 3rd Quartile `r format(mysum[[5]], scientific = FALSE)`
+
+## Severity
+
+* Description: An estimate by the user reporting the error about its perceived severity.
+* Type: Factors
+
+```{r attr.severity.init, warning=FALSE, echo=FALSE, cache=TRUE}
+mysum <- summary(myincidents$severity)
+```
+
+Distribution:
+
+* CRITICAL `r mysum[[c('CRITICAL')]]`
+* MAJOR `r mysum[[c('MAJOR')]]`
+* MINOR `r mysum[[c('MINOR')]]`
+* NO_BUG `r mysum[[c('NO_BUG')]]`
+* TRIVIAL `r mysum[[c('TRIVIAL')]]`
+* UNKNOWN `r mysum[[c('UNKNOWN')]]`
+
+
+## Kind {#attr_kind}
+
+* Description: The type of error recorded, as identified by the AERI system.
+* Type: Factors
+
+The possible values found in the dataset for this attributes are:
+
+```{r attr.kind, message=FALSE, echo=FALSE, warning=FALSE, results='asis', cache=TRUE}
+kinds <- table(myincidents$kind)
+kinds <- kinds[kinds != 0]
+kinds <- kinds[order(kinds, decreasing = TRUE)]
+t <- lapply(names(kinds), function(x) paste('* ', x, ' (count: ', kinds[[x]], ")", sep=''))
+t <- paste(t, collapse="\n")
+cat(t)
+```
+
+**Notes**
+
+There are different kinds of incidents described in the [official documentation](https://www.codetrails.com/error-analytics/manual/concepts/incident-kinds.html):
+
+* Normal Error: Normal errors are all exceptions that were reported by a client but that are not of kind defined below. Common examples of a normal error are a `NullPointerException` or `IllegalArgumentException`.
+  - An `OutOfMemoryError` is a special kind of exception. Unlike for normal errors, the stack frame (implicitly) throwing the exception is only sometimes indicative of the root cause of the problem.
+  - A `StackOverflowError` is a special kind of exception, whose unique characteristic is a repeating pattern of stack frames near the top of the stack trace.
+* UI Freeze: A UI freeze is caused by a long-running operation or even a deadlock on the UI thread. 
+* Third-Party Error: Third-party errors are reports that were received by the Codetrails Error Analytics Server, which deemed neither the configured projects nor their dependencies at fault. 
+* Third-Party UI Freeze: Third-Party UI Freezes are UI freezes that were received by the Codetrails Error Analytics Server, which deemed neither the configured projects nor their dependencies at fault. 
+
+## Plugin ID {#attr_plugin_id}
+
+* Description: The ID of the Eclipse plugin that threw the exception.
+* Type: Factors
+
+The possible values found in the dataset for this attributes are:
+
+```{r attr.plugin.id, message=FALSE, echo=FALSE, warning=FALSE, results='asis', cache=TRUE}
+occurences.max.pi <- 500
+pis <- data.frame(table(myincidents$pluginId))
+pis <- pis[order(-pis$Freq),]
+pis.top <- pis[pis[,c('Freq')] >= occurences.max.pi,]
+t <- lapply(pis.top$Var1, function(x) paste('* ', x, ' (count: ', pis.top[pis.top$Var1 == x,c("Freq")], ")", sep=''))
+t <- paste(t, collapse="\n")
+cat(t)
+```
+
+Visualisation of the most used Eclipse Build IDs in the dataset:
+
+```{r attr.plugin.id.plot, echo=FALSE, cache=TRUE}
+ggplot(pis.top[seq(1,30),], aes(x=reorder(Var1, Freq), y=Freq)) + geom_bar(stat='identity') + coord_flip() + 
+  theme_tufte() + xlab("Plugin IDs") + ggtitle("Repartition of most impacted plugin IDs in dataset")
+```
+
+
+## Plugin version {#attr_plugin_version}
+
+* Description: The ID of the Eclipse plugin that threw the exception.
+* Type: Factors
+
+```{r attr.pluginversion.init, echo=F, cache=TRUE}
+occurences.max.pv <- 500
+mypvs <- data.frame(table(myincidents$pluginVersion))
+mypvs <- mypvs[order(-mypvs$Freq),]
+mypvs.top <- mypvs[mypvs[,c('Freq')] >= occurences.max.pv,]
+```
+
+There are `r nrow(mypvs)` different values found in the dataset for this attribute. The following bar plot only displays the values with more than `r occurences.max.pv` occurrences:
+
+```{r attr.pluginversion.plot, echo=FALSE, message=FALSE, cache=TRUE}
+mypvs.df <- as.data.frame(mypvs.top)
+ggplot(mypvs.df[seq(1,30),], aes(x=reorder(Var1, Freq), y=Freq)) + geom_bar(stat='identity') + coord_flip() + 
+  theme_tufte() + xlab("Plugin version") + ggtitle("Repartition of top Eclipse plugin versions in dataset")
+```
+
+
+
+## Status fingerprint {#attr_status_fingerprint}
+
+* Description: An identifier for the status of the incident. Used for [duplicates detection](https://www.codetrails.com/error-analytics/manual/features/server/duplicate-detection.html).
+* Type: String
+
+
+## Incident fingerprint {#attr_fingerprint}
+
+* Description: An identifier for the incident. Used for [duplicates detection](https://www.codetrails.com/error-analytics/manual/features/server/duplicate-detection.html).
+* Type: String
+
+
+## Incident fingerprint2 {#attr_fingerprint2}
+
+* Description: An identifier for the incident. Used for [duplicates detection](https://www.codetrails.com/error-analytics/manual/features/server/duplicate-detection.html).
+* Type: String
+
+
+## Timestamp {#timestamp}
+
+* Description: The time of creation of the incident.
+* Type: Date (ISO8601)
+
+```{r attr.ts, echo=FALSE, cache=TRUE}
+myp.xts.ts <- xts(x = data.frame(c <- rep.int(1,nrow(myincidents))), order.by = parse_iso_8601(myincidents$timestamp))
+```
+
+Dates range from `r first(index(myp.xts.ts))` to `r last(index(myp.xts.ts))`.
+
+```{r attr.ts.plot, echo=FALSE, cache=TRUE}
+#xts.ts <- as.xts(apply.weekly(myp.xts.ts, sum))
+xts.ts <- apply.weekly(myp.xts.ts, sum)
+autoplot(xts.ts, geom='line') + 
+  theme_bw() + ylab("Incidents Timestamp") + ggtitle("Weekly number of Incidents timestamp")
+```
+
+
+## Saved On {#attr_saved_on}
+
+* Description: The time of last save of the problem.
+* Type: Date (ISO8601)
+
+```{r attr.savedOn, echo=FALSE, cache=TRUE}
+myp.xts.savedOn <- xts(x = data.frame(c <- rep.int(1,nrow(myincidents))), order.by = parse_iso_8601(myincidents$savedOn))
+```
+
+Dates range from `r first(index(myp.xts.savedOn))` to `r last(index(myp.xts.savedOn))`.
+
+```{r attr.savedOn.plot, echo=FALSE, cache=TRUE}
+xts.savedOn <- as.xts(apply.weekly(myp.xts.savedOn, sum))
+autoplot(xts.savedOn, geom='line') + 
+  theme_bw() + ylab("Problems SavedOn") + ggtitle("Weekly number of Problems SavedOn")
+```
+
+
+## OSGi Architecture {#attr_osgi_arch}
+
+* Description: The architecture of the host, as specified in the OSGi bundle definition.
+* Type: Factors
+
+Possible values found in the dataset for this attribute are:
+  
+```{r attr.osgi.arch, message=FALSE, echo=FALSE, warning=FALSE, results='asis', cache=TRUE}
+archs <- table(myincidents$osgiArch)
+archs <- archs[order(archs, decreasing = TRUE)]
+t <- lapply(names(archs), function(x) paste('* ', x, ' (count: ', archs[[x]], ")", sep=''))
+t <- paste(t, collapse="\n")
+cat(t)
+```
+
+Repartition of architectures:
+
+```{r osgiArch, echo=FALSE, message=FALSE, cache=TRUE}
+archs.df <- as.data.frame(archs)
+ggplot(archs.df[seq(1,30),], aes(x=reorder(Var1, Freq), y=Freq)) + geom_bar(stat='identity') + coord_flip() + 
+  theme_tufte() + xlab("OSGi Architecture") + ggtitle("Repartition of OSGi Architectures in dataset")
+```
+
+
+## OSGi OS {#attr_osgi_os}
+
+* Description: The host operating system, as reported in OSGi.
+* Type: Factors
+
+The possible values found in the dataset for this attributes are:
+
+```{r attr.osgi.os, message=FALSE, echo=FALSE, warning=FALSE, results='asis', cache=TRUE}
+oses <- table(myincidents$osgiOs)
+oses <- oses[order(oses, decreasing = TRUE)]
+t <- lapply(names(oses), function(x) paste('* ', x, ' (count: ', oses[[x]], ")", sep=''))
+t <- paste(t, collapse="\n")
+cat(t)
+```
+
+Visualisation of the various operating systems used in the dataset:
+
+```{r attr.osgi.os.plot, echo=FALSE, cache=TRUE}
+oses.df <- as.data.frame(oses)
+ggplot(oses.df[seq(1,30),], aes(x=reorder(Var1, Freq), y=Freq)) + geom_bar(stat='identity') + coord_flip() + 
+  theme_tufte() + xlab("OSGi Operating System") + ggtitle("Repartition of OSGi OS in dataset")
+```
+
+
+## OSGi OS Version {#attr_osgi_os_version}
+
+* Description: The host operating system version, as reported in OSGi.
+* Type: Factors
+
+The possible values found in the dataset for this attributes are:
+
+```{r attr.osgi.os.version, message=FALSE, echo=FALSE, warning=FALSE, results='asis', cache=TRUE}
+occurences.max.osv <- 500
+oses <- data.frame(table(myincidents$osgiOsVersion))
+oses <- oses[order(-oses$Freq),]
+oses.top <- oses[oses[,c('Freq')] >= occurences.max.osv,]
+t <- lapply(oses.top$Var1, function(x) paste('* ', x, ' (count: ', oses.top[oses.top$Var1 == x,c("Freq")], ")", sep=''))
+t <- paste(t, collapse="\n")
+cat(t)
+```
+
+Visualisation of the various operating system versions used in the dataset:
+
+```{r attr.osgi.os.version.plot, echo=FALSE, cache=TRUE}
+ggplot(oses.top[seq(1,30),], aes(x=reorder(Var1, Freq), y=Freq)) + geom_bar(stat='identity') + coord_flip() + 
+  theme_tufte() + xlab("OSGi Operating System Version") + ggtitle("Repartition of most used OSGi OS versions in dataset")
+```
+
+
+## OSGi Window Manager {#attr_osgi_ws}
+
+* Description: The Window Manager used by the host, as reported in OSGi.
+* Type: Factors
+
+The possible values found in the dataset for this attributes are:
+
+```{r attr.osgi.ws, message=FALSE, echo=FALSE, warning=FALSE, results='asis', cache=TRUE}
+oses <- table(myincidents$osgiWs)
+
+# We don't want an empty col name.
+names(oses)[names(oses) == ''] <- 'UNKNOWN'
+
+oses <- oses[order(oses, decreasing = TRUE)]
+t <- lapply(names(oses), function(x) paste('* ', x, ' (count: ', oses[[x]], ")", sep=''))
+t <- paste(t, collapse="\n")
+cat(t)
+```
+
+Visualisation of the various Window managers used in the dataset:
+
+```{r attr.osgi.ws.plot, echo=FALSE, cache=TRUE}
+oses.df <- as.data.frame(oses)
+ggplot(oses.df[seq(1,30),], aes(x=reorder(Var1, Freq), y=Freq)) + geom_bar(stat='identity') + coord_flip() + 
+  theme_tufte() + xlab("OSGi Window Managers") + ggtitle("Repartition of OSGi Window managers in dataset")
+```
+
+## Eclipse Build ID {#attr_eclipse_build_id}
+
+* Description: The Build ID of the Eclipse instance running when the exception occurred.
+* Type: Factors
+
+The possible values found in the dataset for this attributes are:
+
+```{r attr.eb.id, message=FALSE, echo=FALSE, warning=FALSE, results='asis', cache=TRUE}
+occurences.max.ebi <- 500
+ebis <- data.frame(table(myincidents$eclipseBuildId))
+ebis <- ebis[order(-ebis$Freq),]
+ebis.top <- ebis[ebis[,c('Freq')] >= occurences.max.ebi,]
+t <- lapply(ebis.top$Var1, function(x) paste('* ', x, ' (count: ', ebis.top[ebis.top$Var1 == x,c("Freq")], ")", sep=''))
+t <- paste(t, collapse="\n")
+cat(t)
+```
+
+Visualisation of the most used Eclipse Build IDs in the dataset:
+
+```{r attr.eb.id.plot, echo=FALSE, cache=TRUE}
+ggplot(ebis.top[seq(1,30),], aes(x=reorder(Var1, Freq), y=Freq)) + geom_bar(stat='identity') + coord_flip() + 
+  theme_tufte() + xlab("Eclipse Builds") + ggtitle("Repartition of most used Eclipse Build IDs in dataset")
+```
+
+## Eclipse Product {#attr_eclipse_product}
+
+* Description: The Eclipse product impacted by the exception.
+* Type: Factors
+
+The possible values found in the dataset for this attributes are:
+
+```{r attr.ep, message=FALSE, echo=FALSE, warning=FALSE, results='asis', cache=TRUE}
+occurences.max.eps <- 500
+eps <- data.frame(table(myincidents$eclipseBuildId))
+eps <- eps[order(-eps$Freq),]
+```
+
+There are `r nrow(eps)` different values found in the dataset for this attribute. The following table and bar plot only display the values with more than `r occurences.max.eps` occurrences:
+
+```{r attr.ep.table, message=FALSE, echo=FALSE, warning=FALSE, results='asis', cache=TRUE}
+eps.top <- eps[eps[,c('Freq')] >= occurences.max.eps,]
+t <- lapply(eps.top$Var1, function(x) paste('* ', x, ' (count: ', eps.top[eps.top$Var1 == x,c("Freq")], ")", sep=''))
+t <- paste(t, collapse="\n")
+cat(t)
+```
+
+Visualisation of the most used Eclipse Build IDs in the dataset:
+
+```{r attr.ep.plot, echo=FALSE, cache=TRUE}
+ggplot(eps.top[seq(1,30),], aes(x=reorder(Var1, Freq), y=Freq)) + geom_bar(stat='identity') + coord_flip() + 
+  theme_tufte() + xlab("Eclipse Products") + ggtitle("Repartition of most used Eclipse Products in dataset")
+```
+
+
+
+## Java runtime version {#attr_javaruntime}
+
+* Description: The Java runtime of the host.
+* Type: Factors
+
+```{r jrv.kable.init, echo=F, cache=TRUE}
+occurences.max.jrv <- 500
+myjrvs <- data.frame(table(myincidents$javaRuntimeVersion))
+myjrvs <- myjrvs[order(-myjrvs$Freq),]
+myjrvs.top <- myjrvs[myjrvs[,c('Freq')] >= occurences.max.jrv,]
+```
+
+There are `r nrow(myjrvs)` different values found in the dataset for this attribute. The following bar plot only displays the values with more than `r occurences.max.jrv` occurrences:
+
+```{r jrv.kable, eval=FALSE, include=FALSE, results='asis', cache=TRUE}
+kable(data.frame(myjrvs.top), row.names = F) %>% 
+  kable_styling(full_width = T, latex_options = c("striped", "hold_position"))
+```
+
+```{r jrv.plot, echo=FALSE, message=FALSE, cache=TRUE}
+myjrvs.df <- as.data.frame(myjrvs.top)
+ggplot(myjrvs.df[seq(1,30),], aes(x=reorder(Var1, Freq), y=Freq)) + geom_bar(stat='identity') + coord_flip() + 
+  theme_tufte() + xlab("Java runtime version") + ggtitle("Repartition of top Java runtime versions in dataset")
+```
+
+## Comment Quality
+
+* Description: An estimate of the user comment's quality (throughfulness). User comments help people better understand the context of the exception.
+* Type: Factors
+
+```{r attr.cq.init, warning=FALSE, echo=FALSE, cache=TRUE}
+mysum <- summary(myincidents$commentQuality)
+```
+
+Distribution:
+
+* HIGH `r mysum[[c('HIGH')]]`
+* MEDIUM `r mysum[[c('MEDIUM')]]`
+* LOW `r mysum[[c('LOW')]]`
+* UNKNOWN `r mysum[[c('UNKNOWN')]]`
+
+
+# Using the dataset
+
+## Reading CSV file
+
+Reading file from `r file.in`. 
+
+```
+myincidents <- read.csv(file.in, header=T)
+myincidents[,c("bug", "status")] <- NULL
+```
+
+There are ``r ncol(myincidents)`` columns and ``r nrow(myincidents)`` entries in this dataset:
+
+```{r examples.ncol, echo=T}
+ncol(myincidents)
+```
+
+```{r examples.nrow, echo=T}
+nrow(myincidents)
+```
+
+Names of columns: 
+
+```{r examples.names, echo=T}
+names(myincidents)
+```
+
+
+## Using time series (xts)
+
+The dataset needs to be converted to a `xts` object. We can use one of the 2 dates: `timestamp` or `savedOn`.
+
+```
+require(xts)
+myp.xts <- xts(x = myincidents, order.by = parse_iso_8601(myincidents$savedOn))
+```
+
+## Plot time series
+
+Plot the number of weekly saves (attribute savedOn).
+
+```{r use.ts.plot, echo=FALSE, cache=TRUE}
+autoplot(xts.ts, geom='line') + 
+  theme_bw() + ylab("Incidents Timestamp") + ggtitle("Weekly number of Incidents timestamp")
+```
+
