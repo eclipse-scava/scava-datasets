@@ -24,16 +24,16 @@ Last update of the dataset occured on 2018-02-11.
 * **Problems full** [ [Download JSON](datasets/aeri_stacktraces/problems_full.tar.bz2) ] -- A list of all problems, exported as JSON (one problem per file).
     * Content: 125250 entries, 22 attributes
     * Size: 38M compressed, 904M raw
-* **Problems extract** [ [Download CSV](datasets/aeri_stacktraces/problems_full.tar.bz2) ] -- A list of all problems, exported as CSV (one big file).
+* **Problems extract** [ [Download CSV](datasets/aeri_stacktraces/problems_extract.csv.bz2) ] -- A list of all problems, exported as CSV (one big file).
     * Content: 125250 entries, 22 attributes
     * Size: 1.5M compressed, 14M raw
-* **Incidents full** [ [Download JSON](datasets/aeri_stacktraces/problems_full.tar.bz2) ] -- A list of all incidents, exported as JSON (one incident per file).
+* **Incidents full** [ [Download JSON](datasets/aeri_stacktraces/incidents_full.tar.bz2) ] -- A list of all incidents, exported as JSON (one incident per file).
     * Content: 2084363 entries, 22 attributes
     * Size: 820M compressed, 19G raw
-* **Incidents extract** [ [Download CSV](datasets/aeri_stacktraces/problems_full.tar.bz2) ] -- A list of all incidents, exported as CSV (one big file).
+* **Incidents extract** [ [Download CSV](datasets/aeri_stacktraces/incidents_extract.csv.bz2) ] -- A list of all incidents, exported as CSV (one big file).
     * Content: 2084045 entries, 20 attributes
     * Size: 141M compressed, 778M raw
-* **Incidents Bundles** [ [Download CSV](datasets/aeri_stacktraces/problems_full.tar.bz2) ] -- A list of all bundles found in incidents, exported as CSV. Attributes are bundle_name, bundle_version, and number of occurrences.
+* **Incidents Bundles** [ [Download CSV](datasets/aeri_stacktraces/incidents_bundles_extract.csv.bz2) ] -- A list of all bundles found in incidents, exported as CSV. Attributes are bundle_name, bundle_version, and number of occurrences.
     * Content: 29709 entries, 3 attributes
     * Size: 220K compressed, 1.5M raw
 
@@ -52,7 +52,7 @@ The [Eclipse Mailing lists](datasets/eclipse_mls/mbox_analysis.html) dump is an 
 * Download the [Eclipse mailing lists dataset here](datasets/eclipse_mls/eclipse_mls.gz).
     * Content: 352951 entries, 6 attributes
     * Size: 12M compressed, 63M raw
-* Check the [PDF documentation for the dataset](datasets/eclipse_mls/mbox_analysis.html).
+* Check the [documentation for the dataset](datasets/eclipse_mls/mbox_analysis.html).
 * For reproducibility we also provide the [R Markdown document](datasets/eclipse_mls/mbox_analysis.rmd) for the dataset analysis and documentation.
 
 More information can be found on the official [Eclipse page for mailing lists](https://accounts.eclipse.org/mailing-list).
