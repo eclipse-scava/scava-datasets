@@ -1,0 +1,79 @@
+pipeline {
+  agent any
+ 
+  stages {
+
+    stage('Retrieve') {
+      steps {
+        sh '''
+        
+          wget http://ci6.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/docs/*zip*/docs.zip -O docs.zip
+          unzip docs.zip
+        
+          wget http://ci6.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/projects/*zip*/projects.zip -O projects.zip
+          unzip projects.zip
+
+          wget http://ci6.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/aeri_stacktraces/*zip*/aeri_stacktraces.zip -O aeri_stacktraces.zip
+          unzip aeri_stacktraces.zip
+
+          wget http://ci6.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/*zip*/eclipse_mls.zip -O eclipse_mls.zip
+          unzip eclipse_mls.zip
+          
+        '''
+      }
+    }
+
+    stage('Deploy Documentation') {
+      steps {
+        sshagent ( ['73e80f22-58da-40ce-bc2d-b9f8ec7debcd']) {
+          sh '''
+            ssh genie.scava@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/scava/*.html
+
+            scp -r docs/scava_datasets.html genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/index.html
+          '''
+        }
+      }
+
+    }
+
+    stage('Deploy AERI') {
+      steps {
+        sshagent ( ['73e80f22-58da-40ce-bc2d-b9f8ec7debcd']) {
+          sh '''
+            ssh genie.scava@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/scava/datasets/aeri_stacktraces/
+            ssh genie.scava@projects-storage.eclipse.org mkdir -p /home/data/httpd/download.eclipse.org/scava/datasets/aeri_stacktraces/
+            
+            scp -r aeri_stacktraces/* genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/datasets/aeri_stacktraces/
+          '''
+        }
+      }
+	}
+
+    stage('Deploy Mailing lists') {
+      steps {
+          sshagent ( ['73e80f22-58da-40ce-bc2d-b9f8ec7debcd']) {
+            sh '''
+              ssh genie.scava@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/scava/datasets/eclipse_mls/
+              ssh genie.scava@projects-storage.eclipse.org mkdir -p /home/data/httpd/download.eclipse.org/scava/datasets/eclipse_mls/
+             
+              scp -r eclipse_mls/* genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/datasets/eclipse_mls/
+            '''
+          }
+        }
+    }
+
+    stage('Deploy Projects') {
+      steps {
+        sshagent ( ['73e80f22-58da-40ce-bc2d-b9f8ec7debcd']) {
+          sh '''
+            ssh genie.scava@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/scava/datasets/projects/
+            ssh genie.scava@projects-storage.eclipse.org mkdir -p /home/data/httpd/download.eclipse.org/scava/datasets/projects/
+            
+            scp -r projects/* genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/datasets/projects/
+          '''
+        }
+      }
+    }
+
+  }
+}
