@@ -23,13 +23,13 @@ File is [``r file_bz_issues_open``](`r file_bz_issues_open`), and has ``r ncol(d
 
 ### <a name="bz_evol"></a> Bugzilla evolution
 
-**Download**: [`r file_bz_evol`.gz](../`r file_bz_evol`.gz)
+**Download**: [`r file_bz_evol`.gz](`r file_bz_evol`.gz)
 
 ```{r bz_evol}
 data <- read.csv(file=url_bz_evol, header=T)
 ```
 
-File is [``r file_bz_evol``](../`r file_bz_evol`), and has ``r ncol(data)`` columns for ``r nrow(data)`` weeks.
+File is [``r file_bz_evol``](`r file_bz_evol`), and has ``r ncol(data)`` columns for ``r nrow(data)`` weeks.
 
 ```{r bz_evol_viz}
 data.xts <- xts(x = data, order.by = as.POSIXct(data$date))
@@ -44,13 +44,13 @@ p
 
 ### <a name="bz_versions"></a> Versions
 
-**Download**: [`r file_bz_versions`.gz](../`r file_bz_versions`.gz)
+**Download**: [`r file_bz_versions`.gz](`r file_bz_versions`.gz)
 
 ```{r bz_versions}
 data <- read.csv(file=url_bz_versions, header=T)
 ```
 
-File is [``r file_bz_versions``](../`r file_bz_versions`), and has ``r ncol(data)`` columns for ``r nrow(data)`` weeks.
+File is [``r file_bz_versions``](`r file_bz_versions`), and has ``r ncol(data)`` columns for ``r nrow(data)`` weeks.
 
 ```{r bz_versions_viz, echo=FALSE, message=FALSE, results='asis'}
 suppressPackageStartupMessages(library(googleVis))
@@ -64,13 +64,13 @@ plot(g)
 
 ### <a name="bz_components"></a> Components
 
-**Download**: [`r file_bz_components`.gz](../`r file_bz_components`.gz)
+**Download**: [`r file_bz_components`.gz](`r file_bz_components`.gz)
 
 ```{r bz_components}
 data <- read.csv(file=url_bz_components, header=T)
 ```
 
-File is [``r file_bz_components``](../`r file_bz_components`), and has ``r ncol(data)`` columns for ``r nrow(data)`` weeks.
+File is [``r file_bz_components``](`r file_bz_components`), and has ``r ncol(data)`` columns for ``r nrow(data)`` weeks.
 
 ```{r bz_components_viz, echo=FALSE, message=FALSE, results='asis'}
 data.sorted <- data[order(data$Bugs, decreasing = T),]

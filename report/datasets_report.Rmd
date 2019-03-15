@@ -17,11 +17,7 @@ library(dygraphs)
 require(xtable)
 library(R.utils)
 
-#if (is.null(project_id)) {
 project_id <- params$project_id
-  #'modeling.sirius'
-  #params$project_id
-#}
 
 dir_in <- "../scripts/projects/"
 
@@ -109,58 +105,58 @@ List of datasets generated for the project:
 `r if(file.exists(url_git_commits)){paste("
 * [Git](#git)
     - [Git Commits](#git_commits) -- list of all commits recorded in git. [ [Download CSV](", 
-    url_git_commits, 
+    file_git_commits, 
     ".gz) ]
     - [Git Log](#git_log) -- the raw export of git log. [ [Download TXT](", 
-    url_git_log, 
+    file_git_log, 
     ".gz) ]
 ", sep='')}`
 `r if(file.exists(url_bz_issues)){paste("
 * [Bugzilla](#bugzilla)
     - [Bugzilla issues](#bz_issues) (CSV) -- list of all issues. [ [Download CSV](", 
-    url_bz_issues, 
+    file_bz_issues, 
     ".gz) ]
     - [Bugzilla open issues](#bz_issues_open) (CSV) -- list of issues in an open state. [ [Download CSV](", 
-    url_bz_issues_open, 
+    file_bz_issues_open, 
     ".gz) ]
     - [Bugzilla evolution](#bz_evol) (CSV) -- weekly time series of issues created. [ [Download CSV](", 
-    url_bz_evol,
+    file_bz_evol,
     ".gz) ]
     - [Bugzilla components](#bz_components) (CSV) -- list of components declared for the project. [ [Download CSV](", 
-    url_bz_components, 
+    file_bz_components, 
     ".gz) ]
     - [Bugzilla versions](#bz_versions) (CSV) -- list of versions declared for the project. [ [Download CSV](", 
-    url_bz_versions, 
+    file_bz_versions, 
     ".gz) ]
 ", sep='')}`
 `r if(file.exists(url_forums_posts)){paste("
 * [Eclipse Forums](#forums)
     - [Forums Posts](#forums_posts) (CSV) -- list of all forum posts for this project. [ [Download CSV](", 
-    url_bz_issues, 
+    file_bz_issues, 
     ".gz) ]
     - [Forums threads](#forums_threads) (CSV) -- list of all forum threads for this project. [ [Download CSV](", 
-    url_bz_issues, 
+    file_bz_issues, 
     ".gz) ]
 ", sep='')}`
 `r if(file.exists(url_pmi_checks)){paste("
 * [Eclipse PMI](#pmi)
     - [PMI Checks](#pmi_checks) (CSV) -- list of all checks applied to the Project Management Infrastructure entries for the project. [ [Download CSV](", 
-    url_pmi_checks, 
+    file_pmi_checks, 
     ".gz) ]
 ", sep='')}`
 `r if(file.exists(url_sq_metrics)){paste("
 * [SonarQube](#sq)
     - [SonarQube blocker issues](#sq_issues_blocker) (CSV) -- list of blocker issues detected by SonarQube. [ [Download CSV](", 
-    url_sq_issues_blocker, 
+    file_sq_issues_blocker, 
     ".gz) ]
     - [SonarQube critical issues](#sq_issues_critical) (CSV) -- list of critical issues detected by SonarQube. [ [Download CSV](", 
-    url_sq_issues_critical, 
+    file_sq_issues_critical, 
     ".gz) ]
     - [SonarQube major issues](#sq_issues_major) (CSV) -- list of major issues detected by SonarQube. [ [Download CSV](", 
-    url_sq_issues_major, 
+    file_sq_issues_major, 
     ".gz) ]
     - [SonarQube metrics](#sq_metrics) (CSV) -- list of code metrics extracted from SonarQube. [ [Download CSV](", 
-    url_sq_metrics, 
+    file_sq_metrics, 
     ".gz) ]
 ", sep='')}`
 

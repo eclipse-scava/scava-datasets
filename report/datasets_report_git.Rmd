@@ -3,13 +3,13 @@
 
 ### <a name="git_commits"></a> Git commits
 
-**Download**: [`r file_git_commits`.gz](../`r file_git_commits`.gz)
+**Download**: [`r file_git_commits`.gz](`r file_git_commits`.gz)
 
 ```{r git_commits}
 data <- read.csv(file=url_git_commits, header=T)
 ```
 
-File is [``r file_git_commits``](../`r file_git_commits`), and has ``r ncol(data)`` columns for ``r nrow(data)`` commits.
+File is [``r file_git_commits``](`r file_git_commits`), and has ``r ncol(data)`` columns for ``r nrow(data)`` commits.
 
 ```{r git_commits_viz}
 data$commits_sum <- cumsum(data$commits)
@@ -24,6 +24,6 @@ p
 
 ### <a name="git_log"></a> Git log
 
-**Download**: [`r file_git_log`.gz](../`r file_git_log`.gz)
+**Download**: [`r file_git_log`.gz](`r file_git_log`.gz)
 
-File is [``r file_git_log``](../`r file_git_log`), and full log has ``r countLines(file=url_git_log)`` lines.
+File is [``r file_git_log``](`r file_git_log`), and full log has ``r countLines(file=url_git_log)`` lines.
