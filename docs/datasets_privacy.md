@@ -3,17 +3,28 @@
 
 ## Introduction
 
-This document presents the datasets generated for Scava, and discusses the implications it has regarding privacy and the associated regulation.
+This document presents the datasets generated for Scava, discusses the implications it has regarding privacy, and describes what has been achieved to ensure data is safe.
 
-All datasets are anonymised: fields that identify individuals or companies either directly or indirectly have been transformed using the [Anonymise::Utility Perl module]().
+All datasets are anonymised: fields that could be used to identify individuals or companies either directly or indirectly have been transformed using the [Anonymise::Utility Perl module](https://github.com/borisbaldassari/data-anonymiser).
+
+The intended audience of the datasets is composed of:
+
+* Research laboratories, mainly in the field of software engineering. 
+* Software engineering practitioners, who may find useful to have real-world examples of software development projects. 
+
+Should one have questions or remarks on the datasets, please [feel free to contact us](https://www.crossminer.org/contact). All cases related to privacy will be handled with utmost diligence.
+
 
 ## Description of the datasets
 
-There are three types of datasets generated, each with its schema and specific attributes. The first step is to describe the various datasets and their attributes, and identify what field could pose a threat to privacy.
+There are three types of datasets generated, each with its specific schema and attributes. The first step to preserve privacy is to describe the various datasets and their attributes, and identify what field could pose a threat.
 
-### AERI stacktraces
 
-The AERI stacktraces dataset contains information about exceptions encountered by users in the Eclipse IDE. It includes data about the exception itself, and the environment where it happened:
+### AERI stacktraces
+
+The [AERI stacktraces dataset](http://download.eclipse.org/scava/datasets/aeri_stacktraces/aeri_stacktraces.html) contains information about exceptions encountered by users in the Eclipse IDE. It includes data about the exception itself, and the environment where it happened.
+
+The [incidents dataset](../datasets/aeri_stacktraces/aeri_stacktraces.html#format-incidents) offers the following attributes:
 
 * **Message** (String) A short text summarising the error.
 * **Code** (Integer) The numeric status code logged with the error.
@@ -35,7 +46,7 @@ The AERI stacktraces dataset contains information about exceptions encountered b
 * **Java runtime version** (String) The Java runtime of the host.
 * **Comment Quality** (Factors) An estimate of the user comment’s quality (throughfulness). User comments help people better understand the context of the exception.
 
-The problems dataset offers the following attributes:
+The [problems dataset](../datasets/aeri_stacktraces/aeri_stacktraces.html#format-problems) offers the following attributes:
 
 * **Summary** (String) A short text summarising the error.
 * **Number of reporters** (Integer) The number of people who reported this incident or problem.
@@ -53,51 +64,88 @@ The problems dataset offers the following attributes:
 * **Eclipse Product** (String) The Eclipse product impacted by the exception.
 * **Java runtime version** (String) The Java runtime of the host.
 
+The [incidents bundle](http://download.eclipse.org/scava/datasets/aeri_stacktraces/incidents_bundles_extract.csv.bz2) offers the following attributes:
+
+* **Bundle name** (String) The name of the bundle impacted by the exception.
+* **Bundle version** (String) The version of the bundle impacted by the exception.
+* **Value** (Integer) The number of times the exception appeared for this bundle (name + version).
+
 
 ### Eclipse Mailing lists
 
-The Eclipse mailing lists dataset offers the following attributes:
+The [Eclipse mailing lists dataset](../datasets/eclipse_mls/mbox_analysis.html) offers the following attributes:
 
 * **List** (String) The mailing list and project of the post.
 * **messageId** (String) A unique identifier for the post.
 * **Subject** (String) The subject of the post as sent on the mailing list.
 * **Sent at** (Date ISO 8601) The time of sending for the post.
-* <span style="color:red;font-size:120%"> :biohazard: </span> **Sender name** (String) The name of the sender of the post.
-* <span style="color:red;font-size:120%"> :biohazard: </span> **Sender address** (String) The email address of the sender, encoded.
+* <span style="color:red;font-size:120%"> :biohazard: </span> **Sender name** (String) The name of the sender of the post. Names are obfuscated, e.g. `HKmwHIC4dREThJRj`.
+* <span style="color:red;font-size:120%"> :biohazard: </span> **Sender address** (String) The email address of the sender of the post. Email address is obfuscated, e.g. `xzrEaN24LhYew151@HAYhBP6A1UVpXiHt`.
 
 
-### Eclipse project datasets
+### Eclipse projects extracts
+
+The [Eclipse projects extracts](../datasets/projects/eclipse_projects.html) have different sets of data depending on the sources available for each project. We list thereafter the full list of extracts, highlighting attributes that include privacy-related information.
+
+Git (Software Configuration Management)
+* **git_commits_evol.csv** contains the daily number of commits and distinct authors. 
+* <span style="color:red;font-size:120%"> :biohazard: </span> **git_log.txt** contains the retranscription of the `git log`command, including the name and email of commit authors. Name is replaced by XXX's and email address is obfuscated, e.g. `xzrEaN24LhYew151@HAYhBP6A1UVpXiHt`.
+
+Bugzilla (Issue tracking)
+* **bugzilla_components.csv** contains the number of issues submitted against each component.
+* **bugzilla_evol.csv** contains the daily number of issues submitted and distinct authors.
+* <span style="color:red;font-size:120%"> :biohazard: </span> **bugzilla_issues.csv** contains the list of issues for the project, including the emails of the author and the assignee for each submitteed issue. Emails are obfuscated, e.g. `xzrEaN24LhYew151@HAYhBP6A1UVpXiHt`.
+* <span style="color:red;font-size:120%"> :biohazard: </span> **bugzilla_issues_open.csv** contains the list of open issues for the project, including the emails of the author and the assignee for each submitteed issue. Emails are obfuscated, e.g. `xzrEaN24LhYew151@HAYhBP6A1UVpXiHt`.
+
+Forums (User-oriented communication)
+* **eclipse_forums_posts.csv** contains the full list of posts on the project's forum. It includes an Integer representation of the author of the post as returned by the API (no obfuscation needed).
+* **eclipse_forums_threads.csv** contains the full list of posts on the project's forum. It includes an Integer representation of the first and last author of the thread, as returned by the API (no obfuscation needed).
+
+PMI (project metadata)
+* **eclipse_pmi_checks.csv** contains a list of checks (values, usefulness, consistency) applied to the Project Management Infrastructure record for the project.
+
+SonarQube (code analysis)
+* **sq_issues_blocker.csv** contains the list of SonarQube issues with severity set to blocker.
+* **sq_issues_blocker.csv** contains the list of SonarQube issues with severity set to critical.
+* **sq_issues_blocker.csv** contains the list of SonarQube issues with severity set to major.
+* **sq_metrics.csv** contains the list of metrics computed by Sonarqube.
 
 
 ## Anonymisation
 
-The mechanism used to anonymise the data is the Anonymise::Utility Perl module. It basically uses asymmetric encryption to generate one-time mapping
+The mechanism used to anonymise the data is the [Anonymise::Utility Perl module](https://github.com/borisbaldassari/data-anonymiser). It basically uses asymmetric encryption to generate a one-off mapping between clear IDs and obfuscated strings. 
 
-The result contains no email address, user id or machine id. Rather than removing the information (we are not sure that we remove all required information) we decided to simply pick relevant information from the file and push it into the output.
+![Data transformation](./data_transformation.png "Data transformation")
 
-End users have an option to keep their own class names private. We have presently no simple means to know what stacktraces in the database extraction should be kept private, so we decided to play it safe and hide class names whose packages don’t start with known prefixes [1]. All private classnames have been replaced by the HIDDEN keyword.
+The private key is thrown away, preventing any recovering of the encrypted IDs. This technique has several advantages: 
 
-[1] `ch.qos.*`, `com.cforcoding.*`, `com.google.*`, `com.gradleware.tooling.*`,
-`com.mountainminds.eclemma.*`, `com.naef.*`, `com.sun.*`, `java.*`,
-`javafx.*`, `javax.*`, `org.apache.*`, `org.eclipse.*`, `org.fordiac.*`,
-`org.gradle.*`, `org.jacoco.*`, `org.osgi.*`, `org.slf4j.*`,
-`sun.*`
+* Identical clear-text strings are translated to the same obfuscated string. This enables researchers and analysts to identify same occurrences of an item without any information about its actual content.
+* The private key is thrown away immediately, making it impossible for an attacker to use it to decrypt the dataset. The algorithm used is the [Perl implementation of RSA](https://metacpan.org/pod/Crypt::PK::RSA), which is considered reasonably strong for our purpose.
+* The public key is re-generated for each session, making it impossible for an attacker to rebuild the mapping or use rainbow tables.
 
+**The resulting datasets contain no email address, names, user id or machine id. **
 
 
 ## Privacy compliance
 
-The publication of data in the European Union is controlled by the GDPR (General Data Protection Regulation), which also addresses the export of data outside the EU and EEA areas. Since we are EU citizens (and considering also that the Crossminer project is funded by the H2020 EU research program) we are to abide by this regulation.
+The management and publication of data in the European Union is regulated by the **General Data Protection Regulation** (GDPR) directive, which also addresses the export of data outside the EU and EEA areas. Since we are EU citizens -- and considering also that the Crossminer project is funded by the H2020 EU research program -- we are to abide by this regulation. Besides the legal implications of publishing open datasets, we are willing to make sure that everybody, individuals or companies, involved in the data is safe.
 
-Besides the legal implications of publishing open datasets, we are willing to conceal any information that would allow an attacker to
+The publication of open data in this context, i.e. with the original data being already publicly available from public tools, is a specific case of the GDPR and it is hard to find any reliable information about how it should be conducted. As a result we relied on similar studies and articles and proceeded on a best-effort basis to provide as useful and safe as possible datasets to our users.
 
 Considering that:
 
-* Original data is already publicly available through the tools themselves (Git, Bugzilla, Mailing lists and forums) and their APIs.
-* Masqueraded
+* **Original data is already publicly available** through the tools themselves (Git, Bugzilla, Mailing lists and forums) and their APIs. 
+* We provide a **complete description** of the content of the datasets, **identifying the risks** and **describing the mitigation steps** we went through to ensure that the data is safe.
+* To the best of our knowledge **there is now way to decrypt or reverse-engineer the obfuscated information**.
 
+Considering also that:
+* The goal of this processing is to provide **free and open resources to help scientific research**, which is in the **public interest** as defined in [Article 6.1 (e)](https://gdpr-info.eu/art-6-gdpr/).
+* The Eclipse forge hosts open source and collaborative projects only, and all contributions are made under a quite [**strict contributor license agreement**](https://www.eclipse.org/legal/ECA.php): people knowingly gave their consent to make their contribution public.
 
-We rely for that on the guidelines and recommendations provided by the [General Data Protection Regulation]()
+We assume that both the data itself and its publication are safe, regarding both the users and the current regulation.
 
 
 ## References
+
+
+
