@@ -1,0 +1,418 @@
+<!DOCTYPE html><html><head>
+      <title>datasets_privacy</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////home/boris/.atom/packages/markdown-preview-enhanced/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h2 class="mume-header" id="introduction">Introduction</h2>
+
+<p>This document presents the datasets generated for Scava, discusses the implications it has regarding privacy, and describes what has been achieved to ensure data is safe.</p>
+<p>All datasets are anonymised: fields that could be used to identify individuals or companies either directly or indirectly have been transformed using the <a href="https://github.com/borisbaldassari/data-anonymiser">Anonymise::Utility Perl module</a>.</p>
+<p>The intended audience of the datasets is composed of:</p>
+<ul>
+<li>Research laboratories, mainly in the field of software engineering.</li>
+<li>Software engineering practitioners, who may find useful to have real-world examples of software development projects.</li>
+</ul>
+<p>Should one have questions or remarks on the datasets, please <a href="https://www.crossminer.org/contact">feel free to contact us</a>. All cases related to privacy will be handled with utmost diligence.</p>
+<h2 class="mume-header" id="description-of-the-datasets">Description of the datasets</h2>
+
+<p>There are three types of datasets generated, each with its specific schema and attributes. The first step to preserve privacy is to describe the various datasets and their attributes, and identify what field could pose a threat.</p>
+<h3 class="mume-header" id="aeri-stacktraces">AERI stacktraces</h3>
+
+<p>The <a href="http://download.eclipse.org/scava/datasets/aeri_stacktraces/aeri_stacktraces.html">AERI stacktraces dataset</a> contains information about exceptions encountered by users in the Eclipse IDE. It includes data about the exception itself, and the environment where it happened.</p>
+<p>The <a href="../datasets/aeri_stacktraces/aeri_stacktraces.html#format-incidents">incidents dataset</a> offers the following attributes:</p>
+<ul>
+<li><strong>Message</strong> (String) A short text summarising the error.</li>
+<li><strong>Code</strong> (Integer) The numeric status code logged with the error.</li>
+<li><strong>Severity</strong> (Factors) An estimate by the user reporting the error about its perceived severity.</li>
+<li><strong>Kind</strong> (Factors) The type of error recorded, as identified by the AERI system.</li>
+<li><strong>Plugin ID</strong> (String) The ID of the Eclipse plugin that threw the exception.</li>
+<li><strong>Plugin Version</strong> (String) The ID of the Eclipse plugin that threw the exception.</li>
+<li><strong>Status fingerprint</strong> (String) An identifier for the status of the incident. Used for duplicates detection.</li>
+<li><strong>Incident fingerprint</strong> (String) An identifier for the incident. Used for duplicates detection.</li>
+<li><strong>Incident fingerprint2</strong> (String) An identifier for the incident. Used for duplicates detection.</li>
+<li><strong>Timestamp</strong> (Date ISO 8601) The time of creation of the incident.</li>
+<li><strong>Saved On</strong> (Date ISO 8601) The time of last save of the problem.</li>
+<li><strong>OSGi Architecture</strong> (Factors) The architecture of the host, as specified in the OSGi bundle definition.</li>
+<li><strong>OSGi OS</strong> (Factors) The host operating system, as reported in OSGi.</li>
+<li><strong>OSGi OS Version</strong> (Factors) The host operating system version, as reported in OSGi.</li>
+<li><strong>OSGi Window Manager</strong> (Factors) The Window Manager used by the host, as reported in OSGi.</li>
+<li><strong>Eclipse Build ID</strong> (String) The Build ID of the Eclipse instance running when the exception occurred.</li>
+<li><strong>Eclipse Product</strong> (String) The Eclipse product impacted by the exception.</li>
+<li><strong>Java runtime version</strong> (String) The Java runtime of the host.</li>
+<li><strong>Comment Quality</strong> (Factors) An estimate of the user comment&#x2019;s quality (throughfulness). User comments help people better understand the context of the exception.</li>
+</ul>
+<p>The <a href="../datasets/aeri_stacktraces/aeri_stacktraces.html#format-problems">problems dataset</a> offers the following attributes:</p>
+<ul>
+<li><strong>Summary</strong> (String) A short text summarising the error.</li>
+<li><strong>Number of reporters</strong> (Integer) The number of people who reported this incident or problem.</li>
+<li><strong>Number of incidents</strong> (integer) The number of times this problem was identified in incidents.</li>
+<li><strong>V1 Status</strong> (Factors) The status of the problem attached to the error report.</li>
+<li><strong>Kind</strong> (Factors) The type of error recorded, as identified by the AERI system.</li>
+<li><strong>Created On</strong> (Date ISO 8601) The time of first appearance of the problem in an incident.</li>
+<li><strong>Modified On</strong> (Date ISO 8601) The time of last update of the problem in an incident.</li>
+<li><strong>Saved On</strong> (Date ISO 8601) The time of last save of the problem.</li>
+<li><strong>OSGi Architecture</strong> (Factors) The architecture of the host, as specified in the OSGi bundle definition.</li>
+<li><strong>OSGi OS</strong> (Factors) The host operating system, as reported in OSGi.</li>
+<li><strong>OSGi OS Version</strong> (Factors) The host operating system version, as reported in OSGi.</li>
+<li><strong>OSGi Window Manager</strong> (Factors) The Window Manager used by the host, as reported in OSGi.</li>
+<li><strong>Eclipse Build ID</strong> (String) The Build ID of the Eclipse instance running when the exception occurred.</li>
+<li><strong>Eclipse Product</strong> (String) The Eclipse product impacted by the exception.</li>
+<li><strong>Java runtime version</strong> (String) The Java runtime of the host.</li>
+</ul>
+<p>The <a href="http://download.eclipse.org/scava/datasets/aeri_stacktraces/incidents_bundles_extract.csv.bz2">incidents bundle</a> offers the following attributes:</p>
+<ul>
+<li><strong>Bundle name</strong> (String) The name of the bundle impacted by the exception.</li>
+<li><strong>Bundle version</strong> (String) The version of the bundle impacted by the exception.</li>
+<li><strong>Value</strong> (Integer) The number of times the exception appeared for this bundle (name + version).</li>
+</ul>
+<h3 class="mume-header" id="eclipse-mailing-lists">Eclipse Mailing lists</h3>
+
+<p>The <a href="../datasets/eclipse_mls/mbox_analysis.html">Eclipse mailing lists dataset</a> offers the following attributes:</p>
+<ul>
+<li><strong>List</strong> (String) The mailing list and project of the post.</li>
+<li><strong>messageId</strong> (String) A unique identifier for the post.</li>
+<li><strong>Subject</strong> (String) The subject of the post as sent on the mailing list.</li>
+<li><strong>Sent at</strong> (Date ISO 8601) The time of sending for the post.</li>
+<li><span style="color:red;font-size:120%"> &#x2623;&#xFE0F; </span> <strong>Sender name</strong> (String) The name of the sender of the post. Names are obfuscated, e.g. <code>HKmwHIC4dREThJRj</code>.</li>
+<li><span style="color:red;font-size:120%"> &#x2623;&#xFE0F; </span> <strong>Sender address</strong> (String) The email address of the sender of the post. Email address is obfuscated, e.g. <code>xzrEaN24LhYew151@HAYhBP6A1UVpXiHt</code>.</li>
+</ul>
+<h3 class="mume-header" id="eclipse-projects-extracts">Eclipse projects extracts</h3>
+
+<p>The <a href="../datasets/projects/eclipse_projects.html">Eclipse projects extracts</a> have different sets of data depending on the sources available for each project. We list thereafter the full list of extracts, highlighting attributes that include privacy-related information.</p>
+<p>Git (Software Configuration Management)</p>
+<ul>
+<li><strong>git_commits_evol.csv</strong> contains the daily number of commits and distinct authors.</li>
+<li><span style="color:red;font-size:120%"> &#x2623;&#xFE0F; </span> <strong>git_log.txt</strong> contains the retranscription of the <code>git log</code>command, including the name and email of commit authors. Name is replaced by XXX&apos;s and email address is obfuscated, e.g. <code>xzrEaN24LhYew151@HAYhBP6A1UVpXiHt</code>.</li>
+</ul>
+<p>Bugzilla (Issue tracking)</p>
+<ul>
+<li><strong>bugzilla_components.csv</strong> contains the number of issues submitted against each component.</li>
+<li><strong>bugzilla_evol.csv</strong> contains the daily number of issues submitted and distinct authors.</li>
+<li><span style="color:red;font-size:120%"> &#x2623;&#xFE0F; </span> <strong>bugzilla_issues.csv</strong> contains the list of issues for the project, including the emails of the author and the assignee for each submitteed issue. Emails are obfuscated, e.g. <code>xzrEaN24LhYew151@HAYhBP6A1UVpXiHt</code>.</li>
+<li><span style="color:red;font-size:120%"> &#x2623;&#xFE0F; </span> <strong>bugzilla_issues_open.csv</strong> contains the list of open issues for the project, including the emails of the author and the assignee for each submitteed issue. Emails are obfuscated, e.g. <code>xzrEaN24LhYew151@HAYhBP6A1UVpXiHt</code>.</li>
+</ul>
+<p>Forums (User-oriented communication)</p>
+<ul>
+<li><strong>eclipse_forums_posts.csv</strong> contains the full list of posts on the project&apos;s forum. It includes an Integer representation of the author of the post as returned by the API (no obfuscation needed).</li>
+<li><strong>eclipse_forums_threads.csv</strong> contains the full list of posts on the project&apos;s forum. It includes an Integer representation of the first and last author of the thread, as returned by the API (no obfuscation needed).</li>
+</ul>
+<p>PMI (project metadata)</p>
+<ul>
+<li><strong>eclipse_pmi_checks.csv</strong> contains a list of checks (values, usefulness, consistency) applied to the Project Management Infrastructure record for the project.</li>
+</ul>
+<p>SonarQube (code analysis)</p>
+<ul>
+<li><strong>sq_issues_blocker.csv</strong> contains the list of SonarQube issues with severity set to blocker.</li>
+<li><strong>sq_issues_blocker.csv</strong> contains the list of SonarQube issues with severity set to critical.</li>
+<li><strong>sq_issues_blocker.csv</strong> contains the list of SonarQube issues with severity set to major.</li>
+<li><strong>sq_metrics.csv</strong> contains the list of metrics computed by Sonarqube.</li>
+</ul>
+<h2 class="mume-header" id="anonymisation">Anonymisation</h2>
+
+<p>The mechanism used to anonymise the data is the <a href="https://github.com/borisbaldassari/data-anonymiser">Anonymise::Utility Perl module</a>. It basically uses asymmetric encryption to generate a one-off mapping between clear IDs and obfuscated strings.</p>
+<p><img src="./data_transformation.png" alt="Data transformation" title="Data transformation"></p>
+<p>The private key is thrown away, preventing any recovering of the encrypted IDs. This technique has several advantages:</p>
+<ul>
+<li>Identical clear-text strings are translated to the same obfuscated string. This enables researchers and analysts to identify same occurrences of an item without any information about its actual content.</li>
+<li>The private key is thrown away immediately, making it impossible for an attacker to use it to decrypt the dataset. The algorithm used is the <a href="https://metacpan.org/pod/Crypt::PK::RSA">Perl implementation of RSA</a>, which is considered reasonably strong for our purpose.</li>
+<li>The public key is re-generated for each session, making it impossible for an attacker to rebuild the mapping or use rainbow tables.</li>
+</ul>
+<p><strong>The resulting datasets contain no email address, names, user id or machine id.</strong></p>
+<h2 class="mume-header" id="privacy-compliance">Privacy compliance</h2>
+
+<p>The management and publication of data in the European Union is regulated by the <strong>General Data Protection Regulation</strong> (GDPR) directive, which also addresses the export of data outside the EU and EEA areas. Since we are EU citizens -- and considering also that the Crossminer project is funded by the H2020 EU research program -- we are to abide by this regulation. Besides the legal implications of publishing open datasets, we are willing to make sure that everybody, individuals or companies, involved in the data is safe.</p>
+<p>In the case of software engineering data, there is a <a href="https://github.com/dspinellis/awesome-msr">huge amount of public information</a> readily available without any restrictions. Most, if not all, tools used in the open-source world provide information about who did what and when -- which is undoubtely useful for collaboration and community. It is also mandatory regarding intellectual property processes: when one contributes a file to an open-source project, it is at the very least good practice to put her name (and maybe email address) in the header of the file along the licence used. When Intellectual Property is an important concern, like for the Eclipse Foundation, it simply is <em>required</em> since we need to know who that work belongs to in the case of IP issues and legal lawsuite cases.</p>
+<p>The publication of open data in this context, i.e. with the original data being already publicly available from public tools, is a specific case of the GDPR and it is hard to find any reliable information about how it should be conducted. As a result we relied on similar studies and articles and proceeded on a best-effort basis to provide datasets to our users which are as useful and safe as possible.</p>
+<p>Considering that:</p>
+<ul>
+<li><strong>Original data is already publicly available</strong> through the tools themselves (Git, Bugzilla, Mailing lists and forums) and their APIs.</li>
+<li>We provide a <strong>complete description</strong> of the content of the datasets, <strong>identifying the risks</strong> and <strong>describing the mitigation steps</strong> we went through to ensure that the data is safe.</li>
+<li>To the best of our knowledge <strong>there is now way to decrypt or reverse-engineer the obfuscated information</strong>. The method used for anonymisation is so strong that only knowing the original data could help re-identifying it.</li>
+</ul>
+<p>Considering also that:</p>
+<ul>
+<li>The goal of this processing is to provide <strong>free and open resources to help scientific research</strong>, which is in the <strong>public interest</strong> as defined in <a href="https://gdpr-info.eu/art-6-gdpr/">Article 6.1 (e)</a>.</li>
+<li>The Eclipse forge hosts open source and collaborative projects only, and all contributions are made under a <strong>required signed agreement</strong> known as the <a href="https://www.eclipse.org/legal/ECA.php">Eclipse Contributor Agreement</a>: people explicitely and knowingly give their consent to make their contribution public.</li>
+</ul>
+<p>We assume that both the <strong>data itself and its publication are safe</strong>, regarding both the users and the current regulation.</p>
+<h2 class="mume-header" id="references">References</h2>
+
+<ul>
+<li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679&amp;from=EN">GDPR official text (HTML)</a></li>
+<li><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32016R0679&amp;from=EN">GDPR official text (PDF)</a></li>
+<li><a href="https://blogs.openaire.eu/?p=3248">GDPR and the research process: What you need to know</a></li>
+<li><a href="https://www.europeandataportal.eu/en/highlights/how-address-privacy-concerns-when-opening-data">How to address privacy concerns when openin data</a></li>
+</ul>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

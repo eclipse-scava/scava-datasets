@@ -9,8 +9,8 @@ All datasets are anonymised: fields that could be used to identify individuals o
 
 The intended audience of the datasets is composed of:
 
-* Research laboratories, mainly in the field of software engineering. 
-* Software engineering practitioners, who may find useful to have real-world examples of software development projects. 
+* Research laboratories, mainly in the field of software engineering.
+* Software engineering practitioners, who may find useful to have real-world examples of software development projects.
 
 Should one have questions or remarks on the datasets, please [feel free to contact us](https://www.crossminer.org/contact). All cases related to privacy will be handled with utmost diligence.
 
@@ -88,7 +88,7 @@ The [Eclipse mailing lists dataset](../datasets/eclipse_mls/mbox_analysis.html) 
 The [Eclipse projects extracts](../datasets/projects/eclipse_projects.html) have different sets of data depending on the sources available for each project. We list thereafter the full list of extracts, highlighting attributes that include privacy-related information.
 
 Git (Software Configuration Management)
-* **git_commits_evol.csv** contains the daily number of commits and distinct authors. 
+* **git_commits_evol.csv** contains the daily number of commits and distinct authors.
 * <span style="color:red;font-size:120%"> :biohazard: </span> **git_log.txt** contains the retranscription of the `git log`command, including the name and email of commit authors. Name is replaced by XXX's and email address is obfuscated, e.g. `xzrEaN24LhYew151@HAYhBP6A1UVpXiHt`.
 
 Bugzilla (Issue tracking)
@@ -113,39 +113,43 @@ SonarQube (code analysis)
 
 ## Anonymisation
 
-The mechanism used to anonymise the data is the [Anonymise::Utility Perl module](https://github.com/borisbaldassari/data-anonymiser). It basically uses asymmetric encryption to generate a one-off mapping between clear IDs and obfuscated strings. 
+The mechanism used to anonymise the data is the [Anonymise::Utility Perl module](https://github.com/borisbaldassari/data-anonymiser). It basically uses asymmetric encryption to generate a one-off mapping between clear IDs and obfuscated strings.
 
 ![Data transformation](./data_transformation.png "Data transformation")
 
-The private key is thrown away, preventing any recovering of the encrypted IDs. This technique has several advantages: 
+The private key is thrown away, preventing any recovering of the encrypted IDs. This technique has several advantages:
 
 * Identical clear-text strings are translated to the same obfuscated string. This enables researchers and analysts to identify same occurrences of an item without any information about its actual content.
 * The private key is thrown away immediately, making it impossible for an attacker to use it to decrypt the dataset. The algorithm used is the [Perl implementation of RSA](https://metacpan.org/pod/Crypt::PK::RSA), which is considered reasonably strong for our purpose.
 * The public key is re-generated for each session, making it impossible for an attacker to rebuild the mapping or use rainbow tables.
 
-**The resulting datasets contain no email address, names, user id or machine id. **
+**The resulting datasets contain no email address, names, user id or machine id.**
 
 
 ## Privacy compliance
 
 The management and publication of data in the European Union is regulated by the **General Data Protection Regulation** (GDPR) directive, which also addresses the export of data outside the EU and EEA areas. Since we are EU citizens -- and considering also that the Crossminer project is funded by the H2020 EU research program -- we are to abide by this regulation. Besides the legal implications of publishing open datasets, we are willing to make sure that everybody, individuals or companies, involved in the data is safe.
 
-The publication of open data in this context, i.e. with the original data being already publicly available from public tools, is a specific case of the GDPR and it is hard to find any reliable information about how it should be conducted. As a result we relied on similar studies and articles and proceeded on a best-effort basis to provide as useful and safe as possible datasets to our users.
+In the case of software engineering data, there is a [huge amount of public information](https://github.com/dspinellis/awesome-msr) readily available without any restrictions. Most, if not all, tools used in the open-source world provide information about who did what and when -- which is undoubtely useful for collaboration and community. It is also mandatory regarding intellectual property processes: when one contributes a file to an open-source project, it is at the very least good practice to put her name (and maybe email address) in the header of the file along the licence used. When Intellectual Property is an important concern, like for the Eclipse Foundation, it simply is *required* since we need to know who that work belongs to in the case of IP issues and legal lawsuite cases.
+
+The publication of open data in this context, i.e. with the original data being already publicly available from public tools, is a specific case of the GDPR and it is hard to find any reliable information about how it should be conducted. As a result we relied on similar studies and articles and proceeded on a best-effort basis to provide datasets to our users which are as useful and safe as possible.
 
 Considering that:
 
-* **Original data is already publicly available** through the tools themselves (Git, Bugzilla, Mailing lists and forums) and their APIs. 
+* **Original data is already publicly available** through the tools themselves (Git, Bugzilla, Mailing lists and forums) and their APIs.
 * We provide a **complete description** of the content of the datasets, **identifying the risks** and **describing the mitigation steps** we went through to ensure that the data is safe.
-* To the best of our knowledge **there is now way to decrypt or reverse-engineer the obfuscated information**.
+* To the best of our knowledge **there is now way to decrypt or reverse-engineer the obfuscated information**. The method used for anonymisation is so strong that only knowing the original data could help re-identifying it.
 
 Considering also that:
 * The goal of this processing is to provide **free and open resources to help scientific research**, which is in the **public interest** as defined in [Article 6.1 (e)](https://gdpr-info.eu/art-6-gdpr/).
-* The Eclipse forge hosts open source and collaborative projects only, and all contributions are made under a quite [**strict contributor license agreement**](https://www.eclipse.org/legal/ECA.php): people knowingly gave their consent to make their contribution public.
+* The Eclipse forge hosts open source and collaborative projects only, and all contributions are made under a **required signed agreement** known as the [Eclipse Contributor Agreement](https://www.eclipse.org/legal/ECA.php): people explicitely and knowingly give their consent to make their contribution public.
 
-We assume that both the data itself and its publication are safe, regarding both the users and the current regulation.
+We assume that both the **data itself and its publication are safe**, regarding both the users and the current regulation.
 
 
 ## References
 
-
-
+* [GDPR official text (HTML)](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679&from=EN)
+* [GDPR official text (PDF)](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32016R0679&from=EN)
+* [GDPR and the research process: What you need to know](https://blogs.openaire.eu/?p=3248)
+* [How to address privacy concerns when openin data](https://www.europeandataportal.eu/en/highlights/how-address-privacy-concerns-when-opening-data)
