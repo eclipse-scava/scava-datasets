@@ -40,7 +40,7 @@ Last update of the dataset occured on 2018-02-11.
 **Documentation**
 
 * **Stacktraces Problems analysis document** [ [Download PDF](datasets/aeri_stacktraces/problems_analysis.pdf) | [Download Rmd](datasets/aeri_stacktraces/problems_analysis.rmd) ] -- A R Markdown document to analyse the Stacktraces problem dataset, with description of the actual content and examples of usage.
-* **Stacktraces Incidents analysis document** [ [Download PDF](datasets/aeri_stacktraces/incidents_analysis.pdf) | [Download Rmd](datasets/aeri_stacktraces/incidents_analysis.rmd) ](PDF)](datasets/aeri_stacktraces/incidents_analysis.pdf). A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage. This is the PDF export.
+* **Stacktraces Incidents analysis document** [ [Download PDF](datasets/aeri_stacktraces/incidents_analysis.pdf) | [Download Rmd](datasets/aeri_stacktraces/incidents_analysis.rmd) ] -- A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage. This is the PDF export.
 
 More information about the AERI system can be found on the [Code Trails website](https://www.codetrails.com/error-analytics/manual/).
 
@@ -49,10 +49,9 @@ More information about the AERI system can be found on the [Code Trails website]
 
 The [Eclipse Mailing lists](datasets/eclipse_mls/mbox_analysis.html) dump is an extract of all emails posted on the Eclipse mailing lists.
 
-* Download the [Eclipse mailing lists dataset here](datasets/eclipse_mls/eclipse_mls.gz).
+* **Download the Eclipse mailing lists dataset** [here](datasets/eclipse_mls/eclipse_mls.gz).
     * Content: 352951 entries, 6 attributes
     * Size: 12M compressed, 63M raw
-* Check the [documentation for the dataset](datasets/eclipse_mls/mbox_analysis.html).
-* For reproducibility we also provide the [R Markdown document](datasets/eclipse_mls/mbox_analysis.rmd) for the dataset analysis and documentation.
+* Check the **documentation** for the dataset [here](datasets/eclipse_mls/mbox_analysis.html). For reproducibility we also provide the [R Markdown document](datasets/eclipse_mls/mbox_analysis.rmd) for the dataset analysis and documentation.
 
 More information can be found on the official [Eclipse page for mailing lists](https://accounts.eclipse.org/mailing-list).
