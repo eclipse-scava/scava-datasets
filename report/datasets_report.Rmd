@@ -132,10 +132,10 @@ List of datasets generated for the project:
 `r if(file.exists(url_forums_posts)){paste("
 * [Eclipse Forums](#forums)
     - [Forums Posts](#forums_posts) (CSV) -- list of all forum posts for this project. [ [Download CSV](", 
-    file_bz_issues, 
+    file_forums_posts, 
     ".gz) ]
     - [Forums threads](#forums_threads) (CSV) -- list of all forum threads for this project. [ [Download CSV](", 
-    file_bz_issues, 
+    file_forums_threads, 
     ".gz) ]
 ", sep='')}`
 `r if(file.exists(url_pmi_checks)){paste("

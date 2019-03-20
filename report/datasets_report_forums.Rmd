@@ -3,13 +3,13 @@
 
 ### <a name="forums_posts"></a> Forums posts
 
-**Download**: [`r file_forums_posts`.gz](`r url_forums_posts`.gz)
+**Download**: [`r file_forums_posts`.gz](`r file_forums_posts`.gz)
 
 ```{r forums_posts}
 data <- read.csv(file=url_forums_posts, header=T)
 ```
 
-File is [``r url_forums_posts``](../../`r url_forums_posts`), and has ``r ncol(data)`` columns for ``r nrow(data)`` posts. The evolution of posts
+File is [``r url_forums_posts``](`r file_forums_posts`), and has ``r ncol(data)`` columns for ``r nrow(data)`` posts. The evolution of posts
 
 ```{r forums_posts_evol}
 data$created.date <- as.POSIXct(data$created_date, origin="1970-01-01")
@@ -50,13 +50,13 @@ print(
 
 ### <a name="forums_threads"></a> Forums threads
 
-**Download**: [`r file_forums_threads`.gz](`r url_forums_threads`.gz)
+**Download**: [`r file_forums_threads`.gz](`r file_forums_threads`.gz)
 
 ```{r forums_threads}
 data <- read.csv(file=url_forums_threads, header=T)
 ```
 
-File is [``r url_forums_threads``](../../`r url_forums_threads`), and has ``r ncol(data)`` columns for ``r nrow(data)`` threads. A wordcloud with the main words used in threads is presented below.
+File is [``r url_forums_threads``](`r file_forums_threads`), and has ``r ncol(data)`` columns for ``r nrow(data)`` threads. A wordcloud with the main words used in threads is presented below.
 
 ```{r forums_threads_viz, message=FALSE, echo=FALSE, warning=FALSE, fig.width=5, fig.height=5}
 require(tm)
