@@ -13,7 +13,7 @@ output:
     toc: yes
     toc_depth: '2'
 params:
-  project: ../eclipse_mls_clean.csv
+  project: downloads/eclipse_mls_clean.csv
 ---
 
 ```{r init, message=FALSE, echo=FALSE}
@@ -28,7 +28,7 @@ library(magrittr)
 # Read csv file
 file.in <- paste( params$project, sep="")
 project.csv <- read.csv(file.in, header=T)
-
+names.orig <- names(project.csv)
 project.csv$Company <- substr(x = project.csv$sender_addr, 18, 33)
 
 # Create xts object
@@ -71,7 +71,7 @@ This document is a [R Markdown document](http://rmarkdown.rstudio.com) and is co
 
 # Structure of data
 
-This dataset is composed of a single big CSV file. Attributes are: ``r names(project.xts)``.
+This dataset is composed of a single big CSV file. Attributes are: ``r names.orig``.
 
 Examples are provided at the end of this file to demonstrate how to use it in R.
 
@@ -81,7 +81,7 @@ Examples are provided at the end of this file to demonstrate how to use it in R.
 * Type: String
 
 Examples: 
-```{r list.sample, warning=FALSE, include=FALSE, results='asis'}
+```{r list.sample, warning=FALSE, echo=F, results='asis'}
 extract <- sample(unique(project.csv$list), size=5)
 kable( extract, caption="Sample of list names", col.names = c('Project list names'))
 ```
