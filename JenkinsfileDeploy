@@ -31,7 +31,7 @@ pipeline {
 
     stage('Deploy Documentation') {
       steps {
-        sshagent ( ['73e80f22-58da-40ce-bc2d-b9f8ec7debcd']) {
+        sshagent ( ['projects-storage.eclipse.org-bot-ssh']) {
           sh '''
             ssh genie.scava@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/scava/*.html
             ssh genie.scava@projects-storage.eclipse.org mkdir -p /home/data/httpd/download.eclipse.org/scava/docs/
@@ -46,7 +46,7 @@ pipeline {
 
     /* stage('Deploy AERI') {
       steps {
-        sshagent ( ['73e80f22-58da-40ce-bc2d-b9f8ec7debcd']) {
+        sshagent ( ['projects-storage.eclipse.org-bot-ssh']) {
           sh '''
             ssh genie.scava@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/scava/datasets/aeri_stacktraces/
             ssh genie.scava@projects-storage.eclipse.org mkdir -p /home/data/httpd/download.eclipse.org/scava/datasets/aeri_stacktraces/
@@ -65,7 +65,7 @@ pipeline {
 
     /* stage('Deploy Mailing lists') {
       steps {
-          sshagent ( ['73e80f22-58da-40ce-bc2d-b9f8ec7debcd']) {
+          sshagent ( ['projects-storage.eclipse.org-bot-ssh']) {
             sh '''
               ssh genie.scava@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/scava/datasets/eclipse_mls/
               ssh genie.scava@projects-storage.eclipse.org mkdir -p /home/data/httpd/download.eclipse.org/scava/datasets/eclipse_mls/
@@ -80,7 +80,7 @@ pipeline {
 
     stage('Deploy Projects') {
       steps {
-        sshagent ( ['73e80f22-58da-40ce-bc2d-b9f8ec7debcd']) {
+        sshagent ( ['projects-storage.eclipse.org-bot-ssh']) {
           sh '''
             ssh genie.scava@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/scava/datasets/projects/
             ssh genie.scava@projects-storage.eclipse.org mkdir -p /home/data/httpd/download.eclipse.org/scava/datasets/projects/
