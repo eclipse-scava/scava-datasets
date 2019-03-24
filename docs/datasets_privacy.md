@@ -152,4 +152,5 @@ We assume that both the **data itself and its publication are safe**, regarding 
 * [GDPR official text (HTML)](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679&from=EN)
 * [GDPR official text (PDF)](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32016R0679&from=EN)
 * [GDPR and the research process: What you need to know](https://blogs.openaire.eu/?p=3248)
+* [GDPR & Personal Data in the Public Domain](https://blog.infinigate.co.uk/gdpr-personal-data-public-domain)
 * [How to address privacy concerns when openin data](https://www.europeandataportal.eu/en/highlights/how-address-privacy-concerns-when-opening-data)
