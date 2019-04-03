@@ -40,11 +40,32 @@ This is the list of all Eclipse projects datasets published for Eclipse Scava. E
 * PMI's home: https://projects.eclipse.org/projects/modeling.epsilon
 
 
+## Eclipse Glassfish
+
+* Analysis report: [dataset_report_ee4j.glassfish.html](modeling.epsilon/dataset_report_ee4j.glassfish.html)
+* Project's home: https://projects.eclipse.org/proposals/eclipse-glassfish
+* PMI's home: https://projects.eclipse.org/projects/ee4j.glassfish
+
+
+## Eclipse Paho
+
+* Analysis report: [dataset_report_technology.paho.html](modeling.epsilon/dataset_report_technology.paho.html)
+* Project's home: https://projects.eclipse.org/proposals/eclipse-glassfish
+* PMI's home: https://projects.eclipse.org/projects/technology.paho
+
+
 ## Eclipse Papyrus
 
 * Analysis report: [dataset_report_modeling.mdt.papyrus.html](modeling.mdt.papyrus/dataset_report_modeling.mdt.papyrus.html)
 * Project's home: https://www.eclipse.org/papyrus
 * PMI's home: https://projects.eclipse.org/projects/modeling.mdt.papyrus
+
+
+## Eclipse PDT (PHP Development Tools)
+
+* Analysis report: [dataset_report_tools.pdt.html](modeling.epsilon/dataset_report_tools.pdt.html)
+* Project's home: http://www.eclipse.org/pdt/
+* PMI's home: https://projects.eclipse.org/projects/tools.pdt
 
 
 ## Eclipse Sirius
