@@ -1,9 +1,17 @@
+ee4j.glassfish
 modeling.emf-parsley
 modeling.epsilon
+modeling.gendoc
+modeling.m2t.acceleo
 modeling.mdt.papyrus
+modeling.mdt.ocl
 modeling.sirius
+technology.apogy
 technology.ease
+technology.paho
 technology.tycho
 tools.andmore
 tools.cdt
+tools.pdt
 tools.tracecompass
+
