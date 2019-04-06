@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    RSYNC_PASSWD = credentials('rsync_passwd')
+  }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '5'))
   }
@@ -9,11 +12,22 @@ pipeline {
         git url: 'https://github.com/eclipse-scava/scava-datasets.git'
       }
     }
-    stage('Build') {
+    stage('Build mboxes') {
+      steps {
+        sh 'rsync -avlp -e ssh --rsh="/usr/bin/sshpass -p $RSYNC_PASSWD ssh -o StrictHostKeyChecking=no -l bbaldassari2kd" build.eclipse.org:/opt/public/download-staging.priv/scava .'
+        sh 'ls'
+        sh 'cd scripts/ && sh ./process_mboxes.sh' 
+      }
+    }
+    stage('Build projects') {
       steps {
         sh 'pwd'
         sh 'ls'
         sh 'cd scripts/ && sh ./process_all_projects.sh' 
+      }
+    }
+    stage('Archiving') {
+      steps {
         archiveArtifacts artifacts: 'datasets/**/*.gz', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.html', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.pdf', fingerprint: true 

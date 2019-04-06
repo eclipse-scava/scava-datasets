@@ -9,7 +9,7 @@ pipeline {
       }
     }
 
-    stage('Retrieve') {
+    stage('Retrieve Documentation') {
       steps {
         sh '''
         
@@ -24,7 +24,9 @@ pipeline {
 
           wget http://ci6.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/*zip*/eclipse_mls.zip -O eclipse_mls.zip
           unzip -o eclipse_mls.zip
-          
+
+	  ls
+
         '''
       }
     }
@@ -63,7 +65,7 @@ pipeline {
       }
 	} */
 
-    /* stage('Deploy Mailing lists') {
+    stage('Deploy Mailing lists') {
       steps {
           sshagent ( ['projects-storage.eclipse.org-bot-ssh']) {
             sh '''
@@ -76,7 +78,7 @@ pipeline {
             '''
           }
         }
-    } */
+    }
 
     stage('Deploy Projects') {
       steps {
