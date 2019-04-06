@@ -56,7 +56,7 @@ if [ $run_csv -eq 1 ]; then
     cat csv/*.csv >> eclipse_mls_full.csv
 
     echo "# Anonymising csv dataset"
-    time perl anonymise_csv.pl eclipse_mls_full.csv
+    perl anonymise_csv.pl eclipse_mls_full.csv
     mv eclipse_mls_clean.csv eclipse_mls_full.csv
     
     echo "# Creating archive eclipse_mls_full.csv.gz"
