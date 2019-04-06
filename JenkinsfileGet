@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Build mboxes') {
       steps {
-        sh 'rsync -avlp -e ssh --rsh="/usr/bin/sshpass -p $SYS_RSYNC_PASSWD ssh -o StrictHostKeyChecking=no -l bbaldassari2kd" build.eclipse.org:/opt/public/download-staging.priv/scava .'
+        sh 'rsync -avlp -e ssh --rsh="/usr/bin/sshpass -p ${SYS_RSYNC_PASSWD} ssh -o StrictHostKeyChecking=no -l bbaldassari2kd" build.eclipse.org:/opt/public/download-staging.priv/scava .'
         sh 'ls'
         sh 'cd scripts/ && sh ./process_mboxes.sh' 
       }
