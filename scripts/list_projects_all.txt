@@ -1,9 +1,0 @@
-modeling.epsilon
-modeling.sirius
-tools.cdt
-tools.andmore
-technology.ease
-modeling.emf-parsley
-modeling.mdt.papyrus
-technology.tycho
-tools.tracecompass
