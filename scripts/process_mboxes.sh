@@ -14,6 +14,7 @@
 DATE=`date +%Y-%m-%d`
 dir_session=/tmp/r_extract_project_${DATE}.session
 dir_anon="data-anonymiser"
+dir_mbox=/data/eclipse_mls
 url_anon="https://github.com/borisbaldassari/data-anonymiser/archive/master.zip"
 
 run_csv=1
@@ -45,9 +46,9 @@ if [ $run_csv -eq 1 ]; then
     fi
     mkdir -p csv/
 
-    for f in `ls scava/`; do 
+    for f in `ls ${dir_mbox}`; do 
 	echo "* Working on mbox $f"
-	perl mbox2csv.pl scava/$f
+	perl mbox2csv.pl ${dir_mbox}/$f
 	mv $f.csv csv/
     done
 
@@ -77,10 +78,10 @@ if [ $run_mbox -eq 1 ]; then
     fi
     mkdir -p scava_scrambled/
     
-    for f in `ls scava/`; do 
+    for f in `ls ${dir_mbox}`; do 
 	echo "* Working on mbox $f"
 	perl data-anonymiser/code/anonymise scramble -s $dir_session \
-             -f scava/$f -t scava_scrambled/${f}
+             -f ${dir_mbox}/$f -t scava_scrambled/${f}
 	gzip scava_scrambled/${f}
     done
     
