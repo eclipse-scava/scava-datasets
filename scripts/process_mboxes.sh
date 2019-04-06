@@ -42,27 +42,31 @@ if [ $run_csv -eq 1 ]; then
 
     if [ -d csv/ ]; then
 	rm -rf csv/
-    else
-	mkdir -p csv/
     fi
-    
+    mkdir -p csv/
+
     for f in `ls scava/`; do 
 	echo "* Working on mbox $f"
 	perl mbox2csv.pl scava/$f
 	mv $f.csv csv/
     done
 
-    # Generate a single big file with all 
+    # Generate a single big file with all csv's
     cat headers.init > eclipse_mls_full.csv
     cat csv/*.csv >> eclipse_mls_full.csv
-    
-    time perl anonymise_csv.pl eclipse_mls_full.csv
 
+    echo "# Anonymising csv dataset"
+    time perl anonymise_csv.pl eclipse_mls_full.csv
+    mv eclipse_mls_clean.csv eclipse_mls_full.csv
+    
     echo "# Creating archive eclipse_mls_full.csv.gz"
     gzip eclipse_mls_full.csv
     
     echo "# Moving eclipse_mls_full.gz to datasets directory..."
     mv eclipse_mls_full.csv.gz ../datasets/eclipse_mls/
+
+    echo "# Cleaning workspace"
+    rm -rf csv/
 fi
 
 if [ $run_mbox -eq 1 ]; then
@@ -70,22 +74,20 @@ if [ $run_mbox -eq 1 ]; then
     
     if [ -d scava_scrambled/ ]; then
 	rm -rf scava_scrambled/
-    else
-	mkdir -p scava_scrambled/
     fi
+    mkdir -p scava_scrambled/
     
     for f in `ls scava/`; do 
 	echo "* Working on mbox $f"
 	perl data-anonymiser/code/anonymise scramble -s $dir_session \
-             -f scava/$f -t scava_scrambled/${f%%.mbox}.mbox
-	gzip scava_scrambled/${f%%.mbox}.mbox 
+             -f scava/$f -t scava_scrambled/${f}
+	gzip scava_scrambled/${f}
     done
     
     if [ -d ../datasets/eclipse_mls/mboxes/ ]; then
 	rm -rf ../datasets/eclipse_mls/mboxes/
-    else
-	mkdir -p ../datasets/eclipse_mls/mboxes/
     fi
+    mkdir -p ../datasets/eclipse_mls/mboxes/
     
     echo "# Moving mls results to datasets directory..."
     mv scava_scrambled/* ../datasets/eclipse_mls/mboxes/
