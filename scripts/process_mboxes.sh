@@ -20,6 +20,8 @@ url_anon="https://github.com/borisbaldassari/data-anonymiser/archive/master.zip"
 run_csv=1
 run_mbox=1
 
+verbose='true'
+
 echo "# Checking if anonymisation utility is present.."
 if [ -e ${dir_anon}/code/anonymise ]; then
     echo "  * Found [${dir_anon}/code/anonymise] utility."
@@ -62,7 +64,22 @@ if [ $run_csv -eq 1 ]; then
     
     echo "# Creating archive eclipse_mls_full.csv.gz"
     gzip eclipse_mls_full.csv
-    
+
+    echo "# Executing R Markdown document."
+    tmpfile=$(mktemp /tmp/r_extract_project.XXXXXX.r)
+    echo "  * Rendering RMarkdown file [$tmpfile] in [${dir_out}/dataset_report_$proj.html]." 
+    cat <<EOF > $tmpfile
+require(rmarkdown)
+render( "../datasets/eclipse_mls/mbox_analysis.Rmd", 
+        output_file="../datasets/eclipse_mls/mbox_analysis.html" )
+EOF
+
+    if [ "$verbose" = true ]; then
+        Rscript $tmpfile
+    else
+        Rscript $tmpfile >/dev/null 2>&1
+    fi
+
     echo "# Moving eclipse_mls_full.gz to datasets directory..."
     mv eclipse_mls_full.csv.gz ../datasets/eclipse_mls/
 
