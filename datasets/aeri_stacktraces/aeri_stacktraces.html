@@ -365,17 +365,6 @@ pre[data-line] .line-highlight[data-end]:after {
   }
 ]
 </pre>
-<h2 class="mume-header" id="extraction">Extraction</h2>
-
-<p>The database dump contains information about errors encountered by people when using Eclipse. It is composed of several mongodb tables and uses the bson format. Only two tables contain stack traces: <code>problems</code> and <code>incidents</code>.</p>
-<p>The bson files can be read using the bsondump utility, provided with the mongodb client package (mongodb-clients on Debian).</p>
-<pre data-role="codeBlock" data-info class="language-"><code>bsondump problems.bson --type json &gt; problems.json
-</code></pre><p>After conversion the two files are quite big: 37GB for incidents and 2.1 GB for problems.</p>
-<p>Unfortunately the utility adds some progress information in the UI that needs to be removed from the output:</p>
-<pre data-role="codeBlock" data-info class="language-"><code>grep -v &apos;Progress: &apos; problems.json &gt; problems_clean.json
-</code></pre><p>We also had to remove a few (approx. a dozen of) lines because they embed unparseable source code, characters or asian/binary/utf8/16/256 text. The script tries to JSON-decode all lines one by one, and on failure simply goes to the next line.</p>
-<p>For <code>problems</code> (the file is reasonably small) the script generates for each line a separate JSON file with only information related to that line. The script for problems extraction is <code>parse_json_problems.pl</code>. Output is 820MB and processing time is roughly 45mn.</p>
-<p>For <code>incidents</code> (file is 37GB) the script generates for each line a separate JSON file with only information related to that line. For the records, trying to generate a single file requires at least twice the size of the file in RAM/SWAP (i.e. roughly 74GB). There are 2084328 files in the output for 17GB. The script for incidents extraction is <code>parse_json_incidents.pl</code>. To get an idea of the resources required to process that, the final incidents extraction took roughly 16h on a quite powerful box.</p>
 
       </div>
       
