@@ -269,68 +269,43 @@ pre[data-line] .line-highlight[data-end]:after {
 <p>All data is anonymised, please see the <a href="docs/datasets_privacy.html">dedicated document</a> to learn more about privacy and the anonymisation mecanism.</p>
 <h2 class="mume-header" id="eclipse-projects">Eclipse projects</h2>
 
-<p>We generate full extracts of a <a href="datasets/projects/eclipse_projects.html">set of Eclipse projects</a>, including data sources like:</p>
+<p>We generate full data extracts of a <a href="projects/eclipse_projects.html">set of Eclipse projects</a>, including data sources like:</p>
 <ul>
-<li>SCM (git),</li>
-<li>Issues tracking (Bugzilla),</li>
-<li>PMI checks,</li>
-<li>Static Code Analysis (SonarQube).</li>
+<li>SCM (<a href="https://git.eclipse.org">git</a>),</li>
+<li>Issues tracking (<a href="https://bugs.eclipse.org">Bugzilla</a>),</li>
+<li><a href="https://projects.eclipse.org">PMI</a> checks,</li>
+<li>Static Code Analysis (<a href="https://sonar.eclipse.org">SonarQube</a>).</li>
 </ul>
 <p>These datasets are updated weekly, at 2am on Saturday.</p>
+<p><strong>Downloads</strong></p>
+<ul>
+<li><strong>List of projects</strong> See the <a href="projects/eclipse_projects.html">list of projects with their associated datasets and documentation</a>.</li>
+</ul>
 <h2 class="mume-header" id="aeri-stacktraces">AERI Stacktraces</h2>
 
-<p>The <a href="datasets/aeri_stacktraces/aeri_stacktraces.html">AERI stacktraces dataset</a> is a list of exceptions encountered by users in the Eclipse IDE, as retrieved by the AERI system. The Automated Error Reporting (AERI) system has been developed by the people at <a href="https://www.codetrails.com/">Code Trails</a> and retrieves information about exceptions. It is installed by default in the Eclipse IDE and has helped hundreds of projects better support their users and resolve bugs. This dataset is a dump of all records over a couple of years, with useful information about the exceptions and environment.</p>
+<p>The <a href="aeri_stacktraces/aeri_stacktraces.html">AERI stacktraces dataset</a> is a list of exceptions encountered by users in the Eclipse IDE, as retrieved by the AERI system. The Automated Error Reporting (AERI) system has been developed by the people at <a href="https://www.codetrails.com/">Code Trails</a> and retrieves information about exceptions. It is installed by default in the Eclipse IDE and has helped hundreds of projects better support their users and resolve bugs. This dataset is a dump of all records over a couple of years, with useful information about the exceptions and environment.</p>
 <p>Last update of the dataset occured on 2018-02-11.</p>
 <p><strong>Downloads</strong></p>
 <ul>
-<li><strong>Problems full</strong> [ <a href="datasets/aeri_stacktraces/problems_full.tar.bz2">Download JSON</a> ] -- A list of all problems, exported as JSON (one problem per file).
-<ul>
-<li>Content: 125250 entries, 22 attributes</li>
-<li>Size: 38M compressed, 904M raw</li>
-</ul>
-</li>
-<li><strong>Problems extract</strong> [ <a href="datasets/aeri_stacktraces/problems_extract.csv.bz2">Download CSV</a> ] -- A list of all problems, exported as CSV (one big file).
-<ul>
-<li>Content: 125250 entries, 22 attributes</li>
-<li>Size: 1.5M compressed, 14M raw</li>
-</ul>
-</li>
-<li><strong>Incidents full</strong> [ <a href="datasets/aeri_stacktraces/incidents_full.tar.bz2">Download JSON</a> ] -- A list of all incidents, exported as JSON (one incident per file).
-<ul>
-<li>Content: 2084363 entries, 22 attributes</li>
-<li>Size: 820M compressed, 19G raw</li>
-</ul>
-</li>
-<li><strong>Incidents extract</strong> [ <a href="datasets/aeri_stacktraces/incidents_extract.csv.bz2">Download CSV</a> ] -- A list of all incidents, exported as CSV (one big file).
-<ul>
-<li>Content: 2084045 entries, 20 attributes</li>
-<li>Size: 141M compressed, 778M raw</li>
-</ul>
-</li>
-<li><strong>Incidents Bundles</strong> [ <a href="datasets/aeri_stacktraces/incidents_bundles_extract.csv.bz2">Download CSV</a> ] -- A list of all bundles found in incidents, exported as CSV. Attributes are bundle_name, bundle_version, and number of occurrences.
-<ul>
-<li>Content: 29709 entries, 3 attributes</li>
-<li>Size: 220K compressed, 1.5M raw</li>
-</ul>
-</li>
+<li><strong>Problems full</strong> [ <a href="aeri_stacktraces/problems_full.tar.bz2">Download JSON</a> ] -- A list of all problems, exported as JSON (one problem per file).</li>
+<li><strong>Problems extract</strong> [ <a href="aeri_stacktraces/problems_extract.csv.bz2">Download CSV</a> ] -- A list of all problems, exported as CSV (one big file).</li>
+<li><strong>Incidents full</strong> [ <a href="aeri_stacktraces/incidents_full.tar.bz2">Download JSON</a> ] -- A list of all incidents, exported as JSON (one incident per file).</li>
+<li><strong>Incidents extract</strong> [ <a href="aeri_stacktraces/incidents_extract.csv.bz2">Download CSV</a> ] -- A list of all incidents, exported as CSV (one big file).</li>
+<li><strong>Incidents Bundles</strong> [ <a href="aeri_stacktraces/incidents_bundles_extract.csv.bz2">Download CSV</a> ] -- A list of all bundles found in incidents, exported as CSV. Attributes are bundle_name, bundle_version, and number of occurrences.</li>
 </ul>
 <p><strong>Documentation</strong></p>
 <ul>
-<li><strong>Stacktraces Problems analysis document</strong> [ <a href="datasets/aeri_stacktraces/problems_analysis.pdf">Download PDF</a> | <a href="datasets/aeri_stacktraces/problems_analysis.rmd">Download Rmd</a> ] -- A R Markdown document to analyse the Stacktraces problem dataset, with description of the actual content and examples of usage.</li>
-<li><strong>Stacktraces Incidents analysis document</strong> [ <a href="datasets/aeri_stacktraces/incidents_analysis.pdf">Download PDF</a> | <a href="datasets/aeri_stacktraces/incidents_analysis.rmd">Download Rmd</a> ] -- A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage. This is the PDF export.</li>
+<li><strong>Stacktraces Problems analysis document</strong> [ <a href="aeri_stacktraces/problems_analysis.pdf">Download PDF</a> | <a href="aeri_stacktraces/problems_analysis.rmd">Download Rmd</a> ] -- A R Markdown document to analyse the Stacktraces problem dataset, with description of the actual content and examples of usage.</li>
+<li><strong>Stacktraces Incidents analysis document</strong> [ <a href="aeri_stacktraces/incidents_analysis.pdf">Download PDF</a> | <a href="aeri_stacktraces/incidents_analysis.rmd">Download Rmd</a> ] -- A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage. This is the PDF export.</li>
 </ul>
 <p>More information about the AERI system can be found on the <a href="https://www.codetrails.com/error-analytics/manual/">Code Trails website</a>.</p>
 <h2 class="mume-header" id="eclipse-mailing-lists">Eclipse mailing lists</h2>
 
-<p>The <a href="datasets/eclipse_mls/mbox_analysis.html">Eclipse Mailing lists</a> dump is an extract of all emails posted on the Eclipse mailing lists.</p>
+<p>The <a href="eclipse_mls/eclipse_mls.html">Eclipse Mailing lists</a> dump is an extract of all emails posted on the Eclipse mailing lists.</p>
 <ul>
-<li><strong>Download the Eclipse mailing lists dataset</strong> <a href="datasets/eclipse_mls/eclipse_mls.gz">here</a>.
-<ul>
-<li>Content: 352951 entries, 6 attributes</li>
-<li>Size: 12M compressed, 63M raw</li>
-</ul>
-</li>
-<li>Check the <strong>documentation</strong> for the dataset <a href="datasets/eclipse_mls/mbox_analysis.html">here</a>. For reproducibility we also provide the <a href="datasets/eclipse_mls/mbox_analysis.rmd">R Markdown document</a> for the dataset analysis and documentation.</li>
+<li>Download the <strong>Eclipse mailing lists dataset</strong> [ <a href="eclipse_mls/eclipse_mls.gz">CSV</a> ].</li>
+<li>Check the <strong>documentation</strong> for the dataset <a href="eclipse_mls/mbox_csv_analysis.html">here (HTML)</a>. For reproducibility we also provide the <a href="eclipse_mls/mbox_csv_analysis.rmd">R Markdown document</a> for the dataset analysis and documentation.</li>
+<li>Download the <strong>mbox files</strong> [ <a href="eclipse_mls/mbox_list.html">see the list</a> ]</li>
 </ul>
 <p>More information can be found on the official <a href="https://accounts.eclipse.org/mailing-list">Eclipse page for mailing lists</a>.</p>
 
