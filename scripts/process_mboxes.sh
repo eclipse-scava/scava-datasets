@@ -64,17 +64,13 @@ if [ $run_csv -eq 1 ]; then
 
     echo "# Executing R Markdown document."
     tmpfile=$(mktemp /tmp/r_extract_project.XXXXXX.r)
-    echo "  * Rendering RMarkdown file [$tmpfile] in [${dir_out}/dataset_report_$proj.html]." 
+    echo "  * Rendering RMarkdown file [$tmpfile] in [${dir_out}/dataset_report_.html]." 
     cat <<EOF > $tmpfile
 require(rmarkdown)
-render( input="../datasets/eclipse_mls/mbox_analysis.rmd", 
+render( input="../datasets/eclipse_mls/mbox_csv_analysis.rmd", 
         output_dir="../datasets/eclipse_mls/" )
-        output_file="mbox_analysis.html" )
+        output_file="mbox_csv_analysis.html" )
 EOF
-
-    echo "PATH is "`pwd`
-    echo "ls is "    
-    ls
 
     if [ "$verbose" = true ]; then
         Rscript $tmpfile
