@@ -59,7 +59,7 @@ if [ $run_csv -eq 1 ]; then
     cat csv/*.csv >> eclipse_mls_full.csv
 
     echo "# Anonymising csv dataset"
-    perl anonymise_csv.pl eclipse_mls_full.csv
+    perl -Idata-anonymiser/code/ anonymise_csv.pl eclipse_mls_full.csv
     mv eclipse_mls_clean.csv eclipse_mls_full.csv
     
     echo "# Creating archive eclipse_mls_full.csv.gz"
@@ -99,7 +99,7 @@ if [ $run_mbox -eq 1 ]; then
 	echo "* Working on mbox $f"
 	pwd
 	ls
-	perl -I../data-anonymiser/code/ data-anonymiser/code/anonymise scramble -s $dir_session \
+	perl -Idata-anonymiser/code/ data-anonymiser/code/anonymise scramble -s $dir_session \
              -f ${dir_mbox}/$f -t scava_scrambled/${f}
 	gzip scava_scrambled/${f}
     done
