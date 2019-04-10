@@ -97,7 +97,9 @@ if [ $run_mbox -eq 1 ]; then
     
     for f in `ls ${dir_mbox}`; do 
 	echo "* Working on mbox $f"
-	perl data-anonymiser/code/anonymise scramble -s $dir_session \
+	pwd
+	ls
+	perl -I../data-anonymiser. data-anonymiser/code/anonymise scramble -s $dir_session \
              -f ${dir_mbox}/$f -t scava_scrambled/${f}
 	gzip scava_scrambled/${f}
     done
