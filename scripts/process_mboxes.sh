@@ -68,7 +68,8 @@ if [ $run_csv -eq 1 ]; then
     cat <<EOF > $tmpfile
 require(rmarkdown)
 render( input="../datasets/eclipse_mls/mbox_analysis.rmd", 
-        output_file="../datasets/eclipse_mls/mbox_analysis.html" )
+        output_dir="../datasets/eclipse_mls/" )
+        output_file="mbox_analysis.html" )
 EOF
 
     echo "PATH is "`pwd`
