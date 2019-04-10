@@ -1,0 +1,713 @@
+<!DOCTYPE html><html><head>
+      <title>eclipse_mls</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////home/boris/.atom/packages/markdown-preview-enhanced/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h1 class="mume-header" id="the-eclipse-mailing-lists-datasets">The Eclipse mailing lists datasets</h1>
+
+<h2 class="mume-header" id="about-this-datasets">About this datasets</h2>
+
+<p>The <a href="https://eclipse.org">Eclipse Foundation</a> provides individuals and organizations with a commercially focused environment for open source software innovation. It includes git repositories, reviews, issues management, continuous integration, forums and mailing lists among other services. Many well-known and widely used projects are hosted on the forge, including the Eclipse IDE itself, several projects about IoT, modeling, and the new Java working group.</p>
+<h2 class="mume-header" id="the-csv-extract">The CSV extract</h2>
+
+<p>This dataset is a dump of all posts sent on all mailing lists hosted at the Eclipse Forge. It only includes the list name, post ID, sent date, author name and address, and post subject. the body of messages is dismissed.</p>
+<p>Although this is public data (the mailing lists can be browsed on the <a href="https://accounts.eclipse.org/mailing-list">official mailman page</a>) all data has been anonymised to prevent any misuse.<br>
+The privacy issues identified, along with the anonymisation process, have been covered in a <a href="../../docs/datasets_privacy.html">dedicated document</a>.</p>
+<p><strong>Downloads</strong></p>
+<ul>
+<li><strong>Download the Eclipse mailing lists dataset</strong> <a href="eclipse_mls.gz">here</a>.
+<ul>
+<li>Content: roughly 400K entries, 6 attributes</li>
+<li>Size: 12M compressed, 63M raw</li>
+</ul>
+</li>
+<li>Check the <strong>documentation</strong> for the dataset <a href="mbox_csv_analysis.html">here</a>. For reproducibility we also provide the <a href="mbox_csv_analysis.rmd">R Markdown document</a> for the dataset analysis and documentation.</li>
+</ul>
+<h2 class="mume-header" id="project-mboxes">Project mboxes</h2>
+
+<p>This dataset provides all Eclipse mailing lists as mboxes, compressed using gzip. Exhaustive list of downloads is as follows:</p>
+<ul>
+<li><a href="4diac-dev.mbox.gz">4diac-dev</a> (size: 6,0M)</li>
+<li><a href="acceleo-dev.mbox.gz">acceleo-dev</a> (size: 340K)</li>
+<li><a href="actf-dev.mbox.gz">actf-dev</a> (size: 9,8M)</li>
+<li><a href="acute-dev.mbox.gz">acute-dev</a> (size: 20K)</li>
+<li><a href="aether-build.mbox.gz">aether-build</a> (size: 100K)</li>
+<li><a href="aether-dev.mbox.gz">aether-dev</a> (size: 152K)</li>
+<li><a href="aether-users.mbox.gz">aether-users</a> (size: 652K)</li>
+<li><a href="agail-dev.mbox.gz">agail-dev</a> (size: 124K)</li>
+<li><a href="ajdt-dev.mbox.gz">ajdt-dev</a> (size: 5,0M)</li>
+<li><a href="albireo-dev.mbox.gz">albireo-dev</a> (size: 884K)</li>
+<li><a href="alf-dev.mbox.gz">alf-dev</a> (size: 3,5M)</li>
+<li><a href="alf-events.mbox.gz">alf-events</a> (size: 148K)</li>
+<li><a href="alf-req.mbox.gz">alf-req</a> (size: 192K)</li>
+<li><a href="amalgam-dev.mbox.gz">amalgam-dev</a> (size: 200K)</li>
+<li><a href="amalgam-releng.mbox.gz">amalgam-releng</a> (size: 4,0K)</li>
+<li><a href="amp-dev.mbox.gz">amp-dev</a> (size: 344K)</li>
+<li><a href="andmore-dev.mbox.gz">andmore-dev</a> (size: 1,8M)</li>
+<li><a href="antenna-dev.mbox.gz">antenna-dev</a> (size: 76K)</li>
+<li><a href="aperi-dev.mbox.gz">aperi-dev</a> (size: 22M)</li>
+<li><a href="aperi-news.mbox.gz">aperi-news</a> (size: 184K)</li>
+<li><a href="aperi-survey.mbox.gz">aperi-survey</a> (size: 8,0K)</li>
+<li><a href="apogee-dev.mbox.gz">apogee-dev</a> (size: 16K)</li>
+<li><a href="apogy-dev.mbox.gz">apogy-dev</a> (size: 8,0K)</li>
+<li><a href="app4mc-dev.mbox.gz">app4mc-dev</a> (size: 36K)</li>
+<li><a href="apricot-dev.mbox.gz">apricot-dev</a> (size: 16K)</li>
+<li><a href="apricot-users.mbox.gz">apricot-users</a> (size: 8,0K)</li>
+<li><a href="articles_editor.mbox.gz">articles_editor</a> (size: 4,0K)</li>
+<li><a href="aspectj-announce.mbox.gz">aspectj-announce</a> (size: 428K)</li>
+<li><a href="aspectj-dev.mbox.gz">aspectj-dev</a> (size: 11M)</li>
+<li><a href="aspectj-users.mbox.gz">aspectj-users</a> (size: 53M)</li>
+<li><a href="atf-dev.mbox.gz">atf-dev</a> (size: 1,9M)</li>
+<li><a href="athena-dev.mbox.gz">athena-dev</a> (size: 4,0K)</li>
+<li><a href="austin-ec.mbox.gz">austin-ec</a> (size: 28K)</li>
+<li><a href="auto-iwg.mbox.gz">auto-iwg</a> (size: 35M)</li>
+<li><a href="avsys-dev.mbox.gz">avsys-dev</a> (size: 4,0K)</li>
+<li><a href="b3-dev.mbox.gz">b3-dev</a> (size: 60K)</li>
+<li><a href="b3.mbox.gz">b3</a> (size: 16K)</li>
+<li><a href="babel-dev.mbox.gz">babel-dev</a> (size: 5,6M)</li>
+<li><a href="basyx-dev.mbox.gz">basyx-dev</a> (size: 8,0K)</li>
+<li><a href="bayarea-ec.mbox.gz">bayarea-ec</a> (size: 36K)</li>
+<li><a href="belgium-ec.mbox.gz">belgium-ec</a> (size: 16K)</li>
+<li><a href="birt-charting-dev.mbox.gz">birt-charting-dev</a> (size: 13M)</li>
+<li><a href="birt-dev.mbox.gz">birt-dev</a> (size: 23M)</li>
+<li><a href="birt-news.mbox.gz">birt-news</a> (size: 1,1M)</li>
+<li><a href="birt-pmc.mbox.gz">birt-pmc</a> (size: 6,0M)</li>
+<li><a href="birt-proposal.mbox.gz">birt-proposal</a> (size: 16K)</li>
+<li><a href="birt-report-designer-dev.mbox.gz">birt-report-designer-dev</a> (size: 444K)</li>
+<li><a href="birt-report-engine-dev.mbox.gz">birt-report-engine-dev</a> (size: 380K)</li>
+<li><a href="blinki-dev.mbox.gz">blinki-dev</a> (size: 12K)</li>
+<li><a href="bpel-dev.mbox.gz">bpel-dev</a> (size: 12M)</li>
+<li><a href="bpmn2-modeler-dev.mbox.gz">bpmn2-modeler-dev</a> (size: 1,6M)</li>
+<li><a href="bpmn-dev.mbox.gz">bpmn-dev</a> (size: 88K)</li>
+<li><a href="bpmn-user.mbox.gz">bpmn-user</a> (size: 6,6M)</li>
+<li><a href="brazil-ec.mbox.gz">brazil-ec</a> (size: 8,0K)</li>
+<li><a href="bridgeiot-dev.mbox.gz">bridgeiot-dev</a> (size: 4,0K)</li>
+<li><a href="buckminster-dev.mbox.gz">buckminster-dev</a> (size: 7,8M)</li>
+<li><a href="budapest-ec.mbox.gz">budapest-ec</a> (size: 12K)</li>
+<li><a href="buildship-dev.mbox.gz">buildship-dev</a> (size: 296K)</li>
+<li><a href="bulgaria-ec.mbox.gz">bulgaria-ec</a> (size: 12K)</li>
+<li><a href="bulgaria-ec-news.mbox.gz">bulgaria-ec-news</a> (size: 32K)</li>
+<li><a href="ca-dev.mbox.gz">ca-dev</a> (size: 12K)</li>
+<li><a href="camf-dev.mbox.gz">camf-dev</a> (size: 1,1M)</li>
+<li><a href="camf-users.mbox.gz">camf-users</a> (size: 8,0K)</li>
+<li><a href="capra-dev.mbox.gz">capra-dev</a> (size: 92K)</li>
+<li><a href="cbi-dev.mbox.gz">cbi-dev</a> (size: 6,0M)</li>
+<li><a href="cdt-build-inbox.mbox.gz">cdt-build-inbox</a> (size: 4,0K)</li>
+<li><a href="cdt-contrib-dev.mbox.gz">cdt-contrib-dev</a> (size: 60K)</li>
+<li><a href="cdt-core-dev.mbox.gz">cdt-core-dev</a> (size: 1,2M)</li>
+<li><a href="cdt-cpp-extensions-dev.mbox.gz">cdt-cpp-extensions-dev</a> (size: 8,0K)</li>
+<li><a href="cdt-cppunit-inbox.mbox.gz">cdt-cppunit-inbox</a> (size: 104K)</li>
+<li><a href="cdt-cvs.mbox.gz">cdt-cvs</a> (size: 108K)</li>
+<li><a href="cdt-debug-dev.mbox.gz">cdt-debug-dev</a> (size: 2,7M)</li>
+<li><a href="cdt-dev.mbox.gz">cdt-dev</a> (size: 124M)</li>
+<li><a href="cdt-doc-dev.mbox.gz">cdt-doc-dev</a> (size: 260K)</li>
+<li><a href="cdt-doc-inbox.mbox.gz">cdt-doc-inbox</a> (size: 2,6M)</li>
+<li><a href="cdt-generic-extensions-dev.mbox.gz">cdt-generic-extensions-dev</a> (size: 8,0K)</li>
+<li><a href="cdtk-dev.mbox.gz">cdtk-dev</a> (size: 8,0K)</li>
+<li><a href="cdt-launch-inbox.mbox.gz">cdt-launch-inbox</a> (size: 136K)</li>
+<li><a href="cdt-lpex-dev.mbox.gz">cdt-lpex-dev</a> (size: 8,0K)</li>
+<li><a href="cdt-patch.mbox.gz">cdt-patch</a> (size: 26M)</li>
+<li><a href="cdt-releng-inbox.mbox.gz">cdt-releng-inbox</a> (size: 168K)</li>
+<li><a href="cdt-test-dev.mbox.gz">cdt-test-dev</a> (size: 1,6M)</li>
+<li><a href="cdt-ui-dev.mbox.gz">cdt-ui-dev</a> (size: 320K)</li>
+<li><a href="ceylon-dev.mbox.gz">ceylon-dev</a> (size: 4,0K)</li>
+<li><a href="cf-dev.mbox.gz">cf-dev</a> (size: 5,6M)</li>
+<li><a href="cft-dev.mbox.gz">cft-dev</a> (size: 220K)</li>
+<li><a href="che-dev.mbox.gz">che-dev</a> (size: 26M)</li>
+<li><a href="chemclipse-dev.mbox.gz">chemclipse-dev</a> (size: 14M)</li>
+<li><a href="chicago-ec.mbox.gz">chicago-ec</a> (size: 8,0K)</li>
+<li><a href="cloud-dev.mbox.gz">cloud-dev</a> (size: 3,7M)</li>
+<li><a href="cloudfree-dev.mbox.gz">cloudfree-dev</a> (size: 188K)</li>
+<li><a href="cme-dev.mbox.gz">cme-dev</a> (size: 184K)</li>
+<li><a href="cme-users.mbox.gz">cme-users</a> (size: 236K)</li>
+<li><a href="cobol-dev.mbox.gz">cobol-dev</a> (size: 1,1M)</li>
+<li><a href="cognicrypt-dev.mbox.gz">cognicrypt-dev</a> (size: 8,0K)</li>
+<li><a href="collections-dev.mbox.gz">collections-dev</a> (size: 176K)</li>
+<li><a href="community-outreach.mbox.gz">community-outreach</a> (size: 16K)</li>
+<li><a href="concierge-dev.mbox.gz">concierge-dev</a> (size: 768K)</li>
+<li><a href="configjsr-discuss.mbox.gz">configjsr-discuss</a> (size: 44K)</li>
+<li><a href="configjsr-experts.mbox.gz">configjsr-experts</a> (size: 356K)</li>
+<li><a href="context-dev.mbox.gz">context-dev</a> (size: 4,0K)</li>
+<li><a href="corona-dev.mbox.gz">corona-dev</a> (size: 3,8M)</li>
+<li><a href="corona-req.mbox.gz">corona-req</a> (size: 4,0K)</li>
+<li><a href="corrosion-dev.mbox.gz">corrosion-dev</a> (size: 28K)</li>
+<li><a href="cosmos-dev.mbox.gz">cosmos-dev</a> (size: 17M)</li>
+<li><a href="cosmos-mgmt.mbox.gz">cosmos-mgmt</a> (size: 128K)</li>
+<li><a href="cosmos-pmc.mbox.gz">cosmos-pmc</a> (size: 16K)</li>
+<li><a href="crossmeter-dev.mbox.gz">crossmeter-dev</a> (size: 28K)</li>
+<li><a href="cross-project-issues-dev.mbox.gz">cross-project-issues-dev</a> (size: 87M)</li>
+<li><a href="cu-dev.mbox.gz">cu-dev</a> (size: 16K)</li>
+<li><a href="cyclonedds-dev.mbox.gz">cyclonedds-dev</a> (size: 116K)</li>
+<li><a href="dali-dev.mbox.gz">dali-dev</a> (size: 3,2M)</li>
+<li><a href="damos-dev.mbox.gz">damos-dev</a> (size: 20K)</li>
+<li><a href="dash-dev.mbox.gz">dash-dev</a> (size: 2,5M)</li>
+<li><a href="dawnsci-dev.mbox.gz">dawnsci-dev</a> (size: 8,0K)</li>
+<li><a href="deeplearning4j-dev.mbox.gz">deeplearning4j-dev</a> (size: 12K)</li>
+<li><a href="detroit-ec.mbox.gz">detroit-ec</a> (size: 4,0K)</li>
+<li><a href="diffmerge-dev.mbox.gz">diffmerge-dev</a> (size: 44K)</li>
+<li><a href="dirigible-dev.mbox.gz">dirigible-dev</a> (size: 1,1M)</li>
+<li><a href="distro-program.mbox.gz">distro-program</a> (size: 4,0K)</li>
+<li><a href="ditto-dev.mbox.gz">ditto-dev</a> (size: 72K)</li>
+<li><a href="dltk-dev.mbox.gz">dltk-dev</a> (size: 4,6M)</li>
+<li><a href="doc2model-dev.mbox.gz">doc2model-dev</a> (size: 8,0K)</li>
+<li><a href="dsdp-dd-dev.mbox.gz">dsdp-dd-dev</a> (size: 3,8M)</li>
+<li><a href="dsdp-dev.mbox.gz">dsdp-dev</a> (size: 2,5M)</li>
+<li><a href="dsdp-ercp-dev.mbox.gz">dsdp-ercp-dev</a> (size: 8,7M)</li>
+<li><a href="dsdp-japan-wg.mbox.gz">dsdp-japan-wg</a> (size: 8,0K)</li>
+<li><a href="dsdp-mtj-dev.mbox.gz">dsdp-mtj-dev</a> (size: 6,7M)</li>
+<li><a href="dsdp-nab-dev-jp.mbox.gz">dsdp-nab-dev-jp</a> (size: 8,0K)</li>
+<li><a href="dsdp-nab-dev.mbox.gz">dsdp-nab-dev</a> (size: 36K)</li>
+<li><a href="dsdp-pmc.mbox.gz">dsdp-pmc</a> (size: 18M)</li>
+<li><a href="dsdp-rtsc-dev.mbox.gz">dsdp-rtsc-dev</a> (size: 4,0K)</li>
+<li><a href="dsdp-sequoyah-dev.mbox.gz">dsdp-sequoyah-dev</a> (size: 4,0K)</li>
+<li><a href="dsdp-tcf-dev.mbox.gz">dsdp-tcf-dev</a> (size: 452K)</li>
+<li><a href="dsdp-tm-dev.mbox.gz">dsdp-tm-dev</a> (size: 8,7M)</li>
+<li><a href="dsdp-tml-dev.mbox.gz">dsdp-tml-dev</a> (size: 392K)</li>
+<li><a href="dtp-arch.mbox.gz">dtp-arch</a> (size: 4,0K)</li>
+<li><a href="dtp-connect-dev.mbox.gz">dtp-connect-dev</a> (size: 492K)</li>
+<li><a href="dtp-dev.mbox.gz">dtp-dev</a> (size: 14M)</li>
+<li><a href="dtp-incubator-dev.mbox.gz">dtp-incubator-dev</a> (size: 4,0K)</li>
+<li><a href="dtp-models-dev.mbox.gz">dtp-models-dev</a> (size: 20K)</li>
+<li><a href="dtp-plan.mbox.gz">dtp-plan</a> (size: 4,0K)</li>
+<li><a href="dtp-pmc.mbox.gz">dtp-pmc</a> (size: 2,9M)</li>
+<li><a href="dtp-reqs.mbox.gz">dtp-reqs</a> (size: 4,0K)</li>
+<li><a href="dtp-sqldevtools-dev.mbox.gz">dtp-sqldevtools-dev</a> (size: 1,7M)</li>
+<li><a href="duttile-dev.mbox.gz">duttile-dev</a> (size: 4,0K)</li>
+<li><a href="e4-dev.mbox.gz">e4-dev</a> (size: 31M)</li>
+<li><a href="ease-dev.mbox.gz">ease-dev</a> (size: 3,3M)</li>
+<li><a href="eatop-dev.mbox.gz">eatop-dev</a> (size: 92K)</li>
+<li><a href="eavp-dev.mbox.gz">eavp-dev</a> (size: 3,5M)</li>
+<li><a href="ebam-dev.mbox.gz">ebam-dev</a> (size: 24K)</li>
+<li><a href="ebam-user.mbox.gz">ebam-user</a> (size: 228K)</li>
+<li><a href="ebpm-dev.mbox.gz">ebpm-dev</a> (size: 32K)</li>
+<li><a href="ebpm-user.mbox.gz">ebpm-user</a> (size: 24K)</li>
+<li><a href="ebr-dev.mbox.gz">ebr-dev</a> (size: 172K)</li>
+<li><a href="ecd-pmc.mbox.gz">ecd-pmc</a> (size: 948K)</li>
+<li><a href="ecd-tools-wg.mbox.gz">ecd-tools-wg</a> (size: 8,0K)</li>
+<li><a href="ecesis-dev.mbox.gz">ecesis-dev</a> (size: 24K)</li>
+<li><a href="ecf-build.mbox.gz">ecf-build</a> (size: 3,6M)</li>
+<li><a href="ecf-def.mbox.gz">ecf-def</a> (size: 4,0K)</li>
+<li><a href="ecf-dev.mbox.gz">ecf-dev</a> (size: 23M)</li>
+<li><a href="eclemma-dev.mbox.gz">eclemma-dev</a> (size: 580K)</li>
+<li><a href="eclipse-announce-europe.mbox.gz">eclipse-announce-europe</a> (size: 88K)</li>
+<li><a href="eclipsecon2011announce.mbox.gz">eclipsecon2011announce</a> (size: 4,0K)</li>
+<li><a href="eclipse-dev.mbox.gz">eclipse-dev</a> (size: 19M)</li>
+<li><a href="eclipse-ide-dev.mbox.gz">eclipse-ide-dev</a> (size: 4,0K)</li>
+<li><a href="eclipse-incubator-e4-dev.mbox.gz">eclipse-incubator-e4-dev</a> (size: 5,5M)</li>
+<li><a href="eclipselink-dev.mbox.gz">eclipselink-dev</a> (size: 20M)</li>
+<li><a href="eclipselink-users.mbox.gz">eclipselink-users</a> (size: 31M)</li>
+<li><a href="eclipse-live.mbox.gz">eclipse-live</a> (size: 76K)</li>
+<li><a href="eclipse-mirrors.mbox.gz">eclipse-mirrors</a> (size: 1,3M)</li>
+<li><a href="eclipse.org-architecture-council.mbox.gz">eclipse.org-architecture-council</a> (size: 22M)</li>
+<li><a href="eclipse.org-committers.mbox.gz">eclipse.org-committers</a> (size: 9,0M)</li>
+<li><a href="eclipse.org-feep-stakeholders.mbox.gz">eclipse.org-feep-stakeholders</a> (size: 128K)</li>
+<li><a href="eclipse.org-member-marketing.mbox.gz">eclipse.org-member-marketing</a> (size: 28M)</li>
+<li><a href="eclipse.org-members-committers.mbox.gz">eclipse.org-members-committers</a> (size: 5,3M)</li>
+<li><a href="eclipse.org-migration.mbox.gz">eclipse.org-migration</a> (size: 1,5M)</li>
+<li><a href="eclipse.org-planning-council.mbox.gz">eclipse.org-planning-council</a> (size: 14M)</li>
+<li><a href="eclipse.org-prc.mbox.gz">eclipse.org-prc</a> (size: 3,7M)</li>
+<li><a href="eclipse.org-project-leadership.mbox.gz">eclipse.org-project-leadership</a> (size: 788K)</li>
+<li><a href="eclipse.org-project-leads.mbox.gz">eclipse.org-project-leads</a> (size: 92K)</li>
+<li><a href="eclipse.org-requirements-council.mbox.gz">eclipse.org-requirements-council</a> (size: 3,8M)</li>
+<li><a href="eclipse.org-strategic-consumer.mbox.gz">eclipse.org-strategic-consumer</a> (size: 4,0K)</li>
+<li><a href="eclipse.org-strategic-developer.mbox.gz">eclipse.org-strategic-developer</a> (size: 4,0K)</li>
+<li><a href="eclipse.org-sustaining-members.mbox.gz">eclipse.org-sustaining-members</a> (size: 8,0K)</li>
+<li><a href="eclipse.org-test.mbox.gz">eclipse.org-test</a> (size: 4,0K)</li>
+<li><a href="eclipse.org-unaffiliated-committer.mbox.gz">eclipse.org-unaffiliated-committer</a> (size: 4,0K)</li>
+<li><a href="eclipse-pmc.mbox.gz">eclipse-pmc</a> (size: 9,8M)</li>
+<li><a href="eclipse-scripting-dev.mbox.gz">eclipse-scripting-dev</a> (size: 928K)</li>
+<li><a href="eclipse-soc.mbox.gz">eclipse-soc</a> (size: 4,0K)</li>
+<li><a href="eclipse-tools-announce.mbox.gz">eclipse-tools-announce</a> (size: 4,0K)</li>
+<li><a href="eclipsezilla-business.mbox.gz">eclipsezilla-business</a> (size: 8,0K)</li>
+<li><a href="eclipsezilla-developer.mbox.gz">eclipsezilla-developer</a> (size: 112K)</li>
+<li><a href="eclipsezilla-special.mbox.gz">eclipsezilla-special</a> (size: 4,0K)</li>
+<li><a href="eclipsezilla-user.mbox.gz">eclipsezilla-user</a> (size: 12K)</li>
+<li><a href="edapt-dev.mbox.gz">edapt-dev</a> (size: 64K)</li>
+<li><a href="edje-dev.mbox.gz">edje-dev</a> (size: 32K)</li>
+<li><a href="edt-dev.mbox.gz">edt-dev</a> (size: 460K)</li>
+<li><a href="ee4j-build.mbox.gz">ee4j-build</a> (size: 4,7M)</li>
+<li><a href="ee4j-community.mbox.gz">ee4j-community</a> (size: 14M)</li>
+<li><a href="ee4j-dev.mbox.gz">ee4j-dev</a> (size: 20K)</li>
+<li><a href="ee4j-pmc.mbox.gz">ee4j-pmc</a> (size: 5,9M)</li>
+<li><a href="ee.next-wg.mbox.gz">ee.next-wg</a> (size: 28K)</li>
+<li><a href="efm-dev.mbox.gz">efm-dev</a> (size: 4,0K)</li>
+<li><a href="efxclipse-dev.mbox.gz">efxclipse-dev</a> (size: 20K)</li>
+<li><a href="egerrit-dev.mbox.gz">egerrit-dev</a> (size: 304K)</li>
+<li><a href="egf-dev.mbox.gz">egf-dev</a> (size: 8,0K)</li>
+<li><a href="egit-build.mbox.gz">egit-build</a> (size: 3,4M)</li>
+<li><a href="egit-dev.mbox.gz">egit-dev</a> (size: 16M)</li>
+<li><a href="ejb-dev.mbox.gz">ejb-dev</a> (size: 8,0K)</li>
+<li><a href="el-dev.mbox.gz">el-dev</a> (size: 20K)</li>
+<li><a href="elk-dev.mbox.gz">elk-dev</a> (size: 408K)</li>
+<li><a href="elogbook-dev.mbox.gz">elogbook-dev</a> (size: 12K)</li>
+<li><a href="emfcompare-build.mbox.gz">emfcompare-build</a> (size: 6,8M)</li>
+<li><a href="emf-compare-dev.mbox.gz">emf-compare-dev</a> (size: 68K)</li>
+<li><a href="emfcp-dev.mbox.gz">emfcp-dev</a> (size: 484K)</li>
+<li><a href="emf-dev.mbox.gz">emf-dev</a> (size: 6,0M)</li>
+<li><a href="emf.index-dev.mbox.gz">emf.index-dev</a> (size: 4,0K)</li>
+<li><a href="emfindex-dev.mbox.gz">emfindex-dev</a> (size: 92K)</li>
+<li><a href="emfparsley-dev.mbox.gz">emfparsley-dev</a> (size: 24K)</li>
+<li><a href="emfrefactor-dev.mbox.gz">emfrefactor-dev</a> (size: 48K)</li>
+<li><a href="emfstore-dev.mbox.gz">emfstore-dev</a> (size: 1,2M)</li>
+<li><a href="emft-dev.mbox.gz">emft-dev</a> (size: 2,8M)</li>
+<li><a href="epf-dev.mbox.gz">epf-dev</a> (size: 96M)</li>
+<li><a href="epf-dev-pt.mbox.gz">epf-dev-pt</a> (size: 108K)</li>
+<li><a href="epl-discuss.mbox.gz">epl-discuss</a> (size: 4,5M)</li>
+<li><a href="epp-dev.mbox.gz">epp-dev</a> (size: 19M)</li>
+<li><a href="epsilon-dev.mbox.gz">epsilon-dev</a> (size: 748K)</li>
+<li><a href="equinox-dev.mbox.gz">equinox-dev</a> (size: 31M)</li>
+<li><a href="ercp-dev.mbox.gz">ercp-dev</a> (size: 336K)</li>
+<li><a href="es-dev.mbox.gz">es-dev</a> (size: 256K)</li>
+<li><a href="esl-dev.mbox.gz">esl-dev</a> (size: 12K)</li>
+<li><a href="etrice-dev.mbox.gz">etrice-dev</a> (size: 840K)</li>
+<li><a href="etrice-users.mbox.gz">etrice-users</a> (size: 76K)</li>
+<li><a href="europa-build-workshop.mbox.gz">europa-build-workshop</a> (size: 1,2M)</li>
+<li><a href="evangelists.mbox.gz">evangelists</a> (size: 12K)</li>
+<li><a href="examples-dev.mbox.gz">examples-dev</a> (size: 36K)</li>
+<li><a href="facet-dev.mbox.gz">facet-dev</a> (size: 16K)</li>
+<li><a href="fairfax-ec.mbox.gz">fairfax-ec</a> (size: 4,0K)</li>
+<li><a href="featuremodel-dev.mbox.gz">featuremodel-dev</a> (size: 40K)</li>
+<li><a href="flux-dev.mbox.gz">flux-dev</a> (size: 972K)</li>
+<li><a href="flux-releng.mbox.gz">flux-releng</a> (size: 4,0K)</li>
+<li><a href="fmc-dev.mbox.gz">fmc-dev</a> (size: 28K)</li>
+<li><a href="fog05-dev.mbox.gz">fog05-dev</a> (size: 28K)</li>
+<li><a href="forum-admins.mbox.gz">forum-admins</a> (size: 12K)</li>
+<li><a href="forums-admin.mbox.gz">forums-admin</a> (size: 4,0K)</li>
+<li><a href="fproj-dev.mbox.gz">fproj-dev</a> (size: 16K)</li>
+<li><a href="franca-dev.mbox.gz">franca-dev</a> (size: 4,0K)</li>
+<li><a href="france-ec.mbox.gz">france-ec</a> (size: 364K)</li>
+<li><a href="france-southwest-ec.mbox.gz">france-southwest-ec</a> (size: 4,0K)</li>
+<li><a href="geclipse-dev.mbox.gz">geclipse-dev</a> (size: 8,5M)</li>
+<li><a href="geclipse-user.mbox.gz">geclipse-user</a> (size: 344K)</li>
+<li><a href="gef3d-dev.mbox.gz">gef3d-dev</a> (size: 476K)</li>
+<li><a href="gef-dev.mbox.gz">gef-dev</a> (size: 4,8M)</li>
+<li><a href="gemini-dev.mbox.gz">gemini-dev</a> (size: 7,0M)</li>
+<li><a href="gemoc-dev.mbox.gz">gemoc-dev</a> (size: 468K)</li>
+<li><a href="gemoc-rc.mbox.gz">gemoc-rc</a> (size: 8,0K)</li>
+<li><a href="gemoc-users.mbox.gz">gemoc-users</a> (size: 8,0K)</li>
+<li><a href="gendoc-dev.mbox.gz">gendoc-dev</a> (size: 116K)</li>
+<li><a href="gendoc-users.mbox.gz">gendoc-users</a> (size: 20K)</li>
+<li><a href="geoperil-dev.mbox.gz">geoperil-dev</a> (size: 4,0K)</li>
+<li><a href="germany-north-ec.mbox.gz">germany-north-ec</a> (size: 8,0K)</li>
+<li><a href="germany-south-ec.mbox.gz">germany-south-ec</a> (size: 8,0K)</li>
+<li><a href="git.mbox.gz">git</a> (size: 124K)</li>
+<li><a href="glassfish-dev.mbox.gz">glassfish-dev</a> (size: 72K)</li>
+<li><a href="glassfish-tools-dev.mbox.gz">glassfish-tools-dev</a> (size: 4,0K)</li>
+<li><a href="glimmer-dev.mbox.gz">glimmer-dev</a> (size: 20K)</li>
+<li><a href="gmf-dev.mbox.gz">gmf-dev</a> (size: 8,5M)</li>
+<li><a href="gmf-releng.mbox.gz">gmf-releng</a> (size: 108M)</li>
+<li><a href="gmt-dev.mbox.gz">gmt-dev</a> (size: 1,3M)</li>
+<li><a href="golo-dev.mbox.gz">golo-dev</a> (size: 436K)</li>
+<li><a href="graphiti-dev.mbox.gz">graphiti-dev</a> (size: 656K)</li>
+<li><a href="handly-dev.mbox.gz">handly-dev</a> (size: 740K)</li>
+<li><a href="henshin-user.mbox.gz">henshin-user</a> (size: 1,7M)</li>
+<li><a href="hono-dev.mbox.gz">hono-dev</a> (size: 6,2M)</li>
+<li><a href="ice-build.mbox.gz">ice-build</a> (size: 11M)</li>
+<li><a href="ide-dev.mbox.gz">ide-dev</a> (size: 20M)</li>
+<li><a href="iot-kapua-sp.mbox.gz">iot-kapua-sp</a> (size: 8,0K)</li>
+<li><a href="iot-pmc.mbox.gz">iot-pmc</a> (size: 37M)</li>
+<li><a href="iot-sc.mbox.gz">iot-sc</a> (size: 7,2M)</li>
+<li><a href="iot-wg-integration.mbox.gz">iot-wg-integration</a> (size: 492K)</li>
+<li><a href="iot-wg.mbox.gz">iot-wg</a> (size: 88M)</li>
+<li><a href="jakarta.ee-community.mbox.gz">jakarta.ee-community</a> (size: 17M)</li>
+<li><a href="jakartaee-tck-dev.mbox.gz">jakartaee-tck-dev</a> (size: 1,2M)</li>
+<li><a href="jakarta.ee-wg.mbox.gz">jakarta.ee-wg</a> (size: 9,5M)</li>
+<li><a href="javamail-dev.mbox.gz">javamail-dev</a> (size: 40K)</li>
+<li><a href="jaxrs-dev.mbox.gz">jaxrs-dev</a> (size: 3,1M)</li>
+<li><a href="jdt-core-dev.mbox.gz">jdt-core-dev</a> (size: 3,8M)</li>
+<li><a href="jdt-dev.mbox.gz">jdt-dev</a> (size: 4,7M)</li>
+<li><a href="jemo-dev.mbox.gz">jemo-dev</a> (size: 4,0K)</li>
+<li><a href="jersey-dev.mbox.gz">jersey-dev</a> (size: 264K)</li>
+<li><a href="jetty-announce.mbox.gz">jetty-announce</a> (size: 5,4M)</li>
+<li><a href="jetty-dev.mbox.gz">jetty-dev</a> (size: 23M)</li>
+<li><a href="jetty-users.mbox.gz">jetty-users</a> (size: 33M)</li>
+<li><a href="jgit-build.mbox.gz">jgit-build</a> (size: 2,0M)</li>
+<li><a href="jgit-dev.mbox.gz">jgit-dev</a> (size: 8,0M)</li>
+<li><a href="jms-dev.mbox.gz">jms-dev</a> (size: 128K)</li>
+<li><a href="jnosql-dev.mbox.gz">jnosql-dev</a> (size: 5,5M)</li>
+<li><a href="jsonp-dev.mbox.gz">jsonp-dev</a> (size: 4,0K)</li>
+<li><a href="kapua-dev.mbox.gz">kapua-dev</a> (size: 14M)</li>
+<li><a href="kura-commit.mbox.gz">kura-commit</a> (size: 2,2M)</li>
+<li><a href="kura-dev.mbox.gz">kura-dev</a> (size: 26M)</li>
+<li><a href="ldt-dev.mbox.gz">ldt-dev</a> (size: 300K)</li>
+<li><a href="leshan-commit.mbox.gz">leshan-commit</a> (size: 448K)</li>
+<li><a href="leshan-dev.mbox.gz">leshan-dev</a> (size: 6,6M)</li>
+<li><a href="linuxtools-dev.mbox.gz">linuxtools-dev</a> (size: 11M)</li>
+<li><a href="lsp4e-dev.mbox.gz">lsp4e-dev</a> (size: 732K)</li>
+<li><a href="lsp4j-dev.mbox.gz">lsp4j-dev</a> (size: 64K)</li>
+<li><a href="lsphub-dev.mbox.gz">lsphub-dev</a> (size: 8,0K)</li>
+<li><a href="lts-iwg.mbox.gz">lts-iwg</a> (size: 6,0M)</li>
+<li><a href="lyo-dev.mbox.gz">lyo-dev</a> (size: 13M)</li>
+<li><a href="m2e-dev.mbox.gz">m2e-dev</a> (size: 6,5M)</li>
+<li><a href="m2e-users.mbox.gz">m2e-users</a> (size: 23M)</li>
+<li><a href="m2t-dev.mbox.gz">m2t-dev</a> (size: 2,1M)</li>
+<li><a href="mat-dev.mbox.gz">mat-dev</a> (size: 3,0M)</li>
+<li><a href="mdmbl-dev.mbox.gz">mdmbl-dev</a> (size: 1,3M)</li>
+<li><a href="mdt-ocl.dev.mbox.gz">mdt-ocl.dev</a> (size: 5,0M)</li>
+<li><a href="mdt-papyrus.dev.mbox.gz">mdt-papyrus.dev</a> (size: 58M)</li>
+<li><a href="microprofile-dev.mbox.gz">microprofile-dev</a> (size: 1,6M)</li>
+<li><a href="milo-dev.mbox.gz">milo-dev</a> (size: 2,2M)</li>
+<li><a href="modeling-pmc.mbox.gz">modeling-pmc</a> (size: 29M)</li>
+<li><a href="modisco-dev.mbox.gz">modisco-dev</a> (size: 76K)</li>
+<li><a href="mojarra-dev.mbox.gz">mojarra-dev</a> (size: 48K)</li>
+<li><a href="mosquitto-dev.mbox.gz">mosquitto-dev</a> (size: 8,0M)</li>
+<li><a href="mylyn-dev.mbox.gz">mylyn-dev</a> (size: 7,8M)</li>
+<li><a href="mylyn-docs-dev.mbox.gz">mylyn-docs-dev</a> (size: 940K)</li>
+<li><a href="mylyn-pmc.mbox.gz">mylyn-pmc</a> (size: 1,4M)</li>
+<li><a href="nattable-dev.mbox.gz">nattable-dev</a> (size: 624K)</li>
+<li><a href="nebula-dev.mbox.gz">nebula-dev</a> (size: 17M)</li>
+<li><a href="omr-dev.mbox.gz">omr-dev</a> (size: 284K)</li>
+<li><a href="oomph-dev.mbox.gz">oomph-dev</a> (size: 668K)</li>
+<li><a href="openadx.mbox.gz">openadx</a> (size: 1,4M)</li>
+<li><a href="opengenesis-wg.mbox.gz">opengenesis-wg</a> (size: 72K)</li>
+<li><a href="openmdm-wg-members.mbox.gz">openmdm-wg-members</a> (size: 1,9M)</li>
+<li><a href="open-measured-data-wg.mbox.gz">open-measured-data-wg</a> (size: 62M)</li>
+<li><a href="openmobility.mbox.gz">openmobility</a> (size: 1,5M)</li>
+<li><a href="openpass-wg.mbox.gz">openpass-wg</a> (size: 1,1M)</li>
+<li><a href="orb-dev.mbox.gz">orb-dev</a> (size: 8,0K)</li>
+<li><a href="orbit-dev.mbox.gz">orbit-dev</a> (size: 7,4M)</li>
+<li><a href="orion-releng.mbox.gz">orion-releng</a> (size: 315M)</li>
+<li><a href="osbea-wg.mbox.gz">osbea-wg</a> (size: 16K)</li>
+<li><a href="p2-dev.mbox.gz">p2-dev</a> (size: 19M)</li>
+<li><a href="paho-dev.mbox.gz">paho-dev</a> (size: 36M)</li>
+<li><a href="papyrus-ic.mbox.gz">papyrus-ic</a> (size: 11M)</li>
+<li><a href="passage-dev.mbox.gz">passage-dev</a> (size: 44K)</li>
+<li><a href="pde-dev.mbox.gz">pde-dev</a> (size: 8,5M)</li>
+<li><a href="photran.mbox.gz">photran</a> (size: 11M)</li>
+<li><a href="platform-dev.mbox.gz">platform-dev</a> (size: 3,2M)</li>
+<li><a href="platform-releng-dev.mbox.gz">platform-releng-dev</a> (size: 30M)</li>
+<li><a href="platform-swt-dev.mbox.gz">platform-swt-dev</a> (size: 31M)</li>
+<li><a href="platform-ui-dev.mbox.gz">platform-ui-dev</a> (size: 27M)</li>
+<li><a href="ptp-dev.mbox.gz">ptp-dev</a> (size: 44M)</li>
+<li><a href="ptp-user.mbox.gz">ptp-user</a> (size: 36M)</li>
+<li><a href="qvto-dev.mbox.gz">qvto-dev</a> (size: 9,1M)</li>
+<li><a href="rap-dev.mbox.gz">rap-dev</a> (size: 6,6M)</li>
+<li><a href="rdf4j-dev.mbox.gz">rdf4j-dev</a> (size: 9,4M)</li>
+<li><a href="recommenders-dev.mbox.gz">recommenders-dev</a> (size: 38M)</li>
+<li><a href="reddeer-dev.mbox.gz">reddeer-dev</a> (size: 28K)</li>
+<li><a href="scada-dev.mbox.gz">scada-dev</a> (size: 508K)</li>
+<li><a href="scava-dev.mbox.gz">scava-dev</a> (size: 352K)</li>
+<li><a href="science-iwg.mbox.gz">science-iwg</a> (size: 58M)</li>
+<li><a href="science-pmc.mbox.gz">science-pmc</a> (size: 1,3M)</li>
+<li><a href="scout-dev.mbox.gz">scout-dev</a> (size: 464K)</li>
+<li><a href="simopenpass-dev.mbox.gz">simopenpass-dev</a> (size: 4,0K)</li>
+<li><a href="sirius-dev.mbox.gz">sirius-dev</a> (size: 332K)</li>
+<li><a href="smarthome-dev.mbox.gz">smarthome-dev</a> (size: 192K)</li>
+<li><a href="soa-pmc.mbox.gz">soa-pmc</a> (size: 58M)</li>
+<li><a href="soc-dev.mbox.gz">soc-dev</a> (size: 9,2M)</li>
+<li><a href="sparkplug-wg.mbox.gz">sparkplug-wg</a> (size: 4,0K)</li>
+<li><a href="sphinx-dev.mbox.gz">sphinx-dev</a> (size: 20K)</li>
+<li><a href="sprotty-dev.mbox.gz">sprotty-dev</a> (size: 8,0K)</li>
+<li><a href="statet-dev.mbox.gz">statet-dev</a> (size: 12K)</li>
+<li><a href="statet-users.mbox.gz">statet-users</a> (size: 36K)</li>
+<li><a href="stem-dev.mbox.gz">stem-dev</a> (size: 19M)</li>
+<li><a href="sumo-announce.mbox.gz">sumo-announce</a> (size: 28K)</li>
+<li><a href="sumo-dev.mbox.gz">sumo-dev</a> (size: 3,8M)</li>
+<li><a href="sumo-user.mbox.gz">sumo-user</a> (size: 118M)</li>
+<li><a href="sw360-dev.mbox.gz">sw360-dev</a> (size: 14M)</li>
+<li><a href="sw360-users.mbox.gz">sw360-users</a> (size: 8,0K)</li>
+<li><a href="swtchart-dev.mbox.gz">swtchart-dev</a> (size: 140K)</li>
+<li><a href="tcf-dev.mbox.gz">tcf-dev</a> (size: 5,3M)</li>
+<li><a href="technology-pmc.mbox.gz">technology-pmc</a> (size: 24M)</li>
+<li><a href="thingweb-dev.mbox.gz">thingweb-dev</a> (size: 20K)</li>
+<li><a href="tinydtls-dev.mbox.gz">tinydtls-dev</a> (size: 784K)</li>
+<li><a href="tm4e-dev.mbox.gz">tm4e-dev</a> (size: 84K)</li>
+<li><a href="tm-dev.mbox.gz">tm-dev</a> (size: 5,1M)</li>
+<li><a href="tools-pmc.mbox.gz">tools-pmc</a> (size: 16M)</li>
+<li><a href="tracecompass-dev.mbox.gz">tracecompass-dev</a> (size: 12M)</li>
+<li><a href="tycho-dev.mbox.gz">tycho-dev</a> (size: 2,1M)</li>
+<li><a href="tycho-user.mbox.gz">tycho-user</a> (size: 34M)</li>
+<li><a href="unide-dev.mbox.gz">unide-dev</a> (size: 1,6M)</li>
+<li><a href="usssdk-dev.mbox.gz">usssdk-dev</a> (size: 20K)</li>
+<li><a href="viatra-dev.mbox.gz">viatra-dev</a> (size: 2,3M)</li>
+<li><a href="wakaama-dev.mbox.gz">wakaama-dev</a> (size: 4,9M)</li>
+<li><a href="websocket-dev.mbox.gz">websocket-dev</a> (size: 24K)</li>
+<li><a href="wildwebdeveloper-dev.mbox.gz">wildwebdeveloper-dev</a> (size: 16K)</li>
+<li><a href="winery-dev.mbox.gz">winery-dev</a> (size: 468K)</li>
+<li><a href="wtp-dev.mbox.gz">wtp-dev</a> (size: 48M)</li>
+<li><a href="wtp-pmc.mbox.gz">wtp-pmc</a> (size: 19M)</li>
+<li><a href="wtp-releng.mbox.gz">wtp-releng</a> (size: 19M)</li>
+<li><a href="xacc-dev.mbox.gz">xacc-dev</a> (size: 140K)</li>
+<li><a href="xtext-dev.mbox.gz">xtext-dev</a> (size: 3,8M)</li>
+<li><a href="yasson-dev.mbox.gz">yasson-dev</a> (size: 32K)</li>
+</ul>
+<hr>
+<p>Note: list obtained through the following command:</p>
+<pre class="language-text">for i in `ls`; do
+     s=`du -sh $i | cut -f1`;
+     echo &quot;* [${i%%.mbox.gz}]($i) (size: $s)&quot; &gt;&gt; list.txt;
+done
+</pre>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
