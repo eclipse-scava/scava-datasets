@@ -71,6 +71,10 @@ render( input="../datasets/eclipse_mls/mbox_analysis.rmd",
         output_file="../datasets/eclipse_mls/mbox_analysis.html" )
 EOF
 
+    echo "PATH is "`pwd`
+    echo "ls is "    
+    ls
+
     if [ "$verbose" = true ]; then
         Rscript $tmpfile
     else
