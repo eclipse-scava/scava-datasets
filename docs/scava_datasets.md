@@ -3,14 +3,21 @@
 
 This web site hosts the open datasets generated in the course of the Crossminer research project. It includes various pieces of data retrieved from the Eclipse forge in CSV and JSON formats, and each dataset has a R Markdown document describing its content and providing hints about how to use it. Examples provided mainly use the [R statistical analysis software](https://r-project.org).
 
+All datasets are published under the [Creative Commons BY-Attribution-Share Alike 4.0 (International)](https://creativecommons.org/licenses/by-sa/4.0/).
+
 All data is anonymised, please see the [dedicated document](docs/datasets_privacy.html) to learn more about privacy and the anonymisation mecanism.
 
 
 ## Eclipse projects
 
-We generate full extracts of a [set of Eclipse projects](datasets/projects/eclipse_projects.html), including data sources like SCM (git), Issues tracking (Bugzilla), PMI checks and more.
+We generate full extracts of a [set of Eclipse projects](datasets/projects/eclipse_projects.html), including data sources like:
 
-These datasets are updated weekly, at 2am on Sunday.
+* SCM (git),
+* Issues tracking (Bugzilla),
+* PMI checks,
+* Static Code Analysis (SonarQube).
+
+These datasets are updated weekly, at 2am on Saturday.
 
 
 ## AERI Stacktraces

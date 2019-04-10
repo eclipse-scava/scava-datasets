@@ -265,11 +265,18 @@ pre[data-line] .line-highlight[data-end]:after {
       <h1 class="mume-header" id="eclipse-scava-datasets">Eclipse Scava Datasets</h1>
 
 <p>This web site hosts the open datasets generated in the course of the Crossminer research project. It includes various pieces of data retrieved from the Eclipse forge in CSV and JSON formats, and each dataset has a R Markdown document describing its content and providing hints about how to use it. Examples provided mainly use the <a href="https://r-project.org">R statistical analysis software</a>.</p>
+<p>All datasets are published under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-Attribution-Share Alike 4.0 (International)</a>.</p>
 <p>All data is anonymised, please see the <a href="docs/datasets_privacy.html">dedicated document</a> to learn more about privacy and the anonymisation mecanism.</p>
 <h2 class="mume-header" id="eclipse-projects">Eclipse projects</h2>
 
-<p>We generate full extracts of a <a href="datasets/projects/eclipse_projects.html">set of Eclipse projects</a>, including data sources like SCM (git), Issues tracking (Bugzilla), PMI checks and more.</p>
-<p>These datasets are updated weekly, at 2am on Sunday.</p>
+<p>We generate full extracts of a <a href="datasets/projects/eclipse_projects.html">set of Eclipse projects</a>, including data sources like:</p>
+<ul>
+<li>SCM (git),</li>
+<li>Issues tracking (Bugzilla),</li>
+<li>PMI checks,</li>
+<li>Static Code Analysis (SonarQube).</li>
+</ul>
+<p>These datasets are updated weekly, at 2am on Saturday.</p>
 <h2 class="mume-header" id="aeri-stacktraces">AERI Stacktraces</h2>
 
 <p>The <a href="datasets/aeri_stacktraces/aeri_stacktraces.html">AERI stacktraces dataset</a> is a list of exceptions encountered by users in the Eclipse IDE, as retrieved by the AERI system. The Automated Error Reporting (AERI) system has been developed by the people at <a href="https://www.codetrails.com/">Code Trails</a> and retrieves information about exceptions. It is installed by default in the Eclipse IDE and has helped hundreds of projects better support their users and resolve bugs. This dataset is a dump of all records over a couple of years, with useful information about the exceptions and environment.</p>
