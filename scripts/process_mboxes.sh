@@ -61,16 +61,13 @@ if [ $run_csv -eq 1 ]; then
     echo "# Anonymising csv dataset"
     perl -Idata-anonymiser/code/ anonymise_csv.pl eclipse_mls_full.csv
     mv eclipse_mls_clean.csv eclipse_mls_full.csv
-    
-    echo "# Creating archive eclipse_mls_full.csv.gz"
-    gzip eclipse_mls_full.csv
 
     echo "# Executing R Markdown document."
     tmpfile=$(mktemp /tmp/r_extract_project.XXXXXX.r)
     echo "  * Rendering RMarkdown file [$tmpfile] in [${dir_out}/dataset_report_$proj.html]." 
     cat <<EOF > $tmpfile
 require(rmarkdown)
-render( "../datasets/eclipse_mls/mbox_analysis.Rmd", 
+render( input="../datasets/eclipse_mls/mbox_analysis.rmd", 
         output_file="../datasets/eclipse_mls/mbox_analysis.html" )
 EOF
 
@@ -79,6 +76,9 @@ EOF
     else
         Rscript $tmpfile >/dev/null 2>&1
     fi
+    
+    echo "# Creating gzip archive eclipse_mls_full.csv.gz"
+    gzip eclipse_mls_full.csv
 
     echo "# Moving eclipse_mls_full.gz to datasets directory..."
     mv eclipse_mls_full.csv.gz ../datasets/eclipse_mls/

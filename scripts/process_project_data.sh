@@ -90,16 +90,34 @@ sed -E 's/^Author: [^<]+/Author: XXXXXXXX /' < ${dir_out}/git_log.txt.1 > ${dir_
 rm ${dir_out}/git_log.txt.1
 
 echo "    - Scramble Bugzilla files"
-anonymise ${dir_out}/bugzilla_issues.csv
-anonymise ${dir_out}/bugzilla_issues_open.csv
+if [ -f ${dir_out}/bugzilla_issues.csv ]; then  
+    echo "      ${dir_out}/bugzilla_issues.csv"
+    anonymise ${dir_out}/bugzilla_issues.csv
+fi
+if [ -f ${dir_out}/bugzilla_issues_open.csv ]; then  
+    echo "      ${dir_out}/bugzilla_issues_open.csv"
+    anonymise ${dir_out}/bugzilla_issues_open.csv
+fi
 
 echo "    - Scramble EclipseForums files"
-anonymise ${dir_out}/eclipse_forums_posts.csv
-anonymise ${dir_out}/eclipse_forums_threads.csv
+if [ -f ${dir_out}/eclipse_forums_posts.csv ]; then  
+    echo "      ${dir_out}/eclipse_forums_posts.csv"
+    anonymise ${dir_out}/eclipse_forums_posts.csv
+fi
+if [ -f ${dir_out}/eclipse_forums_threads.csv ]; then  
+    echo "      ${dir_out}/eclipse_forums_threads.csv"
+    anonymise ${dir_out}/eclipse_forums_threads.csv
+fi
 
 echo "    - Scramble EclipsePMI files"
-anonymise ${dir_out}/eclipse_pmi_checks.csv
-anonymise ${dir_out}/eclipse_pmi_checks.json
+if [ -f ${dir_out}/eclipse_pmi_checks.csv ]; then 
+    echo "      ${dir_out}/eclipse_pmi_checks.csv"
+    anonymise ${dir_out}/eclipse_pmi_checks.csv
+fi
+if [ -f ${dir_out}/eclipse_pmi_checks.json ]; then 
+    echo "      ${dir_out}/eclipse_pmi_checks.json"
+    anonymise ${dir_out}/eclipse_pmi_checks.json 
+fi
 
 
 tmpfile=$(mktemp /tmp/r_extract_project.XXXXXX.r)
