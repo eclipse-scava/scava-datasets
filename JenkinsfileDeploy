@@ -41,7 +41,11 @@ pipeline {
             scp -r docs/scava.html genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/index.html
             scp -r docs/scava_datasets.html genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/datasets/index.html
             scp -r docs/datasets_privacy.html genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/docs/datasets_privacy.html
-            scp -r docs/data_transformation.png genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/docs/data_transformation.png
+
+            scp -r aeri_stacktraces/aeri_stacktraces.html genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/datasets/aeri_stacktraces/
+
+            scp -r docs/data_transformation.png genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/docs/
+            scp -r docs/scava-header.jpg genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/docs/
           '''
         }
       }
