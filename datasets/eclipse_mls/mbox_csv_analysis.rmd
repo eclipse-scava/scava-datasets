@@ -13,7 +13,7 @@ output:
     toc: yes
     toc_depth: '2'
 params:
-  project: downloads/eclipse_mls_clean.csv
+  project: eclipse_mls_full.csv
 ---
 
 ```{r init, message=FALSE, echo=FALSE}
