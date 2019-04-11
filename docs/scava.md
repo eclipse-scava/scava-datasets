@@ -1,9 +1,11 @@
 
 # Eclipse Scava Downloads
 
+![Scava logo](scava-header.jpg)
+
 This web site hosts the various downloads available from the [Eclipse Scava project](https://eclipse.org/scava). It notably includes:
 
-* Open [software-engineering datasets](datasets/index.html) related to the Eclipse forge, including:
+* Open [software-engineering datasets](datasets/index.html) related to the Eclipse forge, including AERI stacktraces, Eclipse mailing lists, and Eclipse projects data.
 * Downloads for the Scava application (availability planned for Q3 2019).
 
 ## More information
@@ -11,6 +13,7 @@ This web site hosts the various downloads available from the [Eclipse Scava proj
 Scava is the Eclipse spin-off of Crossminer, a EU-funded research project. More information can be found at the following places:
 
 * The [Eclipse Scava project](https://eclipse.org/scava)
+* The official [documentation for Scava](https://scava-docs.readthedocs.io)
 * The official [Crossminer web page](https://crossminer.org)
 * The [GitHub Crossminer organisation](https://github.com/crossminer)
 
@@ -25,3 +28,4 @@ All code is, unless otherwise stated, published under the [Eclipse Public Licenc
 More information can be found in the following places:
 
 * The [git repository dedicated to the datasets extraction](https://github.com/eclipse-scava/scava-datasets): `git@github.com:eclipse-scava/scava-datasets.git`
+* The [documentation repository](https://github.com/crossminer/scava-docs) for the Scava project: `https://github.com/crossminer/scava-docs`

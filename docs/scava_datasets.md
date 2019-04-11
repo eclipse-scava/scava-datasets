@@ -5,7 +5,7 @@ This web site hosts the open datasets generated in the course of the Crossminer 
 
 All datasets are published under the [Creative Commons BY-Attribution-Share Alike 4.0 (International)](https://creativecommons.org/licenses/by-sa/4.0/).
 
-All data is anonymised, please see the [dedicated document](docs/datasets_privacy.html) to learn more about privacy and the anonymisation mecanism.
+All data is anonymised, please see the [dedicated document](../docs/datasets_privacy.html) to learn more about privacy and the anonymisation mecanism.
 
 
 ## Eclipse projects
