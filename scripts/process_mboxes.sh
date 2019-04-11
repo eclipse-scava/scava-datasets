@@ -1,11 +1,11 @@
 ##################################################################
 #
 # Copyright (C) 2019 Castalia Solutions
-# 
+#
 # This program and the accompanying materials are made
 # available under the terms of the Eclipse Public License 2.0
 # which is available at https://www.eclipse.org/legal/epl-2.0/
-# 
+#
 # SPDX-License-Identifier: EPL-2.0
 #
 ###################################################################
@@ -48,7 +48,7 @@ if [ $run_csv -eq 1 ]; then
     fi
     mkdir -p csv/
 
-    for f in `ls ${dir_mbox}`; do 
+    for f in `ls ${dir_mbox}`; do
 	echo "* Working on mbox $f"
 	perl mbox2csv.pl ${dir_mbox}/$f
 	mv $f.csv csv/
@@ -61,15 +61,15 @@ if [ $run_csv -eq 1 ]; then
     echo "# Anonymising csv dataset"
     perl -Idata-anonymiser/code/ anonymise_csv.pl eclipse_mls_full.csv
 
-    echo "# Moving eclipse_mls_full.gz to datasets directory..."
-    mv eclipse_mls_clean.csv ../datasets/eclipse_mls/
+    echo "# Moving eclipse_mls_full.csv to datasets directory..."
+    mv eclipse_mls_clean.csv ../datasets/eclipse_mls/eclipse_mls_full.csv
 
     echo "# Executing R Markdown document."
     tmpfile=$(mktemp /tmp/r_extract_project.XXXXXX.r)
-    echo "  * Rendering RMarkdown file [$tmpfile] in [${dir_out}/dataset_report_.html]." 
+    echo "  * Rendering RMarkdown file [$tmpfile] in [${dir_out}/dataset_report_.html]."
     cat <<EOF > $tmpfile
 require(rmarkdown)
-render( input="../datasets/eclipse_mls/mbox_csv_analysis.rmd", 
+render( input="../datasets/eclipse_mls/mbox_csv_analysis.rmd",
         output_dir="../datasets/eclipse_mls/" )
         output_file="mbox_csv_analysis.html" )
 EOF
@@ -79,7 +79,7 @@ EOF
     else
         Rscript $tmpfile >/dev/null 2>&1
     fi
-    
+
     echo "# Creating gzip archive eclipse_mls_full.csv.gz"
     gzip ../datasets/eclipse_mls/eclipse_mls_full.csv
 
@@ -89,31 +89,27 @@ fi
 
 if [ $run_mbox -eq 1 ]; then
     echo "# Anonymise mboxes.."
-    
+
     if [ -d scava_scrambled/ ]; then
-	rm -rf scava_scrambled/
+	    rm -rf scava_scrambled/
     fi
     mkdir -p scava_scrambled/
-    
-    for f in `ls ${dir_mbox}`; do 
-	echo "* Working on mbox $f"
-	pwd
-	ls
-	perl -Idata-anonymiser/code/ data-anonymiser/code/anonymise scramble -s $dir_session \
+
+    for f in `ls ${dir_mbox}`; do
+	    echo "* Working on mbox $f"
+      perl -Idata-anonymiser/code/ data-anonymiser/code/anonymise scramble -s $dir_session \
              -f ${dir_mbox}/$f -t scava_scrambled/${f}
 	gzip scava_scrambled/${f}
     done
-    
+
     if [ -d ../datasets/eclipse_mls/mboxes/ ]; then
-	rm -rf ../datasets/eclipse_mls/mboxes/
+	    rm -rf ../datasets/eclipse_mls/mboxes/
     fi
     mkdir -p ../datasets/eclipse_mls/mboxes/
-    
+
     echo "# Moving mls results to datasets directory..."
     mv scava_scrambled/* ../datasets/eclipse_mls/mboxes/
 fi
 
 echo "# Removing session directory [${dir_session}]."
 rm -rf $dir_session
-
-
