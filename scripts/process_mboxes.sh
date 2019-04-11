@@ -70,7 +70,7 @@ if [ $run_csv -eq 1 ]; then
     cat <<EOF > $tmpfile
 require(rmarkdown)
 render( input="../datasets/eclipse_mls/mbox_csv_analysis.rmd",
-        output_dir="../datasets/eclipse_mls/" )
+        output_dir="../datasets/eclipse_mls/",
         output_file="mbox_csv_analysis.html" )
 EOF
 
