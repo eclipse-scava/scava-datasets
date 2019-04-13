@@ -48,6 +48,8 @@ The [Eclipse Foundation](https://eclipse.org) provides individuals and organizat
 
 This dataset is a dump of all posts sent on all mailing lists hosted at the Eclipse Forge. Although this is public data (the mailing lists can be browsed on the [official mailman page](https://accounts.eclipse.org/mailing-list)) all data has been anonymised to prevent any misuse. The privacy issues identified, along with the anonymisation process, have been covered in a [dedicated document](../../docs/datasets_privacy.html).
 
+These files are published under the [Creative Commons BY-Attribution-Share Alike 4.0 (International) licence](https://creativecommons.org/licenses/by-sa/4.0/).
+
 The dataset is composed of two parts:
 
 * **eclipse_mls_full.csv** contains an extract of all the messages exchanged on the various mailing lists. The present document uses this CSV as input data.

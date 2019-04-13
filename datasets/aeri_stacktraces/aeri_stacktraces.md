@@ -10,6 +10,8 @@ This dataset is a dump of all records over a couple of years, with useful inform
 * **Incidents** When an exception occurs and is trapped by the AERI system, it constitutes an incident (or error report). An incident can be reported by several different people, can be reported multiple times, and can be linked to different environments.
 * **Problems** As soon as an error report arrives on the server, it will be analyzed and subsequently assigned to one or more problems. A problem thus represents a set of (similar) error reports which usually have the same root cause – for example a bug in your software. (Extract from the [AERI system documentation](https://www.codetrails.com/error-analytics/manual/concepts/error-reports-problems-bugs-projects.html))
 
+This dataset is published under the [Creative Commons BY-Attribution-Share Alike 4.0 (International) licence](https://creativecommons.org/licenses/by-sa/4.0/).
+
 
 ## Downloads
 
@@ -32,7 +34,7 @@ This dataset is a dump of all records over a couple of years, with useful inform
 **Documentation**
 
 * **Stacktraces Problems analysis document** [ [Download PDF](problems_analysis.pdf) | [Download Rmd](problems_analysis.rmd) ] -- A R Markdown document to analyse the Stacktraces problem dataset, with description of the actual content and examples of usage.
-* **Stacktraces Incidents analysis document** [ [Download PDF](incidents_analysis.pdf) | [Download Rmd](incidents_analysis.rmd) ] -- A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage. 
+* **Stacktraces Incidents analysis document** [ [Download PDF](incidents_analysis.pdf) | [Download Rmd](incidents_analysis.rmd) ] -- A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage.
 
 More information about the AERI system can be found on the [Code Trails website](https://www.codetrails.com/error-analytics/manual/).
 

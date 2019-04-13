@@ -72,6 +72,8 @@ url_sq_metrics <- paste( dir_in, project_id, "/", file_sq_metrics, sep="" )
 
 [Crossminer](https://crossminer.org) is EU-funded research project that aims at providing tailored recommendations for software practitionners. Its outputs include the [Scava Eclipse project](https://projects.eclipse.org/projects/technology.scava) and a set of public datasets extracted from a selection of representative Eclipse projects.
 
+These datasets are published under the [Creative Commons BY-Attribution-Share Alike 4.0 (International) licence](https://creativecommons.org/licenses/by-sa/4.0/).
+
 This report was generated on ``r Sys.Date()``.
 
 

@@ -5,6 +5,8 @@
 
 The [Eclipse Foundation](https://eclipse.org) provides individuals and organizations with a commercially focused environment for open source software innovation. It includes git repositories, reviews, issues management, continuous integration, forums and mailing lists among other services. Many well-known and widely used projects are hosted on the forge, including the Eclipse IDE itself, several projects about IoT, modeling, and the new Java working group.
 
+This dataset is published under the [Creative Commons BY-Attribution-Share Alike 4.0 (International) licence](https://creativecommons.org/licenses/by-sa/4.0/).
+
 ## The CSV extract
 
 This dataset is a dump of all posts sent on all mailing lists hosted at the Eclipse Forge. It only includes the list name, post ID, sent date, author name and address, and post subject. the body of messages is dismissed.

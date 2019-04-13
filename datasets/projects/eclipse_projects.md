@@ -5,6 +5,8 @@ This is the list of all Eclipse projects datasets published for Eclipse Scava. E
 * Compressed (gzip'd) CSV and JSON files.
 * A R Markdown document that analyses the extracted files and provides some hints about how to use them. This document also serves as a validation step to identify empty or inconsistent datasets.
 
+These datasets are published under the [Creative Commons BY-Attribution-Share Alike 4.0 (International) licence](https://creativecommons.org/licenses/by-sa/4.0/).
+
 
 ## Eclipse Andmore
 
