@@ -41,7 +41,7 @@ pipeline {
             scp -r aeri_stacktraces/* genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/datasets/aeri_stacktraces/
 
             scp -r docs/data_transformation.png genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/docs/
-            scp -r docs/scava-header.jpg genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/docs/
+            scp -r docs/scava-header.jpg genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/
           '''
         }
       }
