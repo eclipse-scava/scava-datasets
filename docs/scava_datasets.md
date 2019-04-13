@@ -41,7 +41,7 @@ Last update of the dataset occured on 2018-02-11.
 **Documentation**
 
 * **Stacktraces Problems analysis document** [ [Download PDF](aeri_stacktraces/problems_analysis.pdf) | [Download Rmd](aeri_stacktraces/problems_analysis.rmd) ] -- A R Markdown document to analyse the Stacktraces problem dataset, with description of the actual content and examples of usage.
-* **Stacktraces Incidents analysis document** [ [Download PDF](aeri_stacktraces/incidents_analysis.pdf) | [Download Rmd](aeri_stacktraces/incidents_analysis.rmd) ] -- A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage. This is the PDF export.
+* **Stacktraces Incidents analysis document** [ [Download PDF](aeri_stacktraces/incidents_analysis.pdf) | [Download Rmd](aeri_stacktraces/incidents_analysis.rmd) ] -- A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage.
 
 More information about the AERI system can be found on the [Code Trails website](https://www.codetrails.com/error-analytics/manual/).
 
@@ -52,6 +52,6 @@ The [Eclipse Mailing lists](eclipse_mls/eclipse_mls.html) dump is an extract of 
 
 * Download the **Eclipse mailing lists dataset** [ [CSV](eclipse_mls/eclipse_mls.gz) ].
 * Check the **documentation** for the dataset [here (HTML)](eclipse_mls/mbox_csv_analysis.html). For reproducibility we also provide the [R Markdown document](eclipse_mls/mbox_csv_analysis.rmd) for the dataset analysis and documentation.
-* Download the **mbox files** [ [see the list](eclipse_mls/mbox_list.html) ]
+* Download the **mbox files** [ [see the list](eclipse_mls/eclipse_mls.html#project-mboxes) ]
 
 More information can be found on the official [Eclipse page for mailing lists](https://accounts.eclipse.org/mailing-list).
