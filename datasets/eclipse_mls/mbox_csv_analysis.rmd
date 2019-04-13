@@ -46,18 +46,14 @@ Sys.setenv("plotly_api_key"="uewufFf4T6NTGwbU6uS5")
 
 The [Eclipse Foundation](https://eclipse.org) provides individuals and organizations with a commercially focused environment for open source software innovation. It includes git repositories, reviews, issues management, continuous integration, forums and mailing lists among other services. Many well-known and widely used projects are hosted on the forge, including the Eclipse IDE itself, The new Java working group, 
 
-This dataset is a dump of all posts sent on all mailing lists hosted at the Eclipse Forge. Although this is public data (the mailing lists can be browsed on the [official mailman page](https://accounts.eclipse.org/mailing-list)) all data has been anonymised to prevent any misuse.
-The privacy issues identified, along with the anonymisation process, have been covered in a [dedicated document](../../docs/datasets_privacy.html).
+This dataset is a dump of all posts sent on all mailing lists hosted at the Eclipse Forge. Although this is public data (the mailing lists can be browsed on the [official mailman page](https://accounts.eclipse.org/mailing-list)) all data has been anonymised to prevent any misuse. The privacy issues identified, along with the anonymisation process, have been covered in a [dedicated document](../../docs/datasets_privacy.html).
 
 The dataset is composed of two parts:
 
 * **eclipse_mls_full.csv** contains an extract of all the messages exchanged on the various mailing lists. The present document uses this CSV as input data.
-* The **full list of mboxes**, one file per mailing list. They can be downloaded from
+* The **full list of mboxes**, one file per mailing list. They can be downloaded directly from the [mboxes subdirectory](mboxes/).
 
 All of them are updated weekly at 2am on Saturdays.
-
-## Downloads
-
 
 
 ## Basic summary
