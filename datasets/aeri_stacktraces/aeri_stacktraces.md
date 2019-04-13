@@ -32,7 +32,7 @@ This dataset is a dump of all records over a couple of years, with useful inform
 **Documentation**
 
 * **Stacktraces Problems analysis document** [ [Download PDF](problems_analysis.pdf) | [Download Rmd](problems_analysis.rmd) ] -- A R Markdown document to analyse the Stacktraces problem dataset, with description of the actual content and examples of usage.
-* **Stacktraces Incidents analysis document** [ [Download PDF](incidents_analysis.pdf) | [Download Rmd](incidents_analysis.rmd) ] -- A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage. This is the PDF export.
+* **Stacktraces Incidents analysis document** [ [Download PDF](incidents_analysis.pdf) | [Download Rmd](incidents_analysis.rmd) ] -- A R Markdown document to analyse the Stacktraces incidents dataset, with description of the actual content and examples of usage. 
 
 More information about the AERI system can be found on the [Code Trails website](https://www.codetrails.com/error-analytics/manual/).
 
