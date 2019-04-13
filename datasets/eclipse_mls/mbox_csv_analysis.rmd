@@ -53,7 +53,7 @@ The dataset is composed of two parts:
 * **eclipse_mls_full.csv** contains an extract of all the messages exchanged on the various mailing lists. The present document uses this CSV as input data.
 * The **full list of mboxes**, one file per mailing list. They can be downloaded directly from the [mboxes subdirectory](mboxes/).
 
-All of them are updated weekly at 2am on Saturdays.
+All of them are updated weekly at 2am on Sunday.
 
 
 ## Basic summary

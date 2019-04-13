@@ -17,7 +17,7 @@ We generate full data extracts of a [set of Eclipse projects](projects/eclipse_p
 * [PMI](https://projects.eclipse.org) checks,
 * Static Code Analysis ([SonarQube](https://sonar.eclipse.org)).
 
-These datasets are updated weekly, at 2am on Saturday.
+These datasets are updated weekly, at 2am on Sunday.
 
 **Downloads**
 
