@@ -55,18 +55,49 @@ if [ $run_csv -eq 1 ]; then
     done
 
     # Generate a single big file with all csv's
+    echo "# Regenerating big CSV file.."
     cat headers.init > eclipse_mls_full.csv
     cat csv/*.csv >> eclipse_mls_full.csv
-
+	
+    echo "# Checking file eclipse_mls_full.csv is in current dir.."
+	if [ -e eclipse_mls_full.csv ]; then
+	    echo "  'eclipse_mls_full.csv' found in dir ["`pwd`"]"
+	else 
+	    echo "  'eclipse_mls_full.csv' NOT found in dir ["`pwd`"]"
+		echo "  Listing of files in current directory: "
+		ls
+		exit 4
+	fi
+	
     echo "# Anonymising csv dataset"
     perl -Idata-anonymiser/code/ anonymise_csv.pl eclipse_mls_full.csv
+	
+    echo "# Checking file eclipse_mls_clean.csv is in current dir.."
+	if [ -e eclipse_mls_clean.csv ]; then
+	    echo "  'eclipse_mls_clean.csv' found in dir ["`pwd`"]"
+	else 
+	    echo "  'eclipse_mls_clean.csv' NOT found in dir ["`pwd`"]"
+		echo "  Listing of files in current directory: "
+		ls
+		exit 4
+	fi
 
     echo "# Moving eclipse_mls_full.csv to datasets directory..."
     mv eclipse_mls_clean.csv ../datasets/eclipse_mls/eclipse_mls_full.csv
+	
+    echo "# Checking file eclipse_mls_full.csv is in datasets/eclipse_mls..."
+	if [ -e ../datasets/eclipse_mls/eclipse_mls_full.csv ]; then
+	    echo "  'eclipse_mls_full.csv' found in dir ["`pwd`"/../datasets/eclipse_mls/]"
+	else 
+	    echo "  'eclipse_mls_full.csv' NOT found in dir ["`pwd`"/../datasets/eclipse_mls/]"
+		echo "  Listing of files in directory: "
+		ls ../datasets/eclipse_mls/
+		exit 4
+	fi
 
     echo "# Executing R Markdown document."
     tmpfile=$(mktemp /tmp/r_extract_project.XXXXXX.r)
-    echo "  * Rendering RMarkdown file [$tmpfile] in [${dir_out}/dataset_report_.html]."
+    echo "  * Rendering RMarkdown file [$tmpfile] in [../datasets/eclipse_mls/]."
     cat <<EOF > $tmpfile
 require(rmarkdown)
 render( input="../datasets/eclipse_mls/mbox_csv_analysis.rmd",
@@ -82,6 +113,16 @@ EOF
 
     echo "# Creating gzip archive eclipse_mls_full.csv.gz"
     gzip ../datasets/eclipse_mls/eclipse_mls_full.csv
+	
+    echo "# Checking file eclipse_mls_full.csv.gz is in datasets/eclipse_mls..."
+	if [ -e ../datasets/eclipse_mls/eclipse_mls_full.csv.gz ]; then
+	    echo "  'eclipse_mls_full.csv.gz' found in dir ["`pwd`"/../datasets/eclipse_mls/]"
+	else 
+	    echo "  'eclipse_mls_full.csv.gz' NOT found in dir ["`pwd`"/../datasets/eclipse_mls/]"
+		echo "  Listing of files in directory: "
+		ls ../datasets/eclipse_mls/
+		exit 4
+	fi
 
     echo "# Cleaning workspace"
     rm -rf csv/
