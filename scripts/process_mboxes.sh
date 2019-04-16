@@ -83,7 +83,7 @@ if [ $run_csv -eq 1 ]; then
 	fi
 
     echo "# Moving eclipse_mls_full.csv to datasets directory..."
-    mv eclipse_mls_clean.csv ../datasets/eclipse_mls/eclipse_mls_full.csv
+    mv eclipse_mls_full_out.csv ../datasets/eclipse_mls/eclipse_mls_full.csv
 	
     echo "# Checking file eclipse_mls_full.csv is in datasets/eclipse_mls..."
 	if [ -e ../datasets/eclipse_mls/eclipse_mls_full.csv ]; then
