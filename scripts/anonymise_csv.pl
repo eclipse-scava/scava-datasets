@@ -40,8 +40,14 @@ Examples:
 EOU
 
 my $file_csv = shift or die $usage;
-my $file_out = 'eclipse_mls_clean.csv';
 
+my $file_out; 
+if ( $file_csv =~ m!^(.+)\.csv$! ) {
+    $file_out = $1 . "_out.csv";
+} else {
+    $file_out = $file_csv . "_out.csv";
+}
+    
 my $stats = 0;
 
 print "# $0 \n";
@@ -79,26 +85,37 @@ open(my $fh, '<', $file_csv) or die "Could not open '$file_csv' $!\n";
 my $line = <$fh>;
 print "Removed first line: $line.\n";
 
+my $c = 0;
 while ($line = <$fh>) {
   chomp $line; 
-  if ($csv_in->parse($line)) {
-      my @fields_in = $csv_in->fields();
-      my @fields_out;
-      # remove '.mbox' from list
-      $fields_in[0] =~ m!^(\S+)\.mbox$!;
-      $fields_out[0] = $1 || 'UNKNOWN';
-      # Scramble fields
-      $fields_out[1] = $anon->scramble_email($fields_in[1]) || 'UNKNOWN';
-      $fields_out[2] = $fields_in[2];
-      $fields_out[3] = $fields_in[3];
-      $fields_out[4] = $anon->scramble_string($fields_in[4]) || 'UNKNOWN';
-      $fields_out[5] = $anon->scramble_email($fields_in[5]) || 'UNKNOWN';      
-      $csv_out->combine(@fields_out);
-      $csv_str .= $csv_out->string() . "\n";
-      $stats++;
-  } else {
+  eval {
+      if ($csv_in->parse($line)) {
+          my @fields_in = $csv_in->fields();
+          my @fields_out;
+          # remove '.mbox' from list
+          $fields_in[0] =~ m!^(\S+)\.mbox$!;
+          $fields_out[0] = $1 || 'UNKNOWN';
+          # Scramble fields
+          $fields_out[1] = $anon->scramble_email($fields_in[1]) || 'UNKNOWN';
+          $fields_out[2] = $fields_in[2];
+          $fields_out[3] = $fields_in[3];
+          $fields_out[4] = $anon->scramble_string($fields_in[4]) || 'UNKNOWN';
+          $fields_out[5] = $anon->scramble_email($fields_in[5]) || 'UNKNOWN';      
+          $csv_out->combine(@fields_out);
+          $csv_str .= $csv_out->string() . "\n";
+          $stats++;
+      } else {
+          warn "Line could not be parsed: $line\n";
+      }
+      if ( ++$c % 1000 == 0) {
+          print "\nProcessed $c messages.. ";
+      } else {
+          print "*";
+      }
+    };
+    if ($@) {
       warn "Line could not be parsed: $line\n";
-  }
+    }
 }
 close($fh);
 
