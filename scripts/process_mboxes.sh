@@ -71,12 +71,13 @@ if [ $run_csv -eq 1 ]; then
 	
     echo "# Anonymising csv dataset"
     perl -Idata-anonymiser/code/ anonymise_csv.pl eclipse_mls_full.csv
-	
-    echo "# Checking file eclipse_mls_clean.csv is in current dir.."
-	if [ -e eclipse_mls_clean.csv ]; then
-	    echo "  'eclipse_mls_clean.csv' found in dir ["`pwd`"]"
+    rm eclipse_mls_full.csv
+    
+    echo "# Checking file eclipse_mls_full_out.csv is in current dir.."
+	if [ -e eclipse_mls_full_out.csv ]; then
+	    echo "  'eclipse_mls_full_out.csv' found in dir ["`pwd`"]"
 	else 
-	    echo "  'eclipse_mls_clean.csv' NOT found in dir ["`pwd`"]"
+	    echo "  'eclipse_mls_full_out.csv' NOT found in dir ["`pwd`"]"
 		echo "  Listing of files in current directory: "
 		ls
 		exit 4
