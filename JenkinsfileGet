@@ -17,6 +17,7 @@ pipeline {
         sh '''
           rm /data/eclipse_mls/*.mbox.lock || echo "No mbox lock found."
           rsync -avlp -e ssh --rsh="/usr/bin/sshpass -p ${SYS_RSYNC_PASSWD} ssh -o StrictHostKeyChecking=no -l bbaldassari2kd" build.eclipse.org:/opt/public/download-staging.priv/scava/ /data/eclipse_mls/ || echo "Rsync had issues. But the show must go on, right?"
+          chmod 777 /data/eclipse_mls/*
           cd scripts/ && sh ./process_mboxes.sh
         ''' 
       }
