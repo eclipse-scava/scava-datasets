@@ -12,16 +12,16 @@ pipeline {
     stage('Retrieve Documentation') {
       steps {
         sh '''        
-          wget http://ci6.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/docs/*zip*/docs.zip -O docs.zip
+          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/docs/*zip*/docs.zip -O docs.zip
           unzip -o docs.zip
         
-          wget http://ci6.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/projects/*zip*/projects.zip -O projects.zip
+          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/projects/*zip*/projects.zip -O projects.zip
           unzip -o projects.zip
 
-          wget http://ci6.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/aeri_stacktraces/*zip*/aeri_stacktraces.zip -O aeri_stacktraces.zip
+          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/aeri_stacktraces/*zip*/aeri_stacktraces.zip -O aeri_stacktraces.zip
           unzip -o aeri_stacktraces.zip
 
-          wget http://ci6.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/*zip*/eclipse_mls.zip -O eclipse_mls.zip
+          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/*zip*/eclipse_mls.zip -O eclipse_mls.zip
           unzip -o eclipse_mls.zip
         '''
       }
