@@ -6,6 +6,9 @@ output:
   pdf_document:
     toc: yes
     toc_depth: 3
+    keep_tex: true
+    extra_dependencies:
+      - tikz
   html_document:
     toc: yes
     toc_depth: 2
