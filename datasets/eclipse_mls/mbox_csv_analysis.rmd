@@ -33,6 +33,7 @@ project.csv$Company <- substr(x = project.csv$sender_addr, 18, 33)
 
 # Create xts object
 require(xts)
+require(parsedate)
 project.xts <- xts(x = project.csv, order.by = parse_iso_8601(project.csv$sent_at))
 
 # Initialise plotly
