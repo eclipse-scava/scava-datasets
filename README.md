@@ -20,3 +20,11 @@ The `scripts` folder contains the code for the extraction, anonymisation and pub
 Every dataset, once generated, is fed to a R Markdown document for analysis. This serves both as a test (check if values seem consistent) and as a presentation of the data through plots and tables.
 
 The R Markdown files are located in the `report` folder.
+
+## Prerequisites
+
+Perl:
+
+```
+* cpanm Mail::Box::Manager Text::CSV DateTime::Format::Strptime Encoding::FixLatin
+```
