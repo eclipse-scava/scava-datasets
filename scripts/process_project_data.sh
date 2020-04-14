@@ -49,7 +49,7 @@ echo "  Working on project $proj."
 echo "  * Cleaning workspace."
 rm -f ${dir_out}/*
  
-base_url="https://eclipse.alambic.io/projects/$proj"
+base_url="http://eclipse.alambic.io:3010/projects/$proj"
 echo "  Using Base URL [${base_url}]."
 
 echo "  * Retrieve data.."
