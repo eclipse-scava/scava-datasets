@@ -79,46 +79,6 @@ curl -f0 -s -o ${dir_out}/sq_issues_critical.csv ${base_url}/SonarQube45/sq_issu
 curl -f0 -s -o ${dir_out}/sq_issues_major.csv ${base_url}/SonarQube45/sq_issues_major.csv
 curl -f0 -s -o ${dir_out}/sq_metrics.csv ${base_url}/SonarQube45/sq_metrics.csv
 
-echo "  * Anonymise data."
-
-echo "    - Scramble Git commits files."
-anonymise ${dir_out}/git_log.txt
-
-echo "    - Scramble names in Git log."
-sed -E 's/Signed-off-by: [^<]+/Signed-off-by: XXXXXXXX /' < ${dir_out}/git_log.txt > ${dir_out}/git_log.txt.1
-sed -E 's/^Author: [^<]+/Author: XXXXXXXX /' < ${dir_out}/git_log.txt.1 > ${dir_out}/git_log.txt
-rm ${dir_out}/git_log.txt.1
-
-echo "    - Scramble Bugzilla files"
-if [ -f ${dir_out}/bugzilla_issues.csv ]; then  
-    echo "      ${dir_out}/bugzilla_issues.csv"
-    anonymise ${dir_out}/bugzilla_issues.csv
-fi
-if [ -f ${dir_out}/bugzilla_issues_open.csv ]; then  
-    echo "      ${dir_out}/bugzilla_issues_open.csv"
-    anonymise ${dir_out}/bugzilla_issues_open.csv
-fi
-
-echo "    - Scramble EclipseForums files"
-if [ -f ${dir_out}/eclipse_forums_posts.csv ]; then  
-    echo "      ${dir_out}/eclipse_forums_posts.csv"
-    anonymise ${dir_out}/eclipse_forums_posts.csv
-fi
-if [ -f ${dir_out}/eclipse_forums_threads.csv ]; then  
-    echo "      ${dir_out}/eclipse_forums_threads.csv"
-    anonymise ${dir_out}/eclipse_forums_threads.csv
-fi
-
-echo "    - Scramble EclipsePMI files"
-if [ -f ${dir_out}/eclipse_pmi_checks.csv ]; then 
-    echo "      ${dir_out}/eclipse_pmi_checks.csv"
-    anonymise ${dir_out}/eclipse_pmi_checks.csv
-fi
-if [ -f ${dir_out}/eclipse_pmi_checks.json ]; then 
-    echo "      ${dir_out}/eclipse_pmi_checks.json"
-    anonymise ${dir_out}/eclipse_pmi_checks.json 
-fi
-
 
 tmpfile=$(mktemp /tmp/r_extract_project.XXXXXX.r)
 echo "  * Rendering RMarkdown file [$tmpfile] in [${dir_out}/dataset_report_$proj.html]." 
