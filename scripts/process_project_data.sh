@@ -19,30 +19,16 @@ else
     exit 4
 fi
 
-export PERL5LIB=./data-anonymiser/code/:$PERL5LIB
-
 verbose=false
 
 dir_out="projects/$proj"
 mkdir -p $dir_out
 
-dir_anon="data-anonymiser"
 DATE=`date +%Y-%m-%d`
 dir_session=/tmp/r_extract_project_${DATE}.session
 
 time_start=`date "+%Y-%m-%d %H:%M:%S"`
 
-# Checking that we have the anonymiser utility available.
-if [ ! -e ${dir_anon}/code/anonymise ]; then
-    echo "ERROR: Cannot find [${dir_anon}/code/anonymise]. Quitting."
-    exit 4
-fi
-
-anonymise() {
-    filein=$1
-    mv ${filein} ${filein}.orig
-    ${dir_anon}/code/anonymise -q scramble -s ${dir_session} -f ${filein}.orig -t $filein
-}
 
 echo "# Script started on ${time_start}."
 echo "  Working on project $proj."
@@ -99,9 +85,6 @@ echo "  * Compressing files."
 find ${dir_out} -name "*.csv" -exec gzip -k {} \;
 find ${dir_out} -name "*.json" -exec gzip -k {} \;
 find ${dir_out} -name "*.txt" -exec gzip -k {} \;
-
-echo "  * Removing clear files."  
-find ${dir_out} -name "*.orig" -exec rm {} \;
 
 
 #rm $tmpfile
