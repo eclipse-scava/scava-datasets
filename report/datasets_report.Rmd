@@ -106,7 +106,7 @@ List of datasets generated for the project:
 
 `r if(file.exists(url_git_commits)){paste("
 * [Git](#git)
-    - [Git Commits](#git_commits) -- list of all commits recorded in git. [ [Download CSV](", 
+    - [Git Commits](#git_commits) -- Evolution of number of commits and authors by day. [ [Download CSV](", 
     file_git_commits, 
     ".gz) ]
     - [Git Log](#git_log) -- the raw export of git log. [ [Download TXT](", 
