@@ -25,7 +25,7 @@ pipeline {
 
           wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/eclipse_mls_full.csv.gz -O eclipse_mls/eclipse_mls_full.csv.gz
           wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/eclipse_mls.html -O eclipse_mls/eclipse_mls.html
-          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/mbox_csv_analysis.htm -O eclipse_mls/mbox_csv_analysis.html	
+          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/mbox_csv_analysis.html -O eclipse_mls/mbox_csv_analysis.html	
           wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/mbox_csv_analysis.rmd -O eclipse_mls/mbox_csv_analysis.rmd
 
           for project in `cat scripts/list_projects.txt`; do 
