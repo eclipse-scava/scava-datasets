@@ -82,8 +82,6 @@ pipeline {
             sh '''
               ssh genie.scava@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/scava/datasets/eclipse_mls/
               ssh genie.scava@projects-storage.eclipse.org mkdir -p /home/data/httpd/download.eclipse.org/scava/datasets/eclipse_mls/
-
-              wget https://castalia.camp/dl/datasets/eclipse_mls.gz -O eclipse_mls/eclipse_mls.gz
              
               scp -r eclipse_mls/* genie.scava@projects-storage.eclipse.org:/home/data/httpd/download.eclipse.org/scava/datasets/eclipse_mls/
             '''
