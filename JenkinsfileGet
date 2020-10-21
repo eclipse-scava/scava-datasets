@@ -23,6 +23,7 @@ pipeline {
           perl -v 
           Rscript --version
           cd scripts/ && sh ./process_mboxes.sh
+          ls /data/eclipse_mls/ > ../datasets/eclipse_mls/list_mboxes.txt
         ''' 
       }
     }
@@ -45,6 +46,7 @@ pipeline {
         archiveArtifacts artifacts: 'datasets/**/*.html', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.pdf', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.rmd', fingerprint: true 
+        archiveArtifacts artifacts: 'datasets/**/*.txt', fingerprint: true 
         archiveArtifacts artifacts: 'docs/*', fingerprint: true 
         cleanWs()
       }
