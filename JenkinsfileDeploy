@@ -30,7 +30,7 @@ pipeline {
 
           wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/list_mboxes.txt -O eclipse_mls/list_mboxes.txt
           for mbox in `cat eclipse_mls/list_mboxes.txt`; do 
-            wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/mboxes/${mbox}.gz -O eclipse_mls/mboxes/${mox}.gz
+            wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/mboxes/${mbox}.gz -O eclipse_mls/mboxes/${mbox}.gz
           done
         '''
       }
