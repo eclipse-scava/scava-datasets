@@ -21,8 +21,16 @@ pipeline {
           wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/aeri_stacktraces/*zip*/aeri_stacktraces.zip -O aeri_stacktraces.zip
           unzip -o aeri_stacktraces.zip
 
-          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/*zip*/eclipse_mls.zip -O eclipse_mls.zip
-          unzip -o eclipse_mls.zip
+          mkdir -p eclipse_mls/mboxes
+
+          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/eclipse_mls_full.csv.gz -O eclipse_mls/eclipse_mls_full.csv.gz
+          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/eclipse_mls.html -O eclipse_mls/eclipse_mls.html
+          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/mbox_csv_analysis.htm -O eclipse_mls/mbox_csv_analysis.html	
+          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/mbox_csv_analysis.rmd -O eclipse_mls/mbox_csv_analysis.rmd
+
+          for project in `cat scripts/list_projects.txt`; do 
+            wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/mboxes/${project}.mbox.gz -O eclipse_mls/mboxes/${project}.mbox.gz
+          done
         '''
       }
     }
@@ -87,6 +95,7 @@ pipeline {
         sshagent ( ['projects-storage.eclipse.org-bot-ssh']) {
           sh '''
             ssh genie.scava@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/scava/datasets/projects/
+            ssh genie.scava@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/scava/projects/
             ssh genie.scava@projects-storage.eclipse.org mkdir -p /home/data/httpd/download.eclipse.org/scava/datasets/projects/
 
             ssh genie.scava@projects-storage.eclipse.org ls -R /home/data/httpd/download.eclipse.org/scava/
