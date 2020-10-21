@@ -28,8 +28,9 @@ pipeline {
           wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/mbox_csv_analysis.html -O eclipse_mls/mbox_csv_analysis.html	
           wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/mbox_csv_analysis.rmd -O eclipse_mls/mbox_csv_analysis.rmd
 
-          for project in `cat scripts/list_projects.txt`; do 
-            wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/mboxes/${project}.mbox.gz -O eclipse_mls/mboxes/${project}.mbox.gz
+          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/list_mboxes.txt -O eclipse_mls/list_mboxes.txt
+          for mbox in `cat eclipse_mls/list_mboxes.txt`; do 
+            wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/mboxes/${mbox} -O eclipse_mls/mboxes/${mox}
           done
         '''
       }
