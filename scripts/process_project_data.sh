@@ -19,7 +19,7 @@ else
     exit 4
 fi
 
-verbose=false
+verbose=1
 
 dir_out="projects/$proj"
 mkdir -p $dir_out
@@ -35,14 +35,15 @@ echo "  Working on project $proj."
 echo "  * Cleaning workspace."
 rm -f ${dir_out}/*
  
-base_url="http://eclipse.alambic.io:3010/projects/$proj"
+base_url="https://eclipse.alambic.io/projects/$proj"
 echo "  Using Base URL [${base_url}]."
 
 echo "  * Retrieve data.."
 
 echo "    - Get Git commits."
-curl -f0 -s -o ${dir_out}/git_commits_evol.csv ${base_url}/Git/git_commits.csv
+curl -f0 -s -o ${dir_out}/git_commits_evol.csv ${base_url}/Git/git_commits_evol.csv
 curl -f0 -s -o ${dir_out}/git_log.txt ${base_url}/Git/import_git.txt
+curl -f0 -s -o ${dir_out}/git_commits.csv ${base_url}/Git/git_commits.csv
  
 echo "    - Get Bugzilla issues."
 curl -f0 -s -o ${dir_out}/bugzilla_evol.csv ${base_url}/Bugzilla/bugzilla_evol.csv
