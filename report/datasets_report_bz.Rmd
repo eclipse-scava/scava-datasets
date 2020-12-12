@@ -33,9 +33,18 @@ File is [``r file_bz_evol``](`r file_bz_evol`), and has ``r ncol(data)`` columns
 
 ```{r bz_evol_viz}
 data.xts <- xts(x = data, order.by = as.POSIXct(data$date))
-data.monthly <- apply.monthly(x=data.xts, FUN = nrow)
 
-p <-dygraph(data.monthly[,1],
+time.min <- index(data.xts[1,])
+time.max <- index(data.xts[nrow(data.xts)])
+all.dates <- seq(time.min, time.max, by="days")
+empty <- xts(order.by = all.dates)
+
+merged.data <- merge(empty, data.xts$issues_created, all=T)
+merged.data[is.na(merged.data) == T] <- 0
+
+data.monthly <- apply.monthly(x=merged.data, FUN = sum)
+
+p <-dygraph(data.monthly[-1,1],
         main = paste('Monthly issues submissions for ', project_id, sep=''),
         width = "750px", height = 250 ) %>%
       dyRangeSelector()

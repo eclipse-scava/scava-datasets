@@ -21,8 +21,11 @@ project_id <- params$project_id
 
 dir_in <- "../scripts/projects/"
 
-file_git_commits <- "git_commits_evol.csv"
+file_git_commits <- "git_commits.csv"
 url_git_commits <- paste( dir_in, project_id, "/", file_git_commits, sep="" )
+
+file_git_commits_evol <- "git_commits_evol.csv"
+url_git_commits_evol <- paste( dir_in, project_id, "/", file_git_commits_evol, sep="" )
 
 file_git_log <- "git_log.txt"
 url_git_log <- paste( dir_in, project_id, "/", file_git_log, sep="" )
@@ -106,8 +109,11 @@ List of datasets generated for the project:
 
 `r if(file.exists(url_git_commits)){paste("
 * [Git](#git)
-    - [Git Commits](#git_commits) -- Evolution of number of commits and authors by day. [ [Download CSV](", 
+    - [Git Commits](#git_commits) -- Full list of commits withid, message, time, author, committer, and added, deleted and modifed lines. [ [Download CSV](", 
     file_git_commits, 
+    ".gz) ]
+    - [Git Commits Evol](#git_commits_evol) -- Evolution of number of commits and authors by day. [ [Download CSV](", 
+    file_git_commits_evol, 
     ".gz) ]
     - [Git Log](#git_log) -- the raw export of git log. [ [Download TXT](", 
     file_git_log, 

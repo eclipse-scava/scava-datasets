@@ -3,19 +3,27 @@
 
 ### <a name="git_commits"></a> Git commits
 
-**Download**: [`r file_git_commits`.gz](`r file_git_commits`.gz)
+**Download**: [`r file_git_commits_evol`.gz](`r file_git_commits_evol`.gz)
 
-```{r git_commits}
-data <- read.csv(file=url_git_commits, header=T)
+```{r git_commits_evol}
+data <- read.csv(file=url_git_commits_evol, header=T)
 ```
 
-File is [``r file_git_commits``](`r file_git_commits`), and has ``r ncol(data)`` columns for ``r nrow(data)`` commits.
+File is [``r file_git_commits_evol``](`r file_git_commits_evol`.gz), and has ``r ncol(data)`` columns for ``r nrow(data)`` entries.
 
 ```{r git_commits_viz}
 data$commits_sum <- cumsum(data$commits)
 data.xts <- xts(x = data[,c('commits_sum', 'commits', 'authors')], order.by=as.POSIXct(as.character(data[,c('date')]), format="%Y-%m-%d"))
 
-p <-dygraph(data.xts[,c('commits')],
+time.min <- index(data.xts[1,])
+time.max <- index(data.xts[nrow(data.xts)])
+all.dates <- seq(time.min, time.max, by="days")
+empty <- xts(order.by = all.dates)
+
+merged.data <- merge(empty, data.xts, all=T)
+merged.data[is.na(merged.data) == T] <- 0
+
+p <-dygraph(merged.data[,c('commits')],
         main = paste('Daily commits for ', project_id, sep=''),
         width = 800, height = 250 ) %>%
       dyRangeSelector()
