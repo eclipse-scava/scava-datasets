@@ -44,6 +44,7 @@ done
 
 echo "# Moving projects to datasets directory..."
 mv projects/* ../datasets/projects/
+cp list_projects.txt ../datasets/projects/
 
 echo "# Removing session directory [${dir_session}]."
 rm -rf $dir_session

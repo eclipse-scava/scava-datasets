@@ -9,17 +9,20 @@ pipeline {
       }
     }
 
-    stage('Retrieve Documentation') {
+    stage('Retrieve Data') {
       steps {
         sh '''        
           wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/docs/*zip*/docs.zip -O docs.zip
           unzip -o docs.zip
-        
-          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/projects/*zip*/projects.zip -O projects.zip
-          unzip -o projects.zip
+          
+          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/eclipse_mls/list_projects.txt -O projects/list_projects.txt 
+          for p in `cat projects/list_projects.txt`; do 
+              wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/projects/$p/*zip*/$p.zip -O projects/$p.zip
+              unzip -d projects/ -o projects/$p.zip
+          done
 
-          wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/aeri_stacktraces/*zip*/aeri_stacktraces.zip -O aeri_stacktraces.zip
-          unzip -o aeri_stacktraces.zip
+          #wget http://ci4.castalia.camp:8080/job/scava-datasets/lastSuccessfulBuild/artifact/datasets/aeri_stacktraces/*zip*/aeri_stacktraces.zip -O aeri_stacktraces.zip
+          #unzip -o aeri_stacktraces.zip
 
           mkdir -p eclipse_mls/mboxes
 
