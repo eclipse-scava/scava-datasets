@@ -42,6 +42,7 @@ pipeline {
     }
     stage('Archiving') {
       steps {
+        archiveArtifacts artifacts: 'datasets/**/_files/**/*.*', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.gz', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.html', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.pdf', fingerprint: true 
