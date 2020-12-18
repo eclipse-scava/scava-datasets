@@ -19,7 +19,10 @@ else
     exit 4
 fi
 
-verbose=1
+verbose=0
+if [ "$verbose" -eq 1 ]; then
+  echo "Verbose mode on"
+fi
 
 dir_out="projects/$proj"
 mkdir -p $dir_out
@@ -33,10 +36,10 @@ time_start=`date "+%Y-%m-%d %H:%M:%S"`
 echo "# Script started on ${time_start}."
 echo "  Working on project $proj."
 echo "  * Cleaning workspace."
-rm -f ${dir_out}/*
+rm -rf ${dir_out}/*
  
 base_url="https://eclipse.alambic.io/projects/$proj"
-echo "  Using Base URL [${base_url}]."
+echo "    Using Base URL [${base_url}]."
 
 echo "  * Retrieve data.."
 
@@ -72,11 +75,12 @@ echo "  * Rendering RMarkdown file [$tmpfile] in [${dir_out}/dataset_report_$pro
 cat <<EOF > $tmpfile
 require(rmarkdown)
 render("../report/datasets_report.Rmd", 
-	output_file="../scripts/${dir_out}/dataset_report_$proj.html",
+        output_file="dataset_report_$proj.html",
+	output_dir="../scripts/${dir_out}/",
 	params = list(project_id = "$proj"))
 EOF
 
-if [ "$verbose" = true ]; then
+if [ "$verbose" -eq 1 ]; then
     Rscript $tmpfile
 else
     Rscript $tmpfile >/dev/null 2>&1
