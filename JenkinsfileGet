@@ -12,7 +12,7 @@ pipeline {
         git url: 'https://github.com/eclipse-scava/scava-datasets.git'
       }
     }
-    stage('Build mboxes') {
+    /* stage('Build mboxes') {
       steps {
         sh '''
           rm /data/eclipse_mls/*.mbox.lock || echo "No mbox lock found."
@@ -26,7 +26,7 @@ pipeline {
           ls /data/eclipse_mls/ > ../datasets/eclipse_mls/list_mboxes.txt
         ''' 
       }
-    }
+    } */
     stage('Build projects') {
       steps {
         sh '''
@@ -42,7 +42,7 @@ pipeline {
     }
     stage('Archiving') {
       steps {
-        archiveArtifacts artifacts: 'datasets/**/_files/**/*.*', fingerprint: true 
+        archiveArtifacts artifacts: 'datasets/**/*_files/**/*.*', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.gz', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.html', fingerprint: true 
         archiveArtifacts artifacts: 'datasets/**/*.pdf', fingerprint: true 
