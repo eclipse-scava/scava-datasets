@@ -3,9 +3,7 @@ title: "Report on datasets"
 output:
   html_document:
     df_print: paged
-  html_notebook:
-    echo: no
-    self_contained: yes
+    self_contained: false
 params:
   project_id: "modeling.sirius"
 ---
@@ -65,7 +63,6 @@ url_sq_issues_major <- paste( dir_in, project_id, "/", file_sq_issues_major, sep
 
 file_sq_metrics <- "sq_metrics.csv"
 url_sq_metrics <- paste( dir_in, project_id, "/", file_sq_metrics, sep="" )
-
 ```
 
 

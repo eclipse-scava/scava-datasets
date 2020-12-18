@@ -9,7 +9,7 @@
 data <- read.csv(file=url_pmi_checks, header=T)
 ```
 
-File is [``r file_pmi_checks``](`r file_pmi_checks`), and has ``r ncol(data)`` columns for ``r nrow(data)`` commits.
+File is [``r file_pmi_checks``](`r file_pmi_checks`.gz), and has ``r ncol(data)`` columns for ``r nrow(data)`` commits.
 
 ```{r pmi_checks_table, results='asis'}
 checks.table <- head(data[,c('Description', 'Value', 'Results')], 10)

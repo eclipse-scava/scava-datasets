@@ -34,4 +34,4 @@ p
 
 **Download**: [`r file_git_log`.gz](`r file_git_log`.gz)
 
-File is [``r file_git_log``](`r file_git_log`), and full log has ``r countLines(file=url_git_log)`` lines.
+File is [``r file_git_log``](`r file_git_log`.gz), and full log has ``r countLines(file=url_git_log)`` lines.

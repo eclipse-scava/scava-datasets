@@ -9,7 +9,7 @@
 data <- read.csv(file=url_bz_issues, header=T)
 ```
 
-File is [``r file_bz_issues``](`r file_bz_issues`), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues.
+File is [``r file_bz_issues``](`r file_bz_issues`.gz), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues.
 
 ### <a name="bz_issues_open"></a> Bugzilla open issues
 
@@ -19,7 +19,7 @@ File is [``r file_bz_issues``](`r file_bz_issues`), and has ``r ncol(data)`` col
 data <- read.csv(file=url_bz_issues_open, header=T)
 ```
 
-File is [``r file_bz_issues_open``](`r file_bz_issues_open`), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues (all open).
+File is [``r file_bz_issues_open``](`r file_bz_issues_open`.gz), and has ``r ncol(data)`` columns for ``r nrow(data)`` issues (all open).
 
 ### <a name="bz_evol"></a> Bugzilla evolution
 
@@ -29,7 +29,7 @@ File is [``r file_bz_issues_open``](`r file_bz_issues_open`), and has ``r ncol(d
 data <- read.csv(file=url_bz_evol, header=T)
 ```
 
-File is [``r file_bz_evol``](`r file_bz_evol`), and has ``r ncol(data)`` columns for ``r nrow(data)`` weeks.
+File is [``r file_bz_evol``](`r file_bz_evol`.gz), and has ``r ncol(data)`` columns for ``r nrow(data)`` weeks.
 
 ```{r bz_evol_viz}
 data.xts <- xts(x = data, order.by = as.POSIXct(data$date))
@@ -59,7 +59,7 @@ p
 data <- read.csv(file=url_bz_versions, header=T)
 ```
 
-File is [``r file_bz_versions``](`r file_bz_versions`), and has ``r ncol(data)`` columns for ``r nrow(data)`` weeks.
+File is [``r file_bz_versions``](`r file_bz_versions`.gz), and has ``r ncol(data)`` columns for ``r nrow(data)`` weeks.
 
 ```{r bz_versions_viz, echo=FALSE, message=FALSE, results='asis'}
 suppressPackageStartupMessages(library(googleVis))
@@ -79,7 +79,7 @@ plot(g)
 data <- read.csv(file=url_bz_components, header=T)
 ```
 
-File is [``r file_bz_components``](`r file_bz_components`), and has ``r ncol(data)`` columns for ``r nrow(data)`` weeks.
+File is [``r file_bz_components``](`r file_bz_components`.gz), and has ``r ncol(data)`` columns for ``r nrow(data)`` weeks.
 
 ```{r bz_components_viz, echo=FALSE, message=FALSE, results='asis'}
 data.sorted <- data[order(data$Bugs, decreasing = T),]
