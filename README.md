@@ -1,4 +1,8 @@
 
+# This project has been moved to Eclipse GitLab: 
+
+[https://gitlab.eclipse.org/bbaldassari2kd/scava-datasets](https://gitlab.eclipse.org/bbaldassari2kd/scava-datasets)
+
 # Scava datasets for Eclipse
 
 This repository contains resources used to extract datasets from the Eclipse forge. This work is part of the [Scava project](https://projects.eclipse.org/projects/technology.scava).
